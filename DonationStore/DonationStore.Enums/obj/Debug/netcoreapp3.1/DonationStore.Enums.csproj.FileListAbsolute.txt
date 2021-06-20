@@ -1,0 +1,14 @@
+C:\Users\Igor Matheus\Desktop\Donation Store\DonationStore\DonationStore.Enums\bin\Debug\netcoreapp3.1\DonationStore.Enums.exe
+C:\Users\Igor Matheus\Desktop\Donation Store\DonationStore\DonationStore.Enums\bin\Debug\netcoreapp3.1\DonationStore.Enums.deps.json
+C:\Users\Igor Matheus\Desktop\Donation Store\DonationStore\DonationStore.Enums\bin\Debug\netcoreapp3.1\DonationStore.Enums.runtimeconfig.json
+C:\Users\Igor Matheus\Desktop\Donation Store\DonationStore\DonationStore.Enums\bin\Debug\netcoreapp3.1\DonationStore.Enums.runtimeconfig.dev.json
+C:\Users\Igor Matheus\Desktop\Donation Store\DonationStore\DonationStore.Enums\bin\Debug\netcoreapp3.1\DonationStore.Enums.dll
+C:\Users\Igor Matheus\Desktop\Donation Store\DonationStore\DonationStore.Enums\bin\Debug\netcoreapp3.1\DonationStore.Enums.pdb
+C:\Users\Igor Matheus\Desktop\Donation Store\DonationStore\DonationStore.Enums\obj\Debug\netcoreapp3.1\DonationStore.Enums.AssemblyInfoInputs.cache
+C:\Users\Igor Matheus\Desktop\Donation Store\DonationStore\DonationStore.Enums\obj\Debug\netcoreapp3.1\DonationStore.Enums.AssemblyInfo.cs
+C:\Users\Igor Matheus\Desktop\Donation Store\DonationStore\DonationStore.Enums\obj\Debug\netcoreapp3.1\DonationStore.Enums.csproj.CoreCompileInputs.cache
+C:\Users\Igor Matheus\Desktop\Donation Store\DonationStore\DonationStore.Enums\obj\Debug\netcoreapp3.1\DonationStore.Enums.dll
+C:\Users\Igor Matheus\Desktop\Donation Store\DonationStore\DonationStore.Enums\obj\Debug\netcoreapp3.1\DonationStore.Enums.pdb
+C:\Users\Igor Matheus\Desktop\Donation Store\DonationStore\DonationStore.Enums\obj\Debug\netcoreapp3.1\DonationStore.Enums.genruntimeconfig.cache
+C:\Users\Igor Matheus\Desktop\Donation Store\DonationStore\DonationStore.Enums\obj\Debug\netcoreapp3.1\DonationStore.Enums.csproj.AssemblyReference.cache
+C:\Users\Igor Matheus\Desktop\Donation Store\DonationStore\DonationStore.Enums\obj\Debug\netcoreapp3.1\DonationStore.Enums.GeneratedMSBuildEditorConfig.editorconfig
