@@ -1,0 +1,11 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace DonationStore.Infrastructure.GenericMessages
+{
+    public static class ErrorMessages
+    {
+        public static readonly string GenericError = $@"Opsss... se você está lendo isso é porque deu ruim no servidor :/ ...Mas em breve vamos ajeitar :)";
+    }
+}

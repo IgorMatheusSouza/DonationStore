@@ -1,0 +1,7 @@
+
+*.pubxml.user
+*.csproj.user
+bin
+obj
+bin
+node_modules
