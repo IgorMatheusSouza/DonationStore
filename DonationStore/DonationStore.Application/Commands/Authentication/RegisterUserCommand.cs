@@ -1,16 +1,12 @@
-﻿using DonationStore.Infrastructure.CQRS.Implementations;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using DonationStore.Infrastructure.CQRS.Abstractions;
+using DonationStore.Infrastructure.CQRS.Implementations;
+using DonationStore.Infrastructure.Extensions;
+using DonationStore.Infrastructure.GenericMessages;
 
 namespace DonationStore.Application.Commands.Authentication
 {
-    public class RegisterUserCommand : Command<RegisterUserCommand>
+    public class RegisterUserCommand : Command<RegisterUserCommand>, ICommand
     {
-        public RegisterUserCommand(RegisterUserCommand message) : base(message)
-        {
-        }
-
         public string PasswordConfirmation { get; set; }
 
         public string Name { get; set; }
@@ -19,5 +15,12 @@ namespace DonationStore.Application.Commands.Authentication
 
         public string Password { get; set; }
 
+        public bool Validate()
+        {
+            if (Name.IsEmpty() || Email.IsEmpty() || Password.IsEmpty())
+                SetBadRequest(ValidationMessages.EmptyFields);
+
+            return IsValid;
+        }
     }
 }

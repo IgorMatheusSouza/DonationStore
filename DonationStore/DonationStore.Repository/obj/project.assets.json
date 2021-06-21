@@ -2035,6 +2035,16 @@
           "bin/placeholder/DonationStore.Domain.dll": {}
         }
       },
+      "DonationStore.Enums/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/DonationStore.Enums.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DonationStore.Enums.dll": {}
+        }
+      },
       "DonationStore.Infrastructure/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
@@ -7029,6 +7039,11 @@
       "path": "../DonationStore.Domain/DonationStore.Domain.csproj",
       "msbuildProject": "../DonationStore.Domain/DonationStore.Domain.csproj"
     },
+    "DonationStore.Enums/1.0.0": {
+      "type": "project",
+      "path": "../DonationStore.Enums/DonationStore.Enums.csproj",
+      "msbuildProject": "../DonationStore.Enums/DonationStore.Enums.csproj"
+    },
     "DonationStore.Infrastructure/1.0.0": {
       "type": "project",
       "path": "../DonationStore.Infrastructure/DonationStore.Infrastructure.csproj",
@@ -7038,6 +7053,7 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
       "DonationStore.Domain >= 1.0.0",
+      "DonationStore.Enums >= 1.0.0",
       "EntityFramework >= 6.4.4",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 5.0.7",
       "Microsoft.EntityFrameworkCore >= 5.0.7",
@@ -7074,6 +7090,9 @@
           "projectReferences": {
             "C:\\Users\\Igor Matheus\\Desktop\\Donation Store\\DonationStore\\DonationStore.Domain\\DonationStore.Domain.csproj": {
               "projectPath": "C:\\Users\\Igor Matheus\\Desktop\\Donation Store\\DonationStore\\DonationStore.Domain\\DonationStore.Domain.csproj"
+            },
+            "C:\\Users\\Igor Matheus\\Desktop\\Donation Store\\DonationStore\\DonationStore.Enums\\DonationStore.Enums.csproj": {
+              "projectPath": "C:\\Users\\Igor Matheus\\Desktop\\Donation Store\\DonationStore\\DonationStore.Enums\\DonationStore.Enums.csproj"
             }
           }
         }

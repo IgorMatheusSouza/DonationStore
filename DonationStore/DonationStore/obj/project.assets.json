@@ -2012,6 +2012,16 @@
           "bin/placeholder/DonationStore.Domain.dll": {}
         }
       },
+      "DonationStore.Enums/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/DonationStore.Enums.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DonationStore.Enums.dll": {}
+        }
+      },
       "DonationStore.Infrastructure/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
@@ -2031,6 +2041,7 @@
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
           "DonationStore.Domain": "1.0.0",
+          "DonationStore.Enums": "1.0.0",
           "EntityFramework": "6.4.4",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.7",
           "Microsoft.EntityFrameworkCore": "5.0.7",
@@ -6838,6 +6849,11 @@
       "path": "../DonationStore.Domain/DonationStore.Domain.csproj",
       "msbuildProject": "../DonationStore.Domain/DonationStore.Domain.csproj"
     },
+    "DonationStore.Enums/1.0.0": {
+      "type": "project",
+      "path": "../DonationStore.Enums/DonationStore.Enums.csproj",
+      "msbuildProject": "../DonationStore.Enums/DonationStore.Enums.csproj"
+    },
     "DonationStore.Infrastructure/1.0.0": {
       "type": "project",
       "path": "../DonationStore.Infrastructure/DonationStore.Infrastructure.csproj",
@@ -6852,6 +6868,7 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
       "DonationStore.Application >= 1.0.0",
+      "DonationStore.Infrastructure >= 1.0.0",
       "DonationStore.Repository >= 1.0.0",
       "Entityframework >= 6.4.4",
       "IdentityServer4 >= 4.1.2",
@@ -6891,6 +6908,9 @@
           "projectReferences": {
             "C:\\Users\\Igor Matheus\\Desktop\\Donation Store\\DonationStore\\DonationStore.Application\\DonationStore.Application.csproj": {
               "projectPath": "C:\\Users\\Igor Matheus\\Desktop\\Donation Store\\DonationStore\\DonationStore.Application\\DonationStore.Application.csproj"
+            },
+            "C:\\Users\\Igor Matheus\\Desktop\\Donation Store\\DonationStore\\DonationStore.Infrastructure\\DonationStore.Infrastructure.csproj": {
+              "projectPath": "C:\\Users\\Igor Matheus\\Desktop\\Donation Store\\DonationStore\\DonationStore.Infrastructure\\DonationStore.Infrastructure.csproj"
             },
             "C:\\Users\\Igor Matheus\\Desktop\\Donation Store\\DonationStore\\DonationStore.Repository\\DonationStore.Repository.csproj": {
               "projectPath": "C:\\Users\\Igor Matheus\\Desktop\\Donation Store\\DonationStore\\DonationStore.Repository\\DonationStore.Repository.csproj"

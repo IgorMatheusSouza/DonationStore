@@ -1,14 +1,30 @@
 ﻿using MediatR;
+using System.Net;
 
 namespace DonationStore.Infrastructure.CQRS.Implementations
 {
     public abstract class Command<TMessage> : IRequest
     {
-        protected Command(TMessage message)
+        public Command()
         {
-            this.Message = message;
+            IsValid = true;
+        }
+        public string Message { get; private set; }
+
+        public HttpStatusCode StatusCode { get; private set; }
+
+        public bool IsValid { get; private set; }
+
+        protected void SetBadRequest(string message) 
+        {
+            SetInvalid(message);
+            StatusCode = HttpStatusCode.BadRequest;
         }
 
-        public TMessage Message { get; private set; }
+        private void SetInvalid(string message) 
+        {
+            IsValid = false;
+            Message = message;
+        }
     }
 }

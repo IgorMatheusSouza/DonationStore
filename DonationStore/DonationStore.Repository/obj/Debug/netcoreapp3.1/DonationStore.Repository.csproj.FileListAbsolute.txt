@@ -18,3 +18,9 @@ C:\Users\Igor Matheus\Desktop\Donation Store\DonationStore\DonationStore.Reposit
 C:\Users\Igor Matheus\Desktop\Donation Store\DonationStore\DonationStore.Repository\bin\Debug\netcoreapp3.1\DonationStore.Infrastructure.pdb
 C:\Users\Igor Matheus\Desktop\Donation Store\DonationStore\DonationStore.Repository\obj\Debug\netcoreapp3.1\DonationStore.Repository.csproj.AssemblyReference.cache
 C:\Users\Igor Matheus\Desktop\Donation Store\DonationStore\DonationStore.Repository\obj\Debug\netcoreapp3.1\DonationStore.Repository.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Igor Matheus\Desktop\Donation Store\DonationStore\DonationStore.Repository\bin\Debug\netcoreapp3.1\DonationStore.Enums.deps.json
+C:\Users\Igor Matheus\Desktop\Donation Store\DonationStore\DonationStore.Repository\bin\Debug\netcoreapp3.1\DonationStore.Enums.runtimeconfig.json
+C:\Users\Igor Matheus\Desktop\Donation Store\DonationStore\DonationStore.Repository\bin\Debug\netcoreapp3.1\DonationStore.Enums.runtimeconfig.dev.json
+C:\Users\Igor Matheus\Desktop\Donation Store\DonationStore\DonationStore.Repository\bin\Debug\netcoreapp3.1\DonationStore.Enums.exe
+C:\Users\Igor Matheus\Desktop\Donation Store\DonationStore\DonationStore.Repository\bin\Debug\netcoreapp3.1\DonationStore.Enums.dll
+C:\Users\Igor Matheus\Desktop\Donation Store\DonationStore\DonationStore.Repository\bin\Debug\netcoreapp3.1\DonationStore.Enums.pdb

@@ -32,6 +32,7 @@
       "DonationStore/1.0.0": {
         "dependencies": {
           "DonationStore.Application": "1.0.0",
+          "DonationStore.Infrastructure": "1.0.0",
           "DonationStore.Repository": "1.0.0",
           "EntityFramework": "6.4.4",
           "IdentityServer4": "4.1.2",
@@ -1783,6 +1784,14 @@
           "DonationStore.Domain.dll": {}
         }
       },
+      "DonationStore.Enums/1.0.0": {
+        "runtime": {
+          "DonationStore.Enums.dll": {}
+        },
+        "compile": {
+          "DonationStore.Enums.dll": {}
+        }
+      },
       "DonationStore.Infrastructure/1.0.0": {
         "dependencies": {
           "MediatR": "9.0.0",
@@ -1798,6 +1807,7 @@
       "DonationStore.Repository/1.0.0": {
         "dependencies": {
           "DonationStore.Domain": "1.0.0",
+          "DonationStore.Enums": "1.0.0",
           "EntityFramework": "6.4.4",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "5.0.7",
           "Microsoft.EntityFrameworkCore": "5.0.7",
@@ -4372,6 +4382,11 @@
       "sha512": ""
     },
     "DonationStore.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "DonationStore.Enums/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
