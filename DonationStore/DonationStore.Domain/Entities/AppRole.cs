@@ -5,7 +5,7 @@ using System.Text;
 
 namespace DonationStore.Domain.Entities
 {
-    public class AppRole : IdentityRole
+    public class AspNetRoles : IdentityRole
     {
 
     }

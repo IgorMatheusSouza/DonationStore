@@ -10,15 +10,12 @@ namespace DonationStore.Application.Services.Abstractions
 {
     public class AuthenticationService : BaseService, IAuthenticationService
     {
-        public AuthenticationService(IMediator mediator) : base(mediator)
-        {
+        public AuthenticationService(IMediator mediator) : base(mediator) { }
 
-        }
-
-        public async Task<UserViewModel> RegisterUser(RegisterUserCommand command)
+        public async Task<LoginUserViewModel> RegisterUser(RegisterUserCommand command)
         {
-            await this.Mediator.Send(command);
-            return null;
+            var result = await Mediator.Send(command);
+            return (LoginUserViewModel)result;
         }
     }
 }

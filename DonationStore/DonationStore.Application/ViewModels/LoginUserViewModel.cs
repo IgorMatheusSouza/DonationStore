@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DonationStore.Application.ViewModels
 {
-    public class UserViewModel
+    public class LoginUserViewModel
     {
         public string Name { get; set; }
 

@@ -3,7 +3,7 @@ using System.Net;
 
 namespace DonationStore.Infrastructure.CQRS.Implementations
 {
-    public abstract class Command<TMessage> : IRequest
+    public abstract class Command
     {
         public Command()
         {

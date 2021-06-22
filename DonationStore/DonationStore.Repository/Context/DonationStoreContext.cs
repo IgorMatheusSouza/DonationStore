@@ -12,7 +12,7 @@ namespace DonationStore.Repository.Context
 
         public DbSet<AppUser> Users { get; set; }
 
-        public DbSet<AppRole> Roles { get; set; }
+        public DbSet<AspNetRoles> Roles { get; set; }
     }
 }
 

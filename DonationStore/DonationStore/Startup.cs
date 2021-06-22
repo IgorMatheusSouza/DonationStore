@@ -1,5 +1,4 @@
 using DonationStore.Repository.Context;
-using DonationStore.Repository.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -14,6 +13,11 @@ using DonationStore.Application.Commands.Authentication;
 using DonationStore.Domain.Handlers.Commands;
 using DonationStore.Domain.Abstractions.Repositories;
 using DonationStore.Repository.Repositories;
+using DonationStore.Domain.Abstractions.Factories;
+using DonationStore.Domain.Factories;
+using DonationStore.Infrastructure.Exceptions;
+using Microsoft.AspNetCore.Mvc;
+using DonationStore.Application.ViewModels;
 
 namespace DonationStore
 {
@@ -34,9 +38,14 @@ namespace DonationStore
 
             services.AddDbContext<DonationStoreContext>(options => options.UseSqlServer(defaultConection));
 
-            services.AddIdentity<AppUser, AppRole>(options =>
+            services.AddIdentity<AppUser, AspNetRoles>(options =>
             {
                 options.User.RequireUniqueEmail = true;
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 6;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireLowercase = false;
             })
             .AddEntityFrameworkStores<IdentityDonationStoreContext>()
             .AddDefaultTokenProviders();
@@ -58,11 +67,14 @@ namespace DonationStore
 
             services.AddTransient<IAuthenticationService, AuthenticationService>()
                     .AddTransient<IUserRepository, UserRepository>()
+                    .AddTransient<IUserFactory, UserFactory>()
                     .AddScoped<DonationStoreContext, DonationStoreContext>()
-                    .AddScoped<IRequestHandler<RegisterUserCommand, Unit>, RegisterUserCommandHandler>();
+                    .AddScoped<IRequestHandler<RegisterUserCommand, LoginUserViewModel>, RegisterUserCommandHandler>();
 
 
             services.AddControllers().AddNewtonsoftJson();
+
+            services.AddMvc(config => config.Filters.Add(new GlobalExceptionHandler())).SetCompatibilityVersion(CompatibilityVersion.Latest);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

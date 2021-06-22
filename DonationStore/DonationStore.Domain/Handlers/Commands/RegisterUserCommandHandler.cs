@@ -1,34 +1,31 @@
 ﻿using DonationStore.Application.Commands.Authentication;
+using DonationStore.Application.ViewModels;
+using DonationStore.Domain.Abstractions.Factories;
 using DonationStore.Domain.Abstractions.Repositories;
-using DonationStore.Domain.Entities;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace DonationStore.Domain.Handlers.Commands
 {
-    public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand>
+    public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, LoginUserViewModel>
     {
-        private readonly IUserRepository userRepository;
+        private readonly IUserRepository UserRepository;
+        private readonly IUserFactory UserFactory;
 
-        public RegisterUserCommandHandler(IUserRepository userRepository)
+        public RegisterUserCommandHandler(IUserRepository userRepository, IUserFactory userFactory)
         {
-            this.userRepository = userRepository;
+            this.UserRepository = userRepository;
+            this.UserFactory = userFactory;
         }
 
-        public async Task<Unit> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
+        public async Task<LoginUserViewModel> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
         {
-            var user = new AppUser {
-                Name = request.Name, 
-                Email = request.Email,
-                UserName = request.Email
-            };
+            var user = UserFactory.Adapt(request);
 
-            await this.userRepository.RegisterUser(user, request.Password);
-            return Unit.Task.Result;
+            var result = await UserRepository.RegisterUser(user, request.Password);
+
+            return UserFactory.Adapt(result);
         }
     }
 }

@@ -1,9 +1,12 @@
 ﻿using DonationStore.Domain.Abstractions.Repositories;
 using DonationStore.Domain.Entities;
 using DonationStore.Enums.DomainEnums;
+using DonationStore.Infrastructure.Exceptions;
+using DonationStore.Infrastructure.GenericMessages;
 using DonationStore.Repository.Context;
 using Microsoft.AspNetCore.Identity;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace DonationStore.Repository.Repositories
@@ -19,13 +22,18 @@ namespace DonationStore.Repository.Repositories
             this.UserManager = userManager;
         }
 
-        public async Task RegisterUser(AppUser user, string password)
+        public async Task<AppUser> RegisterUser(AppUser user, string password)
         {
-            var result = await this.UserManager.CreateAsync(user, password);
+            var result = await UserManager.CreateAsync(user, password);
 
-            await this.UserManager.AddToRoleAsync(user, nameof(RolesEnum.User));
+            if (!result.Succeeded)
+            {
+                throw new BusinessException(string.Join(DefautlTexts.GenericTextSeparator, result.Errors.Select(x => x.Description)));
+            }
 
-            throw new NotImplementedException();
+            await UserManager.AddToRoleAsync(user, nameof(RolesEnum.User));
+
+            return user;
         }
     }
 }
