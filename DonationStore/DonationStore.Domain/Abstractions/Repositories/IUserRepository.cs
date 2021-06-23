@@ -6,5 +6,7 @@ namespace DonationStore.Domain.Abstractions.Repositories
     public interface IUserRepository
     {
         Task<AppUser> RegisterUser(AppUser user, string password);
+
+        Task<AppUser> Login(AppUser user, string password);
     }
 }

@@ -12,6 +12,8 @@ namespace DonationStore.Domain.Factories
     {
         public AppUser Adapt(RegisterUserCommand data) => new AppUser { Name = data.Name, Email = data.Email, UserName = data.Email };
 
+        public AppUser Adapt(LoginCommand data) => new AppUser { Email = data.Email, UserName = data.Email };
+
         public LoginUserViewModel Adapt(AppUser data)
         {
             return new LoginUserViewModel { Email = data.Email, Name = data.Name, Token = data.SecurityStamp };

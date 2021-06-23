@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DonationStore.Infrastructure.GenericMessages
+﻿namespace DonationStore.Infrastructure.GenericMessages
 {
     public static class ValidationMessages
     {

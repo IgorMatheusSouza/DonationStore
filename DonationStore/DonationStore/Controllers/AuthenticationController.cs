@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
-using DonationStore.Application.Commands.Authentication;
+﻿using DonationStore.Application.Commands.Authentication;
 using DonationStore.Application.Services.Abstractions;
+using DonationStore.Application.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace DonationStore.Controllers
 {
@@ -27,6 +24,17 @@ namespace DonationStore.Controllers
                 return ReturnError(command.StatusCode, command.Message);
 
             var response = await AuthenticationService.RegisterUser(command);
+            return ReturnCreated(response);
+        }
+
+        [HttpPost]
+        [Route("users/login")]
+        public async Task<IActionResult> Login([FromBody] LoginCommand command)
+        {
+            if (!command.Validate())
+                return ReturnError(command.StatusCode, command.Message);
+
+            var response = await AuthenticationService.Login(command);
             return ReturnCreated(response);
         }
     }

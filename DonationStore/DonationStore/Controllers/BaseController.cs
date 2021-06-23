@@ -14,7 +14,7 @@ namespace DonationStore.Controllers
                 HttpStatusCode.Unauthorized => Unauthorized(message),
                 HttpStatusCode.Forbidden => Forbid(message),
                 HttpStatusCode.NotFound => NotFound(message),
-                HttpStatusCode.MethodNotAllowed => NotFound(message),
+                HttpStatusCode.MethodNotAllowed => ReturnError(statusCode, message),
                 HttpStatusCode.UnsupportedMediaType => ReturnError(statusCode, message),
                 HttpStatusCode.InternalServerError => ReturnError(statusCode, message),
                 HttpStatusCode.BadGateway => ReturnError(statusCode, message),

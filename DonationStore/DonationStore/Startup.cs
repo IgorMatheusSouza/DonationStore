@@ -69,7 +69,8 @@ namespace DonationStore
                     .AddTransient<IUserRepository, UserRepository>()
                     .AddTransient<IUserFactory, UserFactory>()
                     .AddScoped<DonationStoreContext, DonationStoreContext>()
-                    .AddScoped<IRequestHandler<RegisterUserCommand, LoginUserViewModel>, RegisterUserCommandHandler>();
+                    .AddScoped<IRequestHandler<RegisterUserCommand, LoginUserViewModel>, RegisterUserCommandHandler>()
+                    .AddScoped<IRequestHandler<LoginCommand, LoginUserViewModel>, LoginCommandHandler>();
 
 
             services.AddControllers().AddNewtonsoftJson();

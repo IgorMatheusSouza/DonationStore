@@ -8,6 +8,8 @@ namespace DonationStore.Domain.Abstractions.Factories
     {
         AppUser Adapt(RegisterUserCommand data);
 
+        AppUser Adapt(LoginCommand data);
+
         LoginUserViewModel Adapt(AppUser data);
     }
 }
