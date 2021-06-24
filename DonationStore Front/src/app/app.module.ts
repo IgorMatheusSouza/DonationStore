@@ -10,12 +10,17 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { SignupComponent } from './views/signup/signup.component';
 import { LoginComponent } from './views/login/login.component';
+import { DonationsComponent } from './views/donations/donations.component';
+import { RegisterDonationComponent } from './views/registerDonation/registerDonation.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
     AppComponent,
     SignupComponent,
-    LoginComponent
+    LoginComponent,
+    DonationsComponent,
+    RegisterDonationComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +31,8 @@ import { LoginComponent } from './views/login/login.component';
     MatInputModule,
     MatFormFieldModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSelectModule
 
   ],
   providers: [],

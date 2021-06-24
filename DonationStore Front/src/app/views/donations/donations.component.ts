@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-donations',
@@ -9,7 +10,11 @@ export class DonationsComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  public mainDonations: number[] = [1,2,4,3,5,7,8];
 
+  public donations: number[] = [1,2,5,5,1,1,1,1,1,1,1,1,];
+
+  ngOnInit() {
+
+  }
 }

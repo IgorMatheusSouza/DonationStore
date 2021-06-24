@@ -33,3 +33,6 @@ $DonationStore-theme: mat.define-light-theme((
 // that you are using.
 @include mat.all-component-themes($DonationStore-theme);
 
+.header-area{
+  background: linear-gradient( 135deg , rgba(0, 136, 232, 1) 0%, rgba(0, 182, 198, 1) 0%, rgba(0, 136, 232, 1) 100% );
+}

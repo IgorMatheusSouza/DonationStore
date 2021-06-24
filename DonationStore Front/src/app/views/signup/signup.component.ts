@@ -3,7 +3,7 @@ import { FormBuilder, Validators  } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MustMatch } from 'src/app/helpers/validationHelper';
 import { UserLoginViewModel } from 'src/app/models/userLoginViewModel';
-import {AuthenticationService } from './../../services/authenticationService';
+import { AuthenticationService } from './../../services/authenticationService';
 
 @Component({
   selector: 'app-signup',
