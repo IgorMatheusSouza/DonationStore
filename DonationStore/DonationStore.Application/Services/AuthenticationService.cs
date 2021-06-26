@@ -1,5 +1,6 @@
 ﻿using DonationStore.Application.Commands.Authentication;
 using DonationStore.Application.ViewModels;
+using DonationStore.Infrastructure.Transaction;
 using MediatR;
 using System.Threading.Tasks;
 
@@ -7,7 +8,7 @@ namespace DonationStore.Application.Services.Abstractions
 {
     public class AuthenticationService : BaseService, IAuthenticationService
     {
-        public AuthenticationService(IMediator mediator) : base(mediator) { }
+        public AuthenticationService(IMediator mediator, ITransactionScopeManager transactionScopeManager) : base(mediator, transactionScopeManager) { }
 
         public async Task<LoginUserViewModel> Login(LoginCommand command)
         {

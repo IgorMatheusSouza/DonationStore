@@ -1,4 +1,3 @@
-using DonationStore.Repository.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -10,7 +9,7 @@ using MediatR;
 using DonationStore.Domain.Entities;
 using DonationStore.Application.Services.Abstractions;
 using DonationStore.Application.Commands.Authentication;
-using DonationStore.Domain.Handlers.Commands;
+using DonationStore.Domain.Handlers.Commands.Users;
 using DonationStore.Domain.Abstractions.Repositories;
 using DonationStore.Repository.Repositories;
 using DonationStore.Domain.Abstractions.Factories;
@@ -18,6 +17,10 @@ using DonationStore.Domain.Factories;
 using DonationStore.Infrastructure.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using DonationStore.Application.ViewModels;
+using DonationStore.Repository.Context;
+using DonationStore.Infrastructure.Transaction;
+using DonationStore.Application.Commands.Donation;
+using DonationStore.Domain.Handlers.Commands.Donation;
 
 namespace DonationStore
 {
@@ -33,22 +36,7 @@ namespace DonationStore
         public void ConfigureServices(IServiceCollection services)
         {
             var defaultConection = Configuration.GetConnectionString("DefaultConnection");
-
-            services.AddDbContext<IdentityDonationStoreContext>(options => options.UseSqlServer(defaultConection));
-
-            services.AddDbContext<DonationStoreContext>(options => options.UseSqlServer(defaultConection));
-
-            services.AddIdentity<AppUser, AspNetRoles>(options =>
-            {
-                options.User.RequireUniqueEmail = true;
-                options.Password.RequireDigit = false;
-                options.Password.RequiredLength = 6;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = false;
-                options.Password.RequireLowercase = false;
-            })
-            .AddEntityFrameworkStores<IdentityDonationStoreContext>()
-            .AddDefaultTokenProviders();
+            ConfigureInfrasctructure(services, defaultConection);
 
             services.AddMediatR(typeof(Startup));
 
@@ -64,14 +52,6 @@ namespace DonationStore
                         .AllowAnyOrigin();
                     });
             });
-
-            services.AddTransient<IAuthenticationService, AuthenticationService>()
-                    .AddTransient<IUserRepository, UserRepository>()
-                    .AddTransient<IUserFactory, UserFactory>()
-                    .AddScoped<DonationStoreContext, DonationStoreContext>()
-                    .AddScoped<IRequestHandler<RegisterUserCommand, LoginUserViewModel>, RegisterUserCommandHandler>()
-                    .AddScoped<IRequestHandler<LoginCommand, LoginUserViewModel>, LoginCommandHandler>();
-
 
             services.AddControllers().AddNewtonsoftJson();
 
@@ -99,6 +79,39 @@ namespace DonationStore
             {
                 endpoints.MapControllers();
             });
+        }
+
+        private static void ConfigureInfrasctructure(IServiceCollection services, string defaultConection)
+        {
+            services.AddDbContext<IdentityDonationStoreContext>(options => options.UseSqlServer(defaultConection));
+
+            services.AddDbContext<DonationStoreContext>(options => options.UseSqlServer(defaultConection));
+
+            services.AddIdentity<AppUser, AspNetRoles>(options =>
+            {
+                options.User.RequireUniqueEmail = true;
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 6;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireLowercase = false;
+            })
+            .AddEntityFrameworkStores<IdentityDonationStoreContext>()
+            .AddDefaultTokenProviders();
+
+
+
+            services.AddTransient<IAuthenticationService, AuthenticationService>()
+                    .AddTransient<IUserRepository, UserRepository>()
+                    .AddTransient<IDonationRepository, DonationRepository>()
+                    .AddTransient<IUserFactory, UserFactory>()
+                    .AddTransient<IDonationFactory, DonationFactory>()
+                    .AddTransient<IDonationService, DonationService>()
+                    .AddTransient<ITransactionScopeManager, TransactionScopeManager>()
+                    .AddScoped<DonationStoreContext, DonationStoreContext>()
+                    .AddScoped<IRequestHandler<RegisterUserCommand, LoginUserViewModel>, RegisterUserCommandHandler>()
+                    .AddScoped<IRequestHandler<RegisterDonationCommand, Unit>, RegisterDonationCommandHandler>()
+                    .AddScoped<IRequestHandler<LoginCommand, LoginUserViewModel>, LoginCommandHandler>();
         }
     }
 }

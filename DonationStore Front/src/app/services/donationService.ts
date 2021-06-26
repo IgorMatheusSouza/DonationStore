@@ -14,7 +14,7 @@ export class DonationService extends BaseService {
 
   constructor(public http: HttpClient) { super(http)}
 
-  private urlAuthetication: string = this.Baseurl + 'donation/';
+  private urlAuthetication: string = this.Baseurl + 'donations/';
 
   private urls = {
     register: this.urlAuthetication,

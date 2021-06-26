@@ -9,15 +9,24 @@ using System.Threading.Tasks;
 namespace DonationStore.Controllers
 {
     [Route("api/[controller]")]
-    public class DonationController : BaseController
+    public class DonationsController : BaseController
     {
+        private readonly IDonationService DonationService;
+
+        public DonationsController(IDonationService donationService)
+        {
+            DonationService = donationService;
+        }
+
         [HttpPost]
         public async Task<IActionResult> RegisterDonation([FromBody] RegisterDonationCommand command)
         {
             if (!command.Validate())
                 return ReturnError(command.StatusCode, command.Message);
 
-            return Ok();
+            await DonationService.RegisterDonation(command);
+
+            return ReturnCreated();
         }
     }
 }

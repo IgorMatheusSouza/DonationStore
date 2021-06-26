@@ -12,16 +12,16 @@ import { DonationService } from 'src/app/services/donationService';
 export class RegisterDonationComponent implements OnInit {
 
   registerDonationForm = this.formBuilder.group({
-    title: ['', [Validators.required, Validators.email, Validators.maxLength(40)]],
-    description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(500)]],
+    title: ['', [Validators.required, Validators.maxLength(50)]],
+    description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(3000)]],
     state: ['', [Validators.required]],
     city: ['', [Validators.required]],
-    address: ['', [Validators.required]],
-    zipCode: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(25)]],
+    address: ['', [Validators.required, Validators.maxLength(50)]],
+    zipCode: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(10)]]
   });
 
-  public states = ['Rio de Janeiro', 'Bahia'];
-  public cities = ['Rio de Janeiro', 'Nova Iguaçu'];
+  public states: any  = ['Rio de Janeiro', 'Bahia'];
+  public cities: any = ['Rio de Janeiro', 'Nova Iguaçu'];
 
   get form() { return this.registerDonationForm.controls; }
 
@@ -31,6 +31,8 @@ export class RegisterDonationComponent implements OnInit {
   }
 
   registerDonation() {
+    console.log(5);
+
     if (this.registerDonationForm.invalid)
       return;
 
