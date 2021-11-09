@@ -22,8 +22,8 @@ namespace DonationStore.Domain.Handlers.Commands.Users
         public async Task<LoginUserViewModel> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
         {
             var user = UserFactory.Adapt(request);
-
-            var result = await UserRepository.RegisterUser(user, request.Password);
+            await UserRepository.RegisterUser(user, request.Password);
+            var result = UserRepository.GetUserByEmail(user.Email);
 
             return UserFactory.Adapt(result);
         }

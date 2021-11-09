@@ -13,8 +13,8 @@ import { AuthenticationService } from './../../services/authenticationService';
 export class SignupComponent implements OnInit {
   
   registerForm = this.formBuilder.group({
-    email: ['', [Validators.required, Validators.email, Validators.maxLength(20)]],
-    name: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
+    email: ['', [Validators.required, Validators.email, Validators.maxLength(40)]],
+    name: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
     password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(25)]],
     passwordConfirmation: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(25)]],
    }, { validator: MustMatch('password', 'passwordConfirmation') });

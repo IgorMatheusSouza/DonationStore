@@ -22,5 +22,4 @@ namespace DonationStore.Domain.Factories
             };
         }
     }
-
 }

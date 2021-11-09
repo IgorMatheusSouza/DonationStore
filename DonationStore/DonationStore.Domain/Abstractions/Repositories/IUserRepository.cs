@@ -5,8 +5,12 @@ namespace DonationStore.Domain.Abstractions.Repositories
 {
     public interface IUserRepository
     {
-        Task<AppUser> RegisterUser(AppUser user, string password);
+        Task<AspNetUsers> RegisterUser(AspNetUsers user, string password);
 
-        Task<AppUser> Login(AppUser user, string password);
+        Task<AspNetUsers> Login(AspNetUsers user, string password);
+
+        Task<AspNetUsers> GetUser(string id);
+
+        AspNetUsers GetUserByEmail(string email);
     }
 }

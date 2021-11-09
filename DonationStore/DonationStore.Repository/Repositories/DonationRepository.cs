@@ -1,10 +1,7 @@
 ﻿using DonationStore.Domain.Abstractions.Repositories;
 using DonationStore.Domain.Enities;
 using DonationStore.Repository.Context;
-using MediatR;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DonationStore.Repository.Repositories
@@ -20,6 +17,7 @@ namespace DonationStore.Repository.Repositories
         {
             donation.CreationDate = DateTime.Now;
             await DonationStoreContext.AddAsync(donation);
+            await DonationStoreContext.SaveChangesAsync();
         }
     }
 }

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthenticationUserModel } from '../models/authenticationUserModel';
@@ -23,7 +23,7 @@ export class AuthenticationService extends BaseService {
   register(data : AuthenticationUserModel): Observable<UserLoginViewModel>{
     return this.http.post<UserLoginViewModel>(this.urls.register, data).pipe();
   }
-  
+
   login(data : AuthenticationUserModel): Observable<UserLoginViewModel>{
     return this.http.post<UserLoginViewModel>(this.urls.login, data).pipe();
   }
@@ -31,4 +31,6 @@ export class AuthenticationService extends BaseService {
   saveLoginCredentials(loginData: UserLoginViewModel){
       localStorage.setItem("User",JSON.stringify(loginData));
   }
+
+
 }

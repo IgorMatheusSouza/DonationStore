@@ -22,10 +22,10 @@ namespace DonationStore.Domain.Handlers.Commands.Users
         public async Task<LoginUserViewModel> Handle(LoginCommand request, CancellationToken cancellationToken)
         {
             var user = UserFactory.Adapt(request);
+            await UserRepository.Login(user, request.Password);
+            var loggedUser = UserRepository.GetUserByEmail(user.Email);
 
-            var result = await UserRepository.Login(user, request.Password);
-
-            return UserFactory.Adapt(result);
+            return UserFactory.Adapt(loggedUser);
         }
     }
 }

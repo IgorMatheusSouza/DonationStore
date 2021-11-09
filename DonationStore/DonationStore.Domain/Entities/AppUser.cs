@@ -3,7 +3,7 @@ using System;
 
 namespace DonationStore.Domain.Entities
 {
-    public class AppUser : IdentityUser
+    public class AspNetUsers : IdentityUser
     {
         public Guid UserId { get; set; }
 

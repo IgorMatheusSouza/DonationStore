@@ -10,13 +10,11 @@ namespace DonationStore.Domain.Factories
 {
     public class UserFactory : IUserFactory
     {
-        public AppUser Adapt(RegisterUserCommand data) => new AppUser { Name = data.Name, Email = data.Email, UserName = data.Email };
+        public AspNetUsers Adapt(RegisterUserCommand data) => new AspNetUsers { Name = data.Name, Email = data.Email, UserName = data.Email };
 
-        public AppUser Adapt(LoginCommand data) => new AppUser { Email = data.Email, UserName = data.Email };
+        public AspNetUsers Adapt(LoginCommand data) => new AspNetUsers { Email = data.Email, UserName = data.Email };
 
-        public LoginUserViewModel Adapt(AppUser data)
-        {
-            return new LoginUserViewModel { Email = data.Email, Name = data.Name, Token = data.SecurityStamp };
-        }
+        public LoginUserViewModel Adapt(AspNetUsers data) => new LoginUserViewModel { Email = data.Email, Name = data.Name, Token = data.SecurityStamp };
+        
     }
 }

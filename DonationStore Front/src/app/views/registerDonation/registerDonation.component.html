@@ -9,42 +9,71 @@
         <div class="col-lg-7">
           <div class="p-5">
             <div class="text-center">
-              <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+              <h1 *ngIf="wizardState == 1" class="h4 text-gray-900 mb-4">Preencha o titulo e os detalhes da sua doação!
+              </h1>
+              <h1 *ngIf="wizardState == 2" class="h4 text-gray-900 mb-4">Preencha o endereço da sua doação!</h1>
             </div>
             <form class="user" [formGroup]="registerDonationForm" (ngSubmit)="registerDonation()">
-              <div class="form-group row">
-                <div class="col-sm-12 mb-3 mb-sm-0">
-                  <input matInput class="form-control form-control-user" placeholder="digite o titulo do anúncio" formControlName="title">
+              <div class="wirzard1" *ngIf="wizardState == 1">
+                <div class="form-group row">
+                  <div class="col-sm-12 mb-3 mb-sm-0">
+                    <input matInput class="form-control form-control-user" placeholder="digite o titulo do anúncio"
+                      formControlName="title">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="col-sm-12 col-md-12">
+                    <textarea matInput class="form-control form-control-user" placeholder="digite o detalhes do anúncio"
+                      formControlName="description" rows="5" cols="80"></textarea>
+                  </div>
                 </div>
               </div>
-              <div class="form-group">
-                <div class="col-sm-12 col-md-12">
-                  <textarea matInput class="form-control form-control-user" placeholder="digite o titulo do anúncio" formControlName="description" rows="3" cols="80"></textarea>
-                </div>
-              </div>
-              <div class="form-group row">
-                <div class="col-sm-6 mb-3 mb-sm-0">
-                  <select formControlName="state" class="form-control form-control-user-select">
-                    <option value="">Selecione o estado</option>
-                    <option *ngFor="let state of states" [value]="state">{{state}}</option>
-                  </select>
+              <div class="wirzard1" *ngIf="wizardState == 2">
+                <div class="form-group row">
+                  <div class="form-group col-sm-12 mb-12 mb-sm-12">
+                    <input matInput type="text" class="form-control form-control-user " id="exampleInputEmail"
+                      placeholder="Digite o cep de onde retirar a doação" formControlName="zipCode"
+                      (change)="getAddressByZipCode()">
 
+                    <div *ngIf="registerDonationForm.controls['zipCode'].invalid && (registerDonationForm.controls['zipCode'].dirty || registerDonationForm.controls['zipCode'].touched)"
+                      class="text-danger text-center">
+                      <div *ngIf="registerDonationForm.controls['zipCode'].errors">
+                        O Cep deve ser preenchido :)
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-4 mb-3 mb-sm-0 form-group">
+                    <input [readonly]="true" matInput type="text" class="form-control form-control-user"
+                      id="exampleInputEmail" placeholder="Estado" formControlName="state">
+                  </div>
+                  <div class="col-sm-4 mb-3 mb-sm-0 form-group">
+                    <input [readonly]="true" matInput type="text" class="form-control form-control-user"
+                      id="exampleInputEmail" placeholder="Cidade" formControlName="city">
+                  </div>
+                  <div class="form-group col-sm-4 mb-3 mb-sm-0 ">
+                    <input [readonly]="true" matInput type="text" class="form-control form-control-user"
+                      id="exampleInputEmail" placeholder="Bairro" formControlName="district">
+                  </div>
                 </div>
-                <div class="col-sm-6 mb-3 mb-sm-0">
-                  <select formControlName="city" class="form-control form-control-user-select">
-                    <option value="">Selecione a cidade</option>
-                    <option *ngFor="let city of cities" [value]="city"> {{ city }}</option>
-                  </select>
+                <div class="form-group row">
+                  <div class="form-group col-sm-6 mb-3 mb-sm-0 ">
+                    <input [readonly]="true" matInput type="text" class="form-control form-control-user"
+                      id="exampleInputEmail" placeholder="Rua" formControlName="address">
+                  </div>
+                  <div class="form-group col-sm-6 mb-3 mb-sm-0">
+                    <input matInput type="text" class="form-control form-control-user" id="exampleInputEmail"
+                      placeholder="número">
+                  </div>
                 </div>
               </div>
-              <div class="form-group">
-                <input matInput type="email" class="form-control form-control-user" id="exampleInputEmail" placeholder="Email Address" formControlName="zipCode">
-              </div>
-              <div class="form-group">
-                <input matInput type="email" class="form-control form-control-user" id="exampleInputEmail" placeholder="Email Address" formControlName="address">
-              </div>
-              <button class="btn btn-primary btn-user btn-block" type="submit">
+              <button *ngIf="wizardState == 1" class="btn btn-primary btn-user btn-block" (click)="next()">
+                Próximo
+              </button>
+              <button *ngIf="wizardState == 2" class="btn btn-primary btn-user btn-block" type="submit">
                 Cadastrar
+              </button>
+              <button *ngIf="wizardState == 2" class="btn btn-light btn-user btn-block" (click)="back()">
+                Voltar
               </button>
             </form>
             <hr>

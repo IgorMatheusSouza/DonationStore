@@ -13,6 +13,8 @@ export class LoginComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private authenticationService: AuthenticationService, private Router: Router) { }
 
+  public requestError : string = '';
+
   loginForm = this.formBuilder.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
@@ -28,10 +30,12 @@ export class LoginComponent implements OnInit {
   loginUser(){
     if (this.loginForm.invalid)
           return;
-    
+
     this.authenticationService.login(this.loginForm.value).subscribe((response: UserLoginViewModel) => {
           this.authenticationService.saveLoginCredentials(response);
           this.Router.navigate(['/donations']);
-      });
+      },
+        err => { this.requestError = err.error;}
+      );
   }
 }

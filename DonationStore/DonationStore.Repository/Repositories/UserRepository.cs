@@ -14,17 +14,17 @@ namespace DonationStore.Repository.Repositories
     public class UserRepository : IUserRepository
     {
         private DonationStoreContext DonationStoreContext;
-        private readonly UserManager<AppUser> UserManager;
-        private readonly SignInManager<AppUser> SignInManager;
+        private readonly UserManager<AspNetUsers> UserManager;
+        private readonly SignInManager<AspNetUsers> SignInManager;
 
-        public UserRepository(DonationStoreContext donationStoreContext, UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
+        public UserRepository(DonationStoreContext donationStoreContext, UserManager<AspNetUsers> userManager, SignInManager<AspNetUsers> signInManager)
         {
             this.DonationStoreContext = donationStoreContext;
             this.UserManager = userManager;
             this.SignInManager = signInManager;
         }
 
-        public async Task<AppUser> RegisterUser(AppUser user, string password)
+        public async Task<AspNetUsers> RegisterUser(AspNetUsers user, string password)
         {
             var result = await UserManager.CreateAsync(user, password);
 
@@ -38,7 +38,7 @@ namespace DonationStore.Repository.Repositories
             return user;
         }
 
-        public async Task<AppUser> Login(AppUser user, string password)
+        public async Task<AspNetUsers> Login(AspNetUsers user, string password)
         {
             var result = await SignInManager.PasswordSignInAsync(user.Email, password, false, false);
 
@@ -48,6 +48,16 @@ namespace DonationStore.Repository.Repositories
             }
 
             return user;
+        }
+
+        public async Task<AspNetUsers> GetUser(string id)
+        {
+            return await DonationStoreContext.Users.FindAsync(id);
+        }
+
+        public AspNetUsers GetUserByEmail(string email)
+        {
+            return DonationStoreContext.Users.FirstOrDefault(x => x.Email == email);
         }
     }
 }

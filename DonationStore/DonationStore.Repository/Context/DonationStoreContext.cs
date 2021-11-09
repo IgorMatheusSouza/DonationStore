@@ -1,18 +1,18 @@
 ﻿using DonationStore.Domain.Enities;
 using DonationStore.Domain.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace DonationStore.Repository.Context
 {
-    public class DonationStoreContext : DbContext
+    public class DonationStoreContext : IdentityDbContext<AspNetUsers, AspNetRoles, string>
     {
-        public DonationStoreContext(DbContextOptions<DonationStoreContext> options) : base(options) { }
+        public DonationStoreContext(DbContextOptions<DonationStoreContext> options) : base(options)
+        {
+
+        }
 
         public DbSet<Donation> Donations { get; set; }
-
-        public DbSet<AppUser> Users { get; set; }
-
-        public DbSet<AspNetRoles> Roles { get; set; }
     }
 }
 

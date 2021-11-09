@@ -83,11 +83,11 @@ namespace DonationStore
 
         private static void ConfigureInfrasctructure(IServiceCollection services, string defaultConection)
         {
-            services.AddDbContext<IdentityDonationStoreContext>(options => options.UseSqlServer(defaultConection));
+            services.AddDbContext<DonationStoreContext>(options => options.UseSqlServer(defaultConection));
 
             services.AddDbContext<DonationStoreContext>(options => options.UseSqlServer(defaultConection));
 
-            services.AddIdentity<AppUser, AspNetRoles>(options =>
+            services.AddIdentity<AspNetUsers, AspNetRoles>(options =>
             {
                 options.User.RequireUniqueEmail = true;
                 options.Password.RequireDigit = false;
@@ -96,7 +96,7 @@ namespace DonationStore
                 options.Password.RequireUppercase = false;
                 options.Password.RequireLowercase = false;
             })
-            .AddEntityFrameworkStores<IdentityDonationStoreContext>()
+            .AddEntityFrameworkStores<DonationStoreContext>()
             .AddDefaultTokenProviders();
 
 

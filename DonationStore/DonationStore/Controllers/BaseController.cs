@@ -1,4 +1,6 @@
-﻿using DonationStore.Infrastructure.GenericMessages;
+﻿using DonationStore.Application.ViewModels;
+using DonationStore.Infrastructure.GenericMessages;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -25,5 +27,12 @@ namespace DonationStore.Controllers
         }
 
         protected IActionResult ReturnCreated(object data = null) => StatusCode((int)HttpStatusCode.Created, data);
+
+        protected void SaveUserSession(LoginUserViewModel loginUser) 
+        {
+            HttpContext.Session.SetString(nameof(loginUser.Name), loginUser.Name);
+            HttpContext.Session.SetString(nameof(loginUser.Token), loginUser.Token);
+            HttpContext.Session.SetString(nameof(loginUser.Email), loginUser.Email);
+        }
     }
 }

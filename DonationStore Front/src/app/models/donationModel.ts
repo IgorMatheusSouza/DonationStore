@@ -4,5 +4,6 @@ export class DonationModel {
     state: string = '';
     city: string = '';
     address: string = '';
+    district: string = '';
     zipCode: string = '';
 }
