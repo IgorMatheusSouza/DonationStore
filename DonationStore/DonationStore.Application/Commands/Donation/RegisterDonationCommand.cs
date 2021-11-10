@@ -1,4 +1,5 @@
-﻿using DonationStore.Infrastructure.Constants;
+﻿using DonationStore.Application.ViewModels;
+using DonationStore.Infrastructure.Constants;
 using DonationStore.Infrastructure.CQRS.Abstractions;
 using DonationStore.Infrastructure.CQRS.Implementations;
 using DonationStore.Infrastructure.Extensions;
@@ -18,7 +19,9 @@ namespace DonationStore.Application.Commands.Donation
         public string City { get; set; }
         public string Address { get; set; }
         public string ZipCode { get; set; }
-        
+        public string District { get; set; }
+        public LoginUserViewModel LoginUser { get; set; }
+
         public bool Validate()
         {
             if (Title.IsEmpty() || Description.IsEmpty())

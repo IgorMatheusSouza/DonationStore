@@ -24,6 +24,8 @@ namespace DonationStore.Controllers
                 return ReturnError(command.StatusCode, command.Message);
 
             var response = await AuthenticationService.RegisterUser(command);
+            SaveUserSession(response);
+
             return ReturnCreated(response);
         }
 
@@ -35,6 +37,8 @@ namespace DonationStore.Controllers
                 return ReturnError(command.StatusCode, command.Message);
 
             var response = await AuthenticationService.Login(command);
+            SaveUserSession(response);
+
             return ReturnCreated(response);
         }
     }

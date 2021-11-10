@@ -24,7 +24,7 @@ namespace DonationStore.Infrastructure.Transaction
 
         public void Commit()
         {
-            TransactionScope?.Complete();
+            TransactionScope.Complete();
         }
 
         public void Rollback()

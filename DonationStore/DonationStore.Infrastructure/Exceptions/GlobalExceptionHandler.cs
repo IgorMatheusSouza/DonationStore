@@ -22,6 +22,11 @@ namespace DonationStore.Infrastructure.Exceptions
                 context.Result = new JsonResult(context.Exception.Message);
                 response.StatusCode = (int)HttpStatusCode.BadRequest;
             }
+            else if (context.Exception is AuthorizationException)
+            {
+                context.Result = new JsonResult(context.Exception.Message);
+                response.StatusCode = (int)HttpStatusCode.Unauthorized;
+            }
             else
             {
                 response.StatusCode = (int)HttpStatusCode.InternalServerError;

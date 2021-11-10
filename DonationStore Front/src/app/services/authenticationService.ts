@@ -31,6 +31,4 @@ export class AuthenticationService extends BaseService {
   saveLoginCredentials(loginData: UserLoginViewModel){
       localStorage.setItem("User",JSON.stringify(loginData));
   }
-
-
 }

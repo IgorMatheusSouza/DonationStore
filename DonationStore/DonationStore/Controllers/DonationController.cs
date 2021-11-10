@@ -1,5 +1,6 @@
 ﻿using DonationStore.Application.Commands.Donation;
 using DonationStore.Application.Services.Abstractions;
+using DonationStore.Infrastructure.Security;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -19,11 +20,13 @@ namespace DonationStore.Controllers
         }
 
         [HttpPost]
+        [AuthorizationFilter]
         public async Task<IActionResult> RegisterDonation([FromBody] RegisterDonationCommand command)
         {
             if (!command.Validate())
                 return ReturnError(command.StatusCode, command.Message);
 
+            command.LoginUser = GetUserSession();
             await DonationService.RegisterDonation(command);
 
             return ReturnCreated();

@@ -15,9 +15,13 @@ export class BaseService {
         if(user)
         {
           this.currentUser = JSON.parse(user);
-          const headers = new HttpHeaders();
-          headers.append('userToken', this.currentUser?.token ?? '');
-          this.header  = { headers: headers };
+
+          const headerDict = {
+            'userToken': this.currentUser?.token ?? '',
+            'userName': this.currentUser?.name ?? '',
+            'userEmail': this.currentUser?.email ?? ''
+          }
+          this.header  = { headers: new HttpHeaders(headerDict) };
         }
     }
 }

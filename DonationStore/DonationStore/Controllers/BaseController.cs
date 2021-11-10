@@ -34,5 +34,16 @@ namespace DonationStore.Controllers
             HttpContext.Session.SetString(nameof(loginUser.Token), loginUser.Token);
             HttpContext.Session.SetString(nameof(loginUser.Email), loginUser.Email);
         }
+
+        protected LoginUserViewModel GetUserSession()
+        {
+            var model = new LoginUserViewModel();
+            return new LoginUserViewModel()
+            {
+                Token = HttpContext.Session.GetString(nameof(model.Token)),
+                Email = HttpContext.Session.GetString(nameof(model.Email)),
+                Name = HttpContext.Session.GetString(nameof(model.Name))
+            };
+        }
     }
 }

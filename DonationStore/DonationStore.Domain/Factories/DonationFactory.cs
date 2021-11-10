@@ -18,7 +18,8 @@ namespace DonationStore.Domain.Factories
                 City = data.City,
                 State = data.State,
                 ZipCode = data.ZipCode,
-                Address = data.Address
+                Address = data.Address,
+                District = data.District
             };
         }
     }

@@ -11,11 +11,7 @@ namespace DonationStore.Application.Services.Abstractions
 
         public async Task RegisterDonation(RegisterDonationCommand command)
         {
-            TransactionScopeManager.BeginTransaction();
-
             await Mediator.Send(command);
-
-            TransactionScopeManager.Commit();
         }
     }
 }

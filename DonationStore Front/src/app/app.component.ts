@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { NameFormater } from './helpers/nameFormater';
+import { AuthenticationService } from './services/authenticationService';
 
 
 @Component({
@@ -6,6 +8,18 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.less']
 })
+
 export class AppComponent {
-  title = 'DonationStore';
+
+  userName = '';
+
+  constructor(private authenticationService: AuthenticationService,private nameFormater: NameFormater){
+    let user = this.authenticationService.currentUser;
+
+    if(user)
+    {
+      var name = this.nameFormater.getFirstName(user.name);
+      this.userName = name;
+    }
+  }
 }

@@ -21,6 +21,7 @@ using DonationStore.Repository.Context;
 using DonationStore.Infrastructure.Transaction;
 using DonationStore.Application.Commands.Donation;
 using DonationStore.Domain.Handlers.Commands.Donation;
+using System;
 
 namespace DonationStore
 {
@@ -56,6 +57,15 @@ namespace DonationStore
             services.AddControllers().AddNewtonsoftJson();
 
             services.AddMvc(config => config.Filters.Add(new GlobalExceptionHandler())).SetCompatibilityVersion(CompatibilityVersion.Latest);
+
+            services.AddDistributedMemoryCache();
+
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -74,6 +84,8 @@ namespace DonationStore
             app.UseAuthorization();
 
             app.UseCors("Dev");
+
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {
