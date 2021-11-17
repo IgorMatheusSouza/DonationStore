@@ -1,13 +1,9 @@
-<!-- ***** Header Area Start ***** -->
-<header class="header-area header-sticky">
+<!-- <header class="header-area header-sticky">
   <div class="container">
       <div class="row">
           <div class="col-12">
               <nav class="main-nav">
-                  <!-- ***** Logo Start ***** -->
                   <a href="home" class="logo">Donation Store</a>
-                  <!-- ***** Logo End ***** -->
-                  <!-- ***** Menu Start ***** -->
                   <ul class="nav">
                       <li class="scroll-to-section"><a href="home" class="active">Home</a></li>
                       <li class="scroll-to-section"><a href="donations">Doações</a></li>
@@ -23,18 +19,24 @@
                           </ul>
                       </li>
                       <li *ngIf="!userName"class="scroll-to-section"><a href="login">Login</a></li>
-                      <li *ngIf="userName" class="scroll-to-section"><a href="login">Olá {{ userName }} </a></li>
-
+                      <li *ngIf="userName"  class="submenu">
+                        <a href="javascript:;">Olá {{ userName }} </a>
+                        <ul>
+                            <li><a href="">😄 Meu perfil</a></li>
+                            <li><a href="">🤲 Minhas doações</a></li>
+                            <li><a href="">💬 Mensagens</a></li>
+                            <li><a href="">🚪 Sair</a></li>
+                        </ul>
+                      </li>
                   </ul>
                   <a class='menu-trigger'>
                       <span>Menu</span>
                   </a>
-                  <!-- ***** Menu End ***** -->
               </nav>
           </div>
       </div>
   </div>
-</header>
+</header> -->
 
 <router-outlet></router-outlet>
 

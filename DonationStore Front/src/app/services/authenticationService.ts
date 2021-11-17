@@ -17,7 +17,8 @@ export class AuthenticationService extends BaseService {
 
   private urls = {
     register: this.urlAuthetication + 'users',
-    login: this.urlAuthetication + 'users/login'
+    login: this.urlAuthetication + 'users/login',
+    logout: this.urlAuthetication + 'users/logout'
   }
 
   register(data : AuthenticationUserModel): Observable<UserLoginViewModel>{
@@ -25,10 +26,18 @@ export class AuthenticationService extends BaseService {
   }
 
   login(data : AuthenticationUserModel): Observable<UserLoginViewModel>{
+
     return this.http.post<UserLoginViewModel>(this.urls.login, data).pipe();
   }
 
   saveLoginCredentials(loginData: UserLoginViewModel){
-      localStorage.setItem("User",JSON.stringify(loginData));
+    sessionStorage.setItem("forceReaload", "true");
+    localStorage.setItem("User",JSON.stringify(loginData));
+  }
+
+  logout(){
+    localStorage.removeItem("User");
+    sessionStorage.setItem("forceReaload", "true");
+    return this.http.post(this.urls.logout, null, this.header).pipe();;
   }
 }

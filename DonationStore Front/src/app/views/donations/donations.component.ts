@@ -15,6 +15,13 @@ export class DonationsComponent implements OnInit {
   public donations: number[] = [1,2,5,5,1,1,1,1,1,1,1,1,];
 
   ngOnInit() {
-
+    var reload = sessionStorage.getItem("forceReaload");
+    console.log(5);
+    if(reload){
+      sessionStorage.removeItem("forceReaload");
+      setTimeout(() => {
+        window.location.reload();
+      }, 50);
+    }
   }
 }

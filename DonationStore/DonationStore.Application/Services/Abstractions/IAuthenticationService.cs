@@ -12,5 +12,7 @@ namespace DonationStore.Application.Services.Abstractions
         Task<LoginUserViewModel> RegisterUser(RegisterUserCommand command);
 
         Task<LoginUserViewModel> Login(LoginCommand command);
+
+        Task Logout(LoginUserViewModel command);
     }
 }

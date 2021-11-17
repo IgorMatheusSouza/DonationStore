@@ -30,12 +30,42 @@
       <div></div>
     </div>
   </div>
-  <!-- ***** Preloader End ***** -->
-
+  <header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <a href="home" class="logo">Donation Store</a>
+                    <ul class="nav">
+                        <li class="scroll-to-section"><a href="home" class="active">Home</a></li>
+                        <li class="scroll-to-section"><a href="donations">Doações</a></li>
+                        <li class="scroll-to-section"><a href="registerDonation">Doar</a></li>
+                        <li class="scroll-to-section"><a href="#frequently-question">Frequently Questions</a></li>
+                        <li id="login"class="scroll-to-section"><a href="login">Login</a></li>
+                        <li id="menu-logado"  class="submenu" style="display: none;">
+                          <a href="javascript:;" id="name">Olá {{ userName }} </a>
+                          <ul>
+                              <li><a href="">😄 Meu perfil</a></li>
+                              <li><a href="">🤲 Minhas doações</a></li>
+                              <li><a href="">💬 Mensagens</a></li>
+                              <li><a href="logout">🚪 Sair</a></li>
+                          </ul>
+                        </li>
+                    </ul>
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </div>
+  </header>
 
   <app-root></app-root>
 
   <script src="../../../assets/theme/js/jquery-2.1.0.min.js"></script>
+
+
 
   <!-- Bootstrap -->
   <script src="../../../assets/theme/js/popper.js"></script>
@@ -50,7 +80,17 @@
 
   <!-- Global Init -->
   <script src="../../../assets/theme/js/custom.js"></script>
+  <script>
+    var user = localStorage.getItem('User');
 
+    if(user)
+    {
+      $("#name").text("Olá igor");
+      $("#login").hide();
+      $("#menu-logado").show();
+    }
+
+  </script>
 
 </body>
 

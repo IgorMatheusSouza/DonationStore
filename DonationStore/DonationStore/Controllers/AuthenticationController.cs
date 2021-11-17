@@ -1,6 +1,7 @@
 ﻿using DonationStore.Application.Commands.Authentication;
 using DonationStore.Application.Services.Abstractions;
 using DonationStore.Application.ViewModels;
+using DonationStore.Infrastructure.Security;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -40,6 +41,18 @@ namespace DonationStore.Controllers
             SaveUserSession(response);
 
             return ReturnCreated(response);
+        }
+
+        [HttpPost]
+        [AuthorizationFilter]
+        [Route("users/logout")]
+        public async Task<IActionResult> logout()
+        {
+            var userSession = GetUserSession();
+            await AuthenticationService.Logout(userSession);
+            EndUserSession();
+
+            return Ok();
         }
     }
 }

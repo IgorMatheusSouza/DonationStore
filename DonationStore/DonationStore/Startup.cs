@@ -22,6 +22,7 @@ using DonationStore.Infrastructure.Transaction;
 using DonationStore.Application.Commands.Donation;
 using DonationStore.Domain.Handlers.Commands.Donation;
 using System;
+using DonationStore.Domain.Handlers.Commands.User;
 
 namespace DonationStore
 {
@@ -111,8 +112,6 @@ namespace DonationStore
             .AddEntityFrameworkStores<DonationStoreContext>()
             .AddDefaultTokenProviders();
 
-
-
             services.AddTransient<IAuthenticationService, AuthenticationService>()
                     .AddTransient<IUserRepository, UserRepository>()
                     .AddTransient<IDonationRepository, DonationRepository>()
@@ -123,7 +122,8 @@ namespace DonationStore
                     .AddScoped<DonationStoreContext, DonationStoreContext>()
                     .AddScoped<IRequestHandler<RegisterUserCommand, LoginUserViewModel>, RegisterUserCommandHandler>()
                     .AddScoped<IRequestHandler<RegisterDonationCommand, Unit>, RegisterDonationCommandHandler>()
-                    .AddScoped<IRequestHandler<LoginCommand, LoginUserViewModel>, LoginCommandHandler>();
+                    .AddScoped<IRequestHandler<LoginCommand, LoginUserViewModel>, LoginCommandHandler>()
+                    .AddScoped<IRequestHandler<LogoutCommand, Unit>, LogoutCommandHandler>();
         }
     }
 }

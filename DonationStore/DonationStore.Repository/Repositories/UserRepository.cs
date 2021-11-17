@@ -59,5 +59,10 @@ namespace DonationStore.Repository.Repositories
         {
             return DonationStoreContext.Users.FirstOrDefault(x => x.Email == email);
         }
+
+        public async Task logout(string email)
+        {
+            await SignInManager.SignOutAsync();
+        }
     }
 }

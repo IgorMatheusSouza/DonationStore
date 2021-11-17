@@ -15,6 +15,11 @@ namespace DonationStore.Application.Services.Abstractions
             return await Mediator.Send(command);
         }
 
+        public async Task Logout(LoginUserViewModel model)
+        {
+            await Mediator.Send(new LogoutCommand { Email = model.Email, Token = model.Token });
+        }
+
         public async Task<LoginUserViewModel> RegisterUser(RegisterUserCommand command)
         {
             return await Mediator.Send(command);

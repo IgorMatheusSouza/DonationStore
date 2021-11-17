@@ -12,5 +12,7 @@ namespace DonationStore.Domain.Abstractions.Repositories
         Task<AspNetUsers> GetUser(string id);
 
         AspNetUsers GetUserByEmail(string email);
+
+        Task logout(string email);
     }
 }

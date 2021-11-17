@@ -10,6 +10,13 @@ export class HomeComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    var reload = sessionStorage.getItem("forceReaload");
+    if(reload){
+      sessionStorage.removeItem("forceReaload");
+      setTimeout(() => {
+        window.location.reload();
+      }, 50);
+    }
   }
 
 }

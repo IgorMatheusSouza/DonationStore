@@ -2,6 +2,7 @@
 using DonationStore.Infrastructure.GenericMessages;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Owin.Security;
 using System.Net;
 
 namespace DonationStore.Controllers
@@ -44,6 +45,11 @@ namespace DonationStore.Controllers
                 Email = HttpContext.Session.GetString(nameof(model.Email)),
                 Name = HttpContext.Session.GetString(nameof(model.Name))
             };
+        }
+
+        protected void EndUserSession()
+        {
+            HttpContext.Session.Clear();
         }
     }
 }
