@@ -3,8 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { addressModel } from 'src/app/models/addressModel';
+import { AuthenticationService } from 'src/app/services/authenticationService';
 import { DonationService } from 'src/app/services/donationService';
 import { ExternalService } from 'src/app/services/externalService';
+import { FileUploadService } from 'src/app/services/fileUploadService';
 
 
 @Component({
@@ -13,6 +15,8 @@ import { ExternalService } from 'src/app/services/externalService';
   styleUrls: ['./registerDonation.component.less']
 })
 export class RegisterDonationComponent implements OnInit {
+
+  requestError = '';
 
   registerDonationForm = this.formBuilder.group({
     title: ['', [Validators.required, Validators.maxLength(50)]],
@@ -27,21 +31,33 @@ export class RegisterDonationComponent implements OnInit {
   get form() { return this.registerDonationForm.controls; }
 
   public wizardState: number = 1;
+  public imagePath: string = '';
 
-  constructor(private formBuilder: FormBuilder, private Router: Router, private donationService: DonationService, private externalService: ExternalService) { }
+  fileToUpload: File | null = null;
+
+  loader = false;
+
+  constructor(private formBuilder: FormBuilder,
+              private Router: Router,
+              private donationService: DonationService,
+              private externalService: ExternalService,
+              private authenticationService: AuthenticationService,
+              private fileUploadService: FileUploadService) { }
 
   ngOnInit() {
+    if(this.authenticationService.currentUser == null)
+        this.Router.navigate(['/login']);
   }
 
   registerDonation() {
-    console.log(5);
 
-    if (this.registerDonationForm.invalid)
+    if (this.registerDonationForm.invalid || this.loader)
       return;
 
+    this.loader = true;
     this.donationService.register(this.registerDonationForm.value).subscribe((response: any) => {
       this.Router.navigate(['/donations']);
-    }, err => console.log(err));
+    }, err => { this.requestError = err.error;}).add(() => { this.loader = false; });;
   }
 
   getAddressByZipCode() {
@@ -61,5 +77,17 @@ export class RegisterDonationComponent implements OnInit {
 
   back() {
     this.wizardState--;
+  }
+
+  handleFileInput(event: any) {
+      this.fileToUpload = event.target.files.item(0);
+
+      if(this.fileToUpload){
+        var file = this.fileToUpload as File;
+
+        this.fileUploadService.postFile(file).subscribe((response: any) => {
+          this.imagePath = response.filePath;
+          });
+      }
   }
 }

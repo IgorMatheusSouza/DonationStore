@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http'; 
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -13,6 +13,7 @@ import { LoginComponent } from './views/login/login.component';
 import { DonationsComponent } from './views/donations/donations.component';
 import { RegisterDonationComponent } from './views/registerDonation/registerDonation.component';
 import { MatSelectModule } from '@angular/material/select';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { MatSelectModule } from '@angular/material/select';
     SignupComponent,
     LoginComponent,
     DonationsComponent,
-    RegisterDonationComponent
+    RegisterDonationComponent,
+    LoaderComponent
   ],
   imports: [
     CommonModule,

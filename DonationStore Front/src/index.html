@@ -43,7 +43,9 @@
                         <li class="scroll-to-section"><a href="#frequently-question">Frequently Questions</a></li>
                         <li id="login"class="scroll-to-section"><a href="login">Login</a></li>
                         <li id="menu-logado"  class="submenu" style="display: none;">
-                          <a href="javascript:;" id="name">Olá {{ userName }} </a>
+                          <a href="javascript:;">
+                            <span class="" id="name">Olá </span>
+                            <img class="img-profile rounded-circle" src="assets/imgs/undraw_profile.svg" style="width: 25px;"></a>
                           <ul>
                               <li><a href="">😄 Meu perfil</a></li>
                               <li><a href="">🤲 Minhas doações</a></li>
@@ -81,11 +83,11 @@
   <!-- Global Init -->
   <script src="../../../assets/theme/js/custom.js"></script>
   <script>
-    var user = localStorage.getItem('User');
+    var user = JSON.parse(localStorage.getItem('User'));
 
     if(user)
     {
-      $("#name").text("Olá igor");
+      $("#name").text('Olá '+ user.name.split(' ')[0]);
       $("#login").hide();
       $("#menu-logado").show();
     }

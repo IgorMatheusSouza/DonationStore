@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NameFormater } from './helpers/nameFormater';
 import { AuthenticationService } from './services/authenticationService';
 
@@ -12,6 +12,7 @@ import { AuthenticationService } from './services/authenticationService';
 export class AppComponent {
 
   userName = '';
+  loader = false;
 
   constructor(private authenticationService: AuthenticationService,private nameFormater: NameFormater){
     let user = this.authenticationService.currentUser;
