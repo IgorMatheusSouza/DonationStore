@@ -21,6 +21,7 @@ namespace DonationStore.Application.Commands.Donation
         public string ZipCode { get; set; }
         public string District { get; set; }
         public LoginUserViewModel LoginUser { get; set; }
+        public List<DonationImageModel> Images { get; set; }
 
         public bool Validate()
         {

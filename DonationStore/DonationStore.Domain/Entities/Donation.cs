@@ -16,5 +16,6 @@ namespace DonationStore.Domain.Enities
         public string ZipCode { get; set; }
         public DateTime CreationDate { get; set; }
         public virtual AspNetUsers User { get; set; }
+        public virtual ICollection<DonationImage> Images { get; set; }
     }
 }

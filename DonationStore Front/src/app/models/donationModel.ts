@@ -6,4 +6,10 @@ export class DonationModel {
     address: string = '';
     district: string = '';
     zipCode: string = '';
+    images: ImageModel | undefined;
+}
+
+export class ImageModel {
+  fileName : string = '';
+  file : string = '';
 }

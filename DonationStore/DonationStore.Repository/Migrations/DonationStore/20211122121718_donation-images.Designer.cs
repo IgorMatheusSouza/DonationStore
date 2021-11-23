@@ -4,14 +4,16 @@ using DonationStore.Repository.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DonationStore.Repository.Migrations.DonationStore
 {
     [DbContext(typeof(DonationStoreContext))]
-    partial class DonationStoreContextModelSnapshot : ModelSnapshot
+    [Migration("20211122121718_donation-images")]
+    partial class donationimages
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -175,18 +177,18 @@ namespace DonationStore.Repository.Migrations.DonationStore
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("DonationId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<string>("FileName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDelete")
                         .HasColumnType("bit");
 
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("DonationId");
+                    b.HasIndex("UserId");
 
                     b.ToTable("DonationImages");
                 });
@@ -306,11 +308,11 @@ namespace DonationStore.Repository.Migrations.DonationStore
 
             modelBuilder.Entity("DonationStore.Domain.Entities.DonationImage", b =>
                 {
-                    b.HasOne("DonationStore.Domain.Enities.Donation", "Donation")
+                    b.HasOne("DonationStore.Domain.Enities.Donation", "User")
                         .WithMany("Images")
-                        .HasForeignKey("DonationId");
+                        .HasForeignKey("UserId");
 
-                    b.Navigation("Donation");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

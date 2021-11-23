@@ -13,6 +13,8 @@ namespace DonationStore.Repository.Context
         }
 
         public DbSet<Donation> Donations { get; set; }
+
+        public DbSet<DonationImage> DonationImages { get; set; }
     }
 }
 

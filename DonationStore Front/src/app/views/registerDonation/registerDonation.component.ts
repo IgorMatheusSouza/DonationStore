@@ -1,8 +1,9 @@
 import { state } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { addressModel } from 'src/app/models/addressModel';
+import { ImageModel } from 'src/app/models/donationModel';
 import { AuthenticationService } from 'src/app/services/authenticationService';
 import { DonationService } from 'src/app/services/donationService';
 import { ExternalService } from 'src/app/services/externalService';
@@ -25,13 +26,21 @@ export class RegisterDonationComponent implements OnInit {
     city: ['', [Validators.required]],
     district: ['', [Validators.required]],
     address: ['', [Validators.required, Validators.maxLength(50)]],
-    zipCode: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(10)]]
+    zipCode: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(10)]],
+    images: this.formBuilder.array([
+          new FormGroup({
+            fileName: new FormControl(),
+            file: new FormControl(),
+          }),
+    ])
   });
+
 
   get form() { return this.registerDonationForm.controls; }
 
   public wizardState: number = 1;
   public imagePath: string = '';
+  public imagesModel: ImageModel[] = [];
 
   fileToUpload: File | null = null;
 
@@ -86,8 +95,14 @@ export class RegisterDonationComponent implements OnInit {
         var file = this.fileToUpload as File;
 
         this.fileUploadService.postFile(file).subscribe((response: any) => {
-          this.imagePath = response.filePath;
-          });
+            response.file = 'data:image/jpeg;base64,'+ response.file;
+
+            var imagesForm = this.registerDonationForm.get('images') as FormArray;
+            var model : ImageModel =  { fileName: response.fileName, file: '' };
+            imagesForm.push(this.formBuilder.group(model));
+
+            this.imagesModel.push(response);
+        });
       }
   }
 }
