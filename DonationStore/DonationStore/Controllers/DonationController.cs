@@ -1,4 +1,5 @@
 ﻿using DonationStore.Application.Commands.Donation;
+using DonationStore.Application.Queries.Donation;
 using DonationStore.Application.Services.Abstractions;
 using DonationStore.Infrastructure.Security;
 using Microsoft.AspNetCore.Mvc;
@@ -29,7 +30,16 @@ namespace DonationStore.Controllers
             command.LoginUser = GetUserSession();
             await DonationService.RegisterDonation(command);
 
-            return ReturnCreated();
+            return OkCreated();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetDonations([FromQuery] int? page, [FromQuery] int? quantity)
+        {
+            var query = new GetDonationsQuery(page, quantity);
+            var donations = await DonationService.GetDonations(query);
+
+            return Ok(donations);
         }
     }
 }

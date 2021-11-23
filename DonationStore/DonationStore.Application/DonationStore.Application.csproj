@@ -12,8 +12,4 @@
     <ProjectReference Include="..\DonationStore.Infrastructure\DonationStore.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Queries\" />
-  </ItemGroup>
-
 </Project>

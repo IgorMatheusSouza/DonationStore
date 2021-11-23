@@ -4,10 +4,8 @@ using DonationStore.Infrastructure.CQRS.Abstractions;
 using DonationStore.Infrastructure.CQRS.Implementations;
 using DonationStore.Infrastructure.Extensions;
 using DonationStore.Infrastructure.GenericMessages;
-using MediatR;
-using System;
 using System.Collections.Generic;
-using System.Text;
+using IRequest = MediatR.IRequest;
 
 namespace DonationStore.Application.Commands.Donation
 {
@@ -20,7 +18,7 @@ namespace DonationStore.Application.Commands.Donation
         public string Address { get; set; }
         public string ZipCode { get; set; }
         public string District { get; set; }
-        public LoginUserViewModel LoginUser { get; set; }
+        public UserViewModel LoginUser { get; set; }
         public List<DonationImageModel> Images { get; set; }
 
         public bool Validate()

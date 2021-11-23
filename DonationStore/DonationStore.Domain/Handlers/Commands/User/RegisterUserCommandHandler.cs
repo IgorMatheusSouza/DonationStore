@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DonationStore.Domain.Handlers.Commands.Users
 {
-    public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, LoginUserViewModel>
+    public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand, UserViewModel>
     {
         private readonly IUserRepository UserRepository;
         private readonly IUserFactory UserFactory;
@@ -19,7 +19,7 @@ namespace DonationStore.Domain.Handlers.Commands.Users
             this.UserFactory = userFactory;
         }
 
-        public async Task<LoginUserViewModel> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
+        public async Task<UserViewModel> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
         {
             var user = UserFactory.Adapt(request);
             await UserRepository.RegisterUser(user, request.Password);

@@ -10,6 +10,6 @@ namespace DonationStore.Domain.Abstractions.Factories
 
         AspNetUsers Adapt(LoginCommand data);
 
-        LoginUserViewModel Adapt(AspNetUsers data);
+        UserViewModel Adapt(AspNetUsers data);
     }
 }

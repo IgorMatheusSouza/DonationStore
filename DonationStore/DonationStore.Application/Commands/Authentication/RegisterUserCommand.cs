@@ -7,7 +7,7 @@ using MediatR;
 
 namespace DonationStore.Application.Commands.Authentication
 {
-    public class RegisterUserCommand : Command, ICommand, IRequest<LoginUserViewModel>
+    public class RegisterUserCommand : Command, ICommand, IRequest<UserViewModel>
     {
         public string PasswordConfirmation { get; set; }
 

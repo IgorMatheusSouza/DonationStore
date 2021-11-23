@@ -6,7 +6,8 @@ export class DonationModel {
     address: string = '';
     district: string = '';
     zipCode: string = '';
-    images: ImageModel | undefined;
+    creationDate: Date = new Date();
+    images: ImageModel[] = [];
 }
 
 export class ImageModel {

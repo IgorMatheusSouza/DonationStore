@@ -27,19 +27,19 @@ namespace DonationStore.Controllers
             };
         }
 
-        protected IActionResult ReturnCreated(object data = null) => StatusCode((int)HttpStatusCode.Created, data);
+        protected IActionResult OkCreated(object data = null) => StatusCode((int)HttpStatusCode.Created, data);
 
-        protected void SaveUserSession(LoginUserViewModel loginUser) 
+        protected void SaveUserSession(UserViewModel loginUser) 
         {
             HttpContext.Session.SetString(nameof(loginUser.Name), loginUser.Name);
             HttpContext.Session.SetString(nameof(loginUser.Token), loginUser.Token);
             HttpContext.Session.SetString(nameof(loginUser.Email), loginUser.Email);
         }
 
-        protected LoginUserViewModel GetUserSession()
+        protected UserViewModel GetUserSession()
         {
-            var model = new LoginUserViewModel();
-            return new LoginUserViewModel()
+            var model = new UserViewModel();
+            return new UserViewModel()
             {
                 Token = HttpContext.Session.GetString(nameof(model.Token)),
                 Email = HttpContext.Session.GetString(nameof(model.Email)),

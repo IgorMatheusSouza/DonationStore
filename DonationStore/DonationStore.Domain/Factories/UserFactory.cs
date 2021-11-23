@@ -14,6 +14,6 @@ namespace DonationStore.Domain.Factories
 
         public AspNetUsers Adapt(LoginCommand data) => new AspNetUsers { Email = data.Email, UserName = data.Email };
 
-        public LoginUserViewModel Adapt(AspNetUsers data) => new LoginUserViewModel { Email = data.Email, Name = data.Name, Token = data.SecurityStamp };
+        public UserViewModel Adapt(AspNetUsers data) => new UserViewModel { Email = data.Email, Name = data.Name, Token = data.SecurityStamp };
     }
 }

@@ -23,6 +23,12 @@ using DonationStore.Application.Commands.Donation;
 using DonationStore.Domain.Handlers.Commands.Donation;
 using System;
 using DonationStore.Domain.Handlers.Commands.User;
+using DonationStore.Application.Queries.Donation;
+using System.Collections.Generic;
+using DonationStore.Domain.Handlers.Queries.Donation;
+using DonationStore.Infrastructure.Services;
+using DonationStore.Infrastructure.Services.Interfaces;
+using DonationStore.Infrastructure.Services.File;
 
 namespace DonationStore
 {
@@ -119,11 +125,16 @@ namespace DonationStore
                     .AddTransient<IDonationFactory, DonationFactory>()
                     .AddTransient<IDonationService, DonationService>()
                     .AddTransient<ITransactionScopeManager, TransactionScopeManager>()
+                    .AddTransient<IFileInfrastructureService, FileInfrastructureService>()
                     .AddScoped<DonationStoreContext, DonationStoreContext>()
-                    .AddScoped<IRequestHandler<RegisterUserCommand, LoginUserViewModel>, RegisterUserCommandHandler>()
+                    .AddScoped<IRequestHandler<RegisterUserCommand, UserViewModel>, RegisterUserCommandHandler>()
                     .AddScoped<IRequestHandler<RegisterDonationCommand, Unit>, RegisterDonationCommandHandler>()
-                    .AddScoped<IRequestHandler<LoginCommand, LoginUserViewModel>, LoginCommandHandler>()
-                    .AddScoped<IRequestHandler<LogoutCommand, Unit>, LogoutCommandHandler>();
+                    .AddScoped<IRequestHandler<LoginCommand, UserViewModel>, LoginCommandHandler>()
+                    .AddScoped<IRequestHandler<LogoutCommand, Unit>, LogoutCommandHandler>()
+                    .AddScoped<IRequestHandler<LoginCommand, UserViewModel>, LoginCommandHandler>()
+                    .AddScoped<IRequestHandler<LogoutCommand, Unit>, LogoutCommandHandler>()
+                    .AddScoped<IRequestHandler<GetDonationsQuery, List<DonationViewModel>>, DonationQueryHandler>();
+                    
         }
     }
 }

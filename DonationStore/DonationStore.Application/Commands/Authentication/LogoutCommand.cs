@@ -2,12 +2,7 @@
 using DonationStore.Infrastructure.CQRS.Implementations;
 using DonationStore.Infrastructure.Extensions;
 using DonationStore.Infrastructure.GenericMessages;
-using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using IRequest = MediatR.IRequest;
 
 namespace DonationStore.Application.Commands.Authentication
 {

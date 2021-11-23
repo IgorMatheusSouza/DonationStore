@@ -1,4 +1,5 @@
 ﻿using DonationStore.Application.Commands.Donation;
+using DonationStore.Application.ViewModels;
 using DonationStore.Domain.Abstractions.Factories;
 using DonationStore.Domain.Enities;
 using DonationStore.Domain.Entities;
@@ -28,6 +29,26 @@ namespace DonationStore.Domain.Factories
                     CreationDate = DateTime.Now 
                 }).ToList()
             };
+        }
+
+        public List<DonationViewModel> Adapt(List<Donation> donations)
+        {
+            return donations.Select(data => new DonationViewModel()
+            {
+                Title = data.Title,
+                Description = data.Description,
+                City = data.City,
+                State = data.State,
+                ZipCode = data.ZipCode,
+                Address = data.Address,
+                District = data.District,
+                CreationDate = data.CreationDate,
+                Images = data.Images?.Select(x => new DonationImageModel
+                {
+                    FileName = x.FileName
+                }).ToList() ?? default
+
+            }).ToList();
         }
     }
 }

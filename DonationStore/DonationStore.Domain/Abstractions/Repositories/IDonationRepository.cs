@@ -9,5 +9,6 @@ namespace DonationStore.Domain.Abstractions.Repositories
     public interface IDonationRepository
     { 
         Task RegisterDonation(Donation donation);
+        Task<List<Donation>> GetDonations(int page, int quantity);
     }
 }

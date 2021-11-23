@@ -89,6 +89,10 @@ export class RegisterDonationComponent implements OnInit {
   }
 
   handleFileInput(event: any) {
+
+      if (this.loader)
+      return;
+
       this.fileToUpload = event.target.files.item(0);
 
       if(this.fileToUpload){

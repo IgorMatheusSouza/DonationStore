@@ -9,10 +9,10 @@ namespace DonationStore.Application.Services.Abstractions
 {
     public interface IAuthenticationService
     {
-        Task<LoginUserViewModel> RegisterUser(RegisterUserCommand command);
+        Task<UserViewModel> RegisterUser(RegisterUserCommand command);
 
-        Task<LoginUserViewModel> Login(LoginCommand command);
+        Task<UserViewModel> Login(LoginCommand command);
 
-        Task Logout(LoginUserViewModel command);
+        Task Logout(UserViewModel command);
     }
 }

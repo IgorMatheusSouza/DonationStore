@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { DonationService } from 'src/app/services/donationService';
+import { DonationModel } from 'src/app/models/donationModel';
 
 @Component({
   selector: 'app-donations',
@@ -8,9 +10,9 @@ import { CommonModule } from '@angular/common';
 })
 export class DonationsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private donationService: DonationService) { }
 
-  public mainDonations: number[] = [1,2,4,3,5,7,8];
+  public mainDonations: DonationModel[] = [];
 
   public donations: number[] = [1,2,5,5,1,1,1,1,1,1,1,1,];
 
@@ -22,6 +24,11 @@ export class DonationsComponent implements OnInit {
       setTimeout(() => {
         window.location.reload();
       }, 50);
+    }
+    else{
+      this.donationService.getDonations().subscribe((response: DonationModel[]) => {
+        this.mainDonations = response;
+      });
     }
   }
 }

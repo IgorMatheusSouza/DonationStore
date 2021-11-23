@@ -27,7 +27,7 @@ namespace DonationStore.Controllers
             var response = await AuthenticationService.RegisterUser(command);
             SaveUserSession(response);
 
-            return ReturnCreated(response);
+            return OkCreated(response);
         }
 
         [HttpPost]
@@ -40,7 +40,7 @@ namespace DonationStore.Controllers
             var response = await AuthenticationService.Login(command);
             SaveUserSession(response);
 
-            return ReturnCreated(response);
+            return OkCreated(response);
         }
 
         [HttpPost]

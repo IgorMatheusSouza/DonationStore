@@ -10,7 +10,7 @@ using System.Text;
 
 namespace DonationStore.Application.Commands.Authentication
 {
-    public class LoginCommand : Command, ICommand, IRequest<LoginUserViewModel>
+    public class LoginCommand : Command, ICommand, IRequest<UserViewModel>
     {
         public string Email { get; set; }
 
