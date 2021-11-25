@@ -20,13 +20,18 @@ export class DonationService extends BaseService {
   private urls = {
     register: this.urlAuthetication,
     getAll: this.urlAuthetication,
+    get: this.urlAuthetication,
   }
 
-  register(data : AuthenticationUserModel){
+  register(data : AuthenticationUserModel) {
     return this.http.post<DonationModel>(this.urls.register, data, this.header).pipe();
   }
 
-  getDonations(){
+  getDonations() {
     return this.http.get<DonationModel[]>(this.urls.getAll).pipe();
+  }
+
+  getDonation(id : string) {
+    return this.http.get<DonationModel>(this.urls.get + id).pipe();
   }
 }

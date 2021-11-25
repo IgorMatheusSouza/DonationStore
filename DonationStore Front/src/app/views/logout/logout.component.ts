@@ -13,12 +13,11 @@ export class LogoutComponent implements OnInit {
 
   ngOnInit() {
 
+    this.authenticationService.logout().subscribe((response: any) => {});
 
     setTimeout(() => {
-      this.authenticationService.logout().subscribe((response: any) => {
-        this.Router.navigate(['/home']);
-      });
-    }, 1000);
+      this.Router.navigate(['/home']);
+    }, 3000);
   }
 
 }

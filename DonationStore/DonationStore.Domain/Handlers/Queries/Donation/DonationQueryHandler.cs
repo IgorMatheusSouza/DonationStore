@@ -31,7 +31,8 @@ namespace DonationStore.Domain.Handlers.Queries.Donation
 
         public async Task<DonationViewModel> Handle(GetDonationQuery request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            var result = await DonationRepository.GetDonation(request.Id);
+            return DonationFactory.Adapt(result);
         }
     }
 }

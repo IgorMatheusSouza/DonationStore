@@ -41,5 +41,13 @@ namespace DonationStore.Controllers
 
             return Ok(donations);
         }
+
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<IActionResult> GetDonation([FromRoute] Guid id)
+        {
+            var donations = await DonationService.GetDonation(new GetDonationQuery(id));
+            return Ok(donations);
+        }
     }
 }

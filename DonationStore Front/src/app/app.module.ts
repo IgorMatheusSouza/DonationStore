@@ -14,6 +14,7 @@ import { DonationsComponent } from './views/donations/donations.component';
 import { RegisterDonationComponent } from './views/registerDonation/registerDonation.component';
 import { MatSelectModule } from '@angular/material/select';
 import { LoaderComponent } from './components/loader/loader.component';
+import { DonationDetailsComponent } from './views/donationDetails/donationDetails.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { LoaderComponent } from './components/loader/loader.component';
     LoginComponent,
     DonationsComponent,
     RegisterDonationComponent,
-    LoaderComponent
+    LoaderComponent,
+    DonationDetailsComponent
   ],
   imports: [
     CommonModule,

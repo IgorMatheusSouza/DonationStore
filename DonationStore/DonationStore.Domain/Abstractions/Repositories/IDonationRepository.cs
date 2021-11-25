@@ -10,5 +10,6 @@ namespace DonationStore.Domain.Abstractions.Repositories
     { 
         Task RegisterDonation(Donation donation);
         Task<List<Donation>> GetDonations(int page, int quantity);
+        Task<Donation> GetDonation(Guid id);
     }
 }

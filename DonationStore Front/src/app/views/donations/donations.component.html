@@ -6,13 +6,14 @@
         <div id="map">
           <iframe class="map-side"
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3674.7960240611515!2d-43.2385990537693!3d-22.920893189202985!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x997f2f17b061db%3A0xf26e748949e13574!2zUG9udG86Pg!5e0!3m2!1spt-BR!2sbr!4v1624487398270!5m2!1spt-BR!2sbr"
-            width="100%" height="627px" frameborder="0" style="border:0" allowfullscreen></iframe>
+            width="100%" height="800px " frameborder="0" style="border:0" allowfullscreen></iframe>
         </div>
       </div>
       <div class="col-md-6 main-box" id="style-7">
         <!-- Card Start -->
         <div class="card card-donation" *ngFor="let item of mainDonations">
           <div class="row">
+
 
             <div class="col-md-5">
               <div id="CarouselTest" class="carousel slide box" data-ride="carousel">
@@ -41,9 +42,11 @@
 
             <div class="col-md-7 px-3">
               <div class="card-block">
-                <h5 class="card-title">{{item.title}}</h5>
-                <h6 class="card-text">{{item.description}}</h6>
-                <a href="#" class="small">{{item.city}} - {{item.state}}, {{item.district}} - {{ item.creationDate | date:'dd/MM/yyyy HH:mm' }}</a>
+                <a [routerLink]="['/donation',item.id]">
+                  <h5 class="card-title">{{item.title}}</h5>
+                  <h6 class="card-text">{{item.description}}</h6>
+                  <div href="#" class="small">{{item.city}} - {{item.state}}, {{item.district}} - {{ item.creationDate | date:'dd/MM/yyyy HH:mm' }}</div>
+                </a>
               </div>
             </div>
 
@@ -54,7 +57,7 @@
   </div>
 </div>
 
-<hr>
+<!-- <hr>
 <br>
 <br>
 <div class="container py-3">
@@ -72,7 +75,8 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 <hr>
 <br>
 <br>
+

@@ -1,4 +1,5 @@
 export class DonationModel {
+    id: string = '';
     title: string = '';
     description: string = '';
     state: string = '';

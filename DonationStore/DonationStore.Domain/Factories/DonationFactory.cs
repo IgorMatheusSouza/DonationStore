@@ -35,6 +35,7 @@ namespace DonationStore.Domain.Factories
         {
             return donations.Select(data => new DonationViewModel()
             {
+                Id = data.Id,
                 Title = data.Title,
                 Description = data.Description,
                 City = data.City,
@@ -49,6 +50,26 @@ namespace DonationStore.Domain.Factories
                 }).ToList() ?? default
 
             }).ToList();
+        }
+
+        public DonationViewModel Adapt(Donation data)
+        {
+            return new DonationViewModel()
+            {
+                Id = data.Id,
+                Title = data.Title,
+                Description = data.Description,
+                City = data.City,
+                State = data.State,
+                ZipCode = data.ZipCode,
+                Address = data.Address,
+                District = data.District,
+                CreationDate = data.CreationDate,
+                Images = data.Images?.Select(x => new DonationImageModel
+                {
+                    FileName = x.FileName
+                }).ToList() ?? default
+            };
         }
     }
 }

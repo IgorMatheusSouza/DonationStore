@@ -133,8 +133,9 @@ namespace DonationStore
                     .AddScoped<IRequestHandler<LogoutCommand, Unit>, LogoutCommandHandler>()
                     .AddScoped<IRequestHandler<LoginCommand, UserViewModel>, LoginCommandHandler>()
                     .AddScoped<IRequestHandler<LogoutCommand, Unit>, LogoutCommandHandler>()
-                    .AddScoped<IRequestHandler<GetDonationsQuery, List<DonationViewModel>>, DonationQueryHandler>();
-                    
+                    .AddScoped<IRequestHandler<GetDonationsQuery, List<DonationViewModel>>, DonationQueryHandler>()
+                    .AddScoped<IRequestHandler<GetDonationQuery, DonationViewModel>, DonationQueryHandler>();
+
         }
     }
 }

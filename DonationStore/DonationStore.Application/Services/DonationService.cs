@@ -31,18 +31,30 @@ namespace DonationStore.Application.Services.Abstractions
 
             foreach (var donation in donations)
             {
-                await Task.Run(async () =>
-                {
-                     var images = donation.Images.Where(x => !x.FileName.IsEmpty());
-
-                     foreach (var image in images)
-                     {  
-                         image.File = await InfrastructureService.LoadImage(image.FileName);
-                     }
-                });
+                await LoadDonationImage(donation);
             }
 
             return donations;
+        }
+
+        public async Task<DonationViewModel> GetDonation(GetDonationQuery query)
+        {
+            var donation = await Mediator.Send(query);
+            await LoadDonationImage(donation);
+            return donation;
+        }
+
+        private async Task LoadDonationImage(DonationViewModel donation)
+        {
+            await Task.Run(async () =>
+            {
+                var images = donation.Images.Where(x => !x.FileName.IsEmpty());
+
+                foreach (var image in images)
+                {
+                    image.File = await InfrastructureService.LoadImage(image.FileName);
+                }
+            });
         }
     }
 }

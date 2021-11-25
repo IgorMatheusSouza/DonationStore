@@ -12,5 +12,7 @@ namespace DonationStore.Domain.Abstractions.Factories
         Donation Adapt(RegisterDonationCommand data);
 
         List<DonationViewModel> Adapt(List<Donation> donations);
+
+        DonationViewModel Adapt(Donation donation);
     }
 }

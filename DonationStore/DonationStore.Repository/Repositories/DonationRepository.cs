@@ -17,6 +17,11 @@ namespace DonationStore.Repository.Repositories
             DonationStoreContext = donationStoreContext;
         }
 
+        public async Task<Donation> GetDonation(Guid id)
+        {
+            return await DonationStoreContext.Donations.Include(x => x.Images).Include(x => x.User).FirstOrDefaultAsync(x => x.Id == id);
+        }
+
         public async Task<List<Donation>> GetDonations(int page, int quantity)
         {
             return await DonationStoreContext.Donations.Skip(page * quantity).Take(quantity).Include(x => x.Images).ToListAsync();
