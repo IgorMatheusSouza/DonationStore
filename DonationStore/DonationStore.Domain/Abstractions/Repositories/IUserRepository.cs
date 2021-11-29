@@ -1,18 +1,19 @@
 ﻿using DonationStore.Domain.Entities;
+using System;
 using System.Threading.Tasks;
 
 namespace DonationStore.Domain.Abstractions.Repositories
 {
     public interface IUserRepository
     {
-        Task<AspNetUsers> RegisterUser(AspNetUsers user, string password);
+        Task<User> RegisterUser(User user, string password);
 
-        Task<AspNetUsers> Login(AspNetUsers user, string password);
+        Task<User> Login(User user, string password);
 
-        Task<AspNetUsers> GetUser(string id);
+        Task<User> GetUser(Guid id);
 
-        AspNetUsers GetUserByEmail(string email);
+        Task<User> GetUserByEmail(string email);
 
-        Task logout(string email);
+        Task Logout(string email);
     }
 }

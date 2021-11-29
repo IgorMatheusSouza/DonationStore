@@ -27,7 +27,7 @@ namespace DonationStore.Domain.Handlers.Commands.Donation
 
         public async Task<Unit> Handle(RegisterDonationCommand request, CancellationToken cancellationToken)
         {
-            var user = UserRepository.GetUserByEmail(request.LoginUser.Email);
+            var user = await UserRepository.GetUserByEmail(request.LoginUser.Email);
 
             if (user.SecurityStamp != request.LoginUser.Token)
                 throw new AuthorizationException(ErrorMessages.AuthError);

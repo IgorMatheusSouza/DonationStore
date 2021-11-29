@@ -20,6 +20,8 @@ namespace DonationStore.Application.Commands.Donation
         public string District { get; set; }
         public UserViewModel LoginUser { get; set; }
         public List<DonationImageModel> Images { get; set; }
+        public bool ShowPhoneNumber { get; set; }
+        public bool ShowEmail { get; set; }
 
         public bool Validate()
         {

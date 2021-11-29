@@ -6,10 +6,10 @@ namespace DonationStore.Domain.Abstractions.Factories
 {
     public interface IUserFactory
     {
-        AspNetUsers Adapt(RegisterUserCommand data);
+        User Adapt(RegisterUserCommand data);
 
-        AspNetUsers Adapt(LoginCommand data);
+        User Adapt(LoginCommand data);
 
-        UserViewModel Adapt(AspNetUsers data);
+        UserDetailViewModel Adapt(User data);
     }
 }

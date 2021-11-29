@@ -17,18 +17,18 @@ namespace DonationStore.Infrastructure.Security
 
             var sessionToken = actionContext.HttpContext.Session.GetString(SystemConstantValues.TokenViewModelString);
 
-            if (userToken == sessionToken)
+            if(userToken.IsEmpty() || (!sessionToken.IsEmpty() && userToken != sessionToken))
             {
-                return;
+                throw new AuthorizationException(ErrorMessages.AuthError);
             }
-            else if (sessionToken.IsEmpty() && !userToken.IsEmpty())
+          
+            if (sessionToken.IsEmpty())
             {
+                //TODO: Validate userToken and gete data from database
                 actionContext.HttpContext.Session.SetString(SystemConstantValues.TokenViewModelString, userToken);
                 actionContext.HttpContext.Session.SetString("Name", actionContext.HttpContext.Request.Headers["username"]);
                 actionContext.HttpContext.Session.SetString("Email", actionContext.HttpContext.Request.Headers["useremail"]);
             }
-            else
-                throw new AuthorizationException(ErrorMessages.AuthError);
         }
     }
 }

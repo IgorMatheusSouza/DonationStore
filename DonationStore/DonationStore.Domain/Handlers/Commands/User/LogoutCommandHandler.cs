@@ -21,7 +21,7 @@ namespace DonationStore.Domain.Handlers.Commands.User
 
         public async Task<Unit> Handle(LogoutCommand request, CancellationToken cancellationToken)
         {
-            await this.UserRepository.logout(request.Email);
+            await this.UserRepository.Logout(request.Email);
             return Unit.Task.Result;
         }
     }

@@ -15,8 +15,8 @@ export class DonationDetailsComponent implements OnInit {
   constructor(private route: ActivatedRoute, private donationService: DonationService, private router: Router) { }
 
   donation: DonationModel = new DonationModel();
-
   mainImageIndex: number = 0;
+  loader = false;
 
   ngOnInit() {
     var id = this.route.snapshot.paramMap.get('id');
@@ -34,4 +34,15 @@ export class DonationDetailsComponent implements OnInit {
     this.mainImageIndex = index;
   }
 
+  acquireDonation(){
+    if(this.loader) return;
+
+    this.loader = true;
+
+    var request = { donationId : this.donation.id };
+
+    this.donationService.acquireDonation(request).subscribe((response: any) => {
+      this.router.navigate(['/donations']);
+    }, err => { console.log(err.error) }).add(() => { this.loader = false; });;
+  }
 }

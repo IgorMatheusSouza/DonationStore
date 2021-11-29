@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 namespace DonationStore.Controllers
 {
     [Route("api/[controller]")]
-    public class AuthenticationController : BaseController
+    public class AuthenticationController : BaseController 
     {
         private readonly IAuthenticationService AuthenticationService;
 
-        public AuthenticationController(IAuthenticationService authenticationService)
+        public AuthenticationController(IAuthenticationService authenticationService, IUserService userService) : base(userService)
         {
             AuthenticationService = authenticationService;
         }
@@ -46,9 +46,9 @@ namespace DonationStore.Controllers
         [HttpPost]
         [AuthorizationFilter]
         [Route("users/logout")]
-        public async Task<IActionResult> logout()
+        public async Task<IActionResult> Logout()
         {
-            var userSession = GetUserSession();
+            var userSession = await GetUserSession();
             await AuthenticationService.Logout(userSession);
             EndUserSession();
 

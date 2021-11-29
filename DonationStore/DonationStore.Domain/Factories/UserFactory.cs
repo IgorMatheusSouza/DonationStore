@@ -3,17 +3,15 @@ using DonationStore.Application.ViewModels;
 using DonationStore.Domain.Abstractions.Factories;
 using DonationStore.Domain.Entities;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace DonationStore.Domain.Factories
 {
     public class UserFactory : IUserFactory
     {
-        public AspNetUsers Adapt(RegisterUserCommand data) => new AspNetUsers { Name = data.Name, Email = data.Email, UserName = data.Email };
+        public User Adapt(RegisterUserCommand data) => new() { Name = data.Name, Email = data.Email, UserName = data.Email };
 
-        public AspNetUsers Adapt(LoginCommand data) => new AspNetUsers { Email = data.Email, UserName = data.Email };
+        public User Adapt(LoginCommand data) => new() { Email = data.Email, UserName = data.Email };
 
-        public UserViewModel Adapt(AspNetUsers data) => new UserViewModel { Email = data.Email, Name = data.Name, Token = data.SecurityStamp };
+        public UserDetailViewModel Adapt(User data) => new() { Email = data.Email, Name = data.Name, Token = data.SecurityStamp, Phone = data.PhoneNumber, Id = Guid.Parse(data.Id) };
     }
 }

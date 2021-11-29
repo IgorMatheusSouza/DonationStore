@@ -40,6 +40,12 @@ namespace DonationStore.Repository.Migrations.DonationStore
                     b.Property<string>("District")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("ShowEmail")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("ShowPhoneNumber")
+                        .HasColumnType("bit");
+
                     b.Property<string>("State")
                         .HasColumnType("nvarchar(max)");
 
@@ -86,7 +92,65 @@ namespace DonationStore.Repository.Migrations.DonationStore
                     b.ToTable("AspNetRoles");
                 });
 
-            modelBuilder.Entity("DonationStore.Domain.Entities.AspNetUsers", b =>
+            modelBuilder.Entity("DonationStore.Domain.Entities.DonationAcquisition", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("DonationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DonationId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("DonationAcquisition");
+                });
+
+            modelBuilder.Entity("DonationStore.Domain.Entities.DonationImage", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("DonationId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("FileName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DonationId");
+
+                    b.ToTable("DonationImages");
+                });
+
+            modelBuilder.Entity("DonationStore.Domain.Entities.User", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -164,31 +228,6 @@ namespace DonationStore.Repository.Migrations.DonationStore
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("DonationStore.Domain.Entities.DonationImage", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<Guid?>("DonationId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("FileName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DonationId");
-
-                    b.ToTable("DonationImages");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -297,9 +336,26 @@ namespace DonationStore.Repository.Migrations.DonationStore
 
             modelBuilder.Entity("DonationStore.Domain.Enities.Donation", b =>
                 {
-                    b.HasOne("DonationStore.Domain.Entities.AspNetUsers", "User")
+                    b.HasOne("DonationStore.Domain.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("DonationStore.Domain.Entities.DonationAcquisition", b =>
+                {
+                    b.HasOne("DonationStore.Domain.Enities.Donation", "Donation")
+                        .WithMany("Acquisitions")
+                        .HasForeignKey("DonationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("DonationStore.Domain.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Donation");
 
                     b.Navigation("User");
                 });
@@ -324,7 +380,7 @@ namespace DonationStore.Repository.Migrations.DonationStore
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("DonationStore.Domain.Entities.AspNetUsers", null)
+                    b.HasOne("DonationStore.Domain.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -333,7 +389,7 @@ namespace DonationStore.Repository.Migrations.DonationStore
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("DonationStore.Domain.Entities.AspNetUsers", null)
+                    b.HasOne("DonationStore.Domain.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -348,7 +404,7 @@ namespace DonationStore.Repository.Migrations.DonationStore
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DonationStore.Domain.Entities.AspNetUsers", null)
+                    b.HasOne("DonationStore.Domain.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -357,7 +413,7 @@ namespace DonationStore.Repository.Migrations.DonationStore
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("DonationStore.Domain.Entities.AspNetUsers", null)
+                    b.HasOne("DonationStore.Domain.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -366,6 +422,8 @@ namespace DonationStore.Repository.Migrations.DonationStore
 
             modelBuilder.Entity("DonationStore.Domain.Enities.Donation", b =>
                 {
+                    b.Navigation("Acquisitions");
+
                     b.Navigation("Images");
                 });
 #pragma warning restore 612, 618

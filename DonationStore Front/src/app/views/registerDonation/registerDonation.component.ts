@@ -4,10 +4,13 @@ import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@ang
 import { Router } from '@angular/router';
 import { addressModel } from 'src/app/models/addressModel';
 import { ImageModel } from 'src/app/models/donationModel';
+import { UserViewModel } from 'src/app/models/userViewModel';
 import { AuthenticationService } from 'src/app/services/authenticationService';
 import { DonationService } from 'src/app/services/donationService';
 import { ExternalService } from 'src/app/services/externalService';
 import { FileUploadService } from 'src/app/services/fileUploadService';
+import { UserService } from 'src/app/services/userService';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 
 @Component({
@@ -28,11 +31,15 @@ export class RegisterDonationComponent implements OnInit {
     address: ['', [Validators.required, Validators.maxLength(50)]],
     zipCode: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(10)]],
     images: this.formBuilder.array([
-          new FormGroup({
-            fileName: new FormControl(),
-            file: new FormControl(),
-          }),
-    ])
+      new FormGroup({
+        fileName: new FormControl(),
+        file: new FormControl(),
+      }),
+    ]),
+    phone: ['', []],
+    email: ['', []],
+    showPhoneNumber: ['', [Validators.required]],
+    showEmail: ['', [Validators.required]]
   });
 
 
@@ -41,21 +48,28 @@ export class RegisterDonationComponent implements OnInit {
   public wizardState: number = 1;
   public imagePath: string = '';
   public imagesModel: ImageModel[] = [];
+  public user: UserViewModel = new UserViewModel();
 
   fileToUpload: File | null = null;
 
   loader = false;
 
   constructor(private formBuilder: FormBuilder,
-              private Router: Router,
-              private donationService: DonationService,
-              private externalService: ExternalService,
-              private authenticationService: AuthenticationService,
-              private fileUploadService: FileUploadService) { }
+    private Router: Router,
+    private donationService: DonationService,
+    private externalService: ExternalService,
+    private authenticationService: AuthenticationService,
+    private fileUploadService: FileUploadService,
+    private userService: UserService) { }
 
   ngOnInit() {
-    if(this.authenticationService.currentUser == null)
-        this.Router.navigate(['/login']);
+    if (this.authenticationService.currentUser == null)
+      this.Router.navigate(['/login']);
+
+    this.userService.getUser().subscribe((response: UserViewModel) => {
+      this.registerDonationForm.controls.phone.setValue(response.phone);
+      this.registerDonationForm.controls.email.setValue(response.email);
+    });
   }
 
   registerDonation() {
@@ -66,11 +80,11 @@ export class RegisterDonationComponent implements OnInit {
     this.loader = true;
     this.donationService.register(this.registerDonationForm.value).subscribe((response: any) => {
       this.Router.navigate(['/donations']);
-    }, err => { this.requestError = err.error;}).add(() => { this.loader = false; });;
+    }, err => { this.requestError = err.error; }).add(() => { this.loader = false; });;
   }
 
   getAddressByZipCode() {
-    let zipcode : string = this.registerDonationForm.controls.zipCode.value;
+    let zipcode: string = this.registerDonationForm.controls.zipCode.value;
 
     this.externalService.getFullAddress(zipcode).subscribe((response: addressModel) => {
       this.registerDonationForm.controls.state.setValue(response.uf);
@@ -90,23 +104,23 @@ export class RegisterDonationComponent implements OnInit {
 
   handleFileInput(event: any) {
 
-      if (this.loader)
+    if (this.loader)
       return;
 
-      this.fileToUpload = event.target.files.item(0);
+    this.fileToUpload = event.target.files.item(0);
 
-      if(this.fileToUpload){
-        var file = this.fileToUpload as File;
+    if (this.fileToUpload) {
+      var file = this.fileToUpload as File;
 
-        this.fileUploadService.postFile(file).subscribe((response: any) => {
-            response.file = 'data:image/jpeg;base64,'+ response.file;
+      this.fileUploadService.postFile(file).subscribe((response: any) => {
+        response.file = 'data:image/jpeg;base64,' + response.file;
 
-            var imagesForm = this.registerDonationForm.get('images') as FormArray;
-            var model : ImageModel =  { fileName: response.fileName, file: '' };
-            imagesForm.push(this.formBuilder.group(model));
+        var imagesForm = this.registerDonationForm.get('images') as FormArray;
+        var model: ImageModel = { fileName: response.fileName, file: '' };
+        imagesForm.push(this.formBuilder.group(model));
 
-            this.imagesModel.push(response);
-        });
-      }
+        this.imagesModel.push(response);
+      });
+    }
   }
 }

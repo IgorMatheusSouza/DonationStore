@@ -1,4 +1,5 @@
-﻿using DonationStore.Infrastructure.Constants;
+﻿using DonationStore.Application.Services.Abstractions;
+using DonationStore.Infrastructure.Constants;
 using DonationStore.Infrastructure.GenericMessages;
 using DonationStore.Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
@@ -16,7 +17,7 @@ namespace DonationStore.Controllers
     {
         private readonly IFileInfrastructureService InfrastructureService;
 
-        public FileController(IFileInfrastructureService infrastructureService)
+        public FileController(IFileInfrastructureService infrastructureService, IUserService userService) : base(userService)
         {
             InfrastructureService = infrastructureService;
         }

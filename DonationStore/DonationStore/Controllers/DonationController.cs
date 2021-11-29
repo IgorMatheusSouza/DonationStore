@@ -15,7 +15,7 @@ namespace DonationStore.Controllers
     {
         private readonly IDonationService DonationService;
 
-        public DonationsController(IDonationService donationService)
+        public DonationsController(IDonationService donationService, IUserService userService) : base(userService)
         {
             DonationService = donationService;
         }
@@ -27,7 +27,7 @@ namespace DonationStore.Controllers
             if (!command.Validate())
                 return ReturnError(command.StatusCode, command.Message);
 
-            command.LoginUser = GetUserSession();
+            command.LoginUser = await GetUserSession();
             await DonationService.RegisterDonation(command);
 
             return OkCreated();
@@ -48,6 +48,21 @@ namespace DonationStore.Controllers
         {
             var donations = await DonationService.GetDonation(new GetDonationQuery(id));
             return Ok(donations);
+        }
+
+        [HttpPost]
+        [AuthorizationFilter]
+        [Route("acquire")]
+        public async Task<IActionResult> AcquireDonation([FromBody] AcquireDonationCommand command)
+        {
+            var user = await GetUserSession();
+            command.UserId = user.Id;
+
+            if (!command.Validate())
+                return ReturnError(command.StatusCode, command.Message);
+
+            await DonationService.AcquireDonation(command);
+            return OkCreated();
         }
     }
 }

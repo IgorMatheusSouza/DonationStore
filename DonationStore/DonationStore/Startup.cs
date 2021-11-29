@@ -29,6 +29,9 @@ using DonationStore.Domain.Handlers.Queries.Donation;
 using DonationStore.Infrastructure.Services;
 using DonationStore.Infrastructure.Services.Interfaces;
 using DonationStore.Infrastructure.Services.File;
+using DonationStore.Application.Services;
+using DonationStore.Application.Queries.User;
+using DonationStore.Domain.Handlers.Queries.User;
 
 namespace DonationStore
 {
@@ -106,7 +109,7 @@ namespace DonationStore
 
             services.AddDbContext<DonationStoreContext>(options => options.UseSqlServer(defaultConection));
 
-            services.AddIdentity<AspNetUsers, AspNetRoles>(options =>
+            services.AddIdentity<User, AspNetRoles>(options =>
             {
                 options.User.RequireUniqueEmail = true;
                 options.Password.RequireDigit = false;
@@ -124,8 +127,10 @@ namespace DonationStore
                     .AddTransient<IUserFactory, UserFactory>()
                     .AddTransient<IDonationFactory, DonationFactory>()
                     .AddTransient<IDonationService, DonationService>()
+                    .AddTransient<IUserService, UserService>()
                     .AddTransient<ITransactionScopeManager, TransactionScopeManager>()
                     .AddTransient<IFileInfrastructureService, FileInfrastructureService>()
+                    .AddTransient<IDonationAcquisitionRepository, DonationAcquisitionRepository>()
                     .AddScoped<DonationStoreContext, DonationStoreContext>()
                     .AddScoped<IRequestHandler<RegisterUserCommand, UserViewModel>, RegisterUserCommandHandler>()
                     .AddScoped<IRequestHandler<RegisterDonationCommand, Unit>, RegisterDonationCommandHandler>()
@@ -134,7 +139,9 @@ namespace DonationStore
                     .AddScoped<IRequestHandler<LoginCommand, UserViewModel>, LoginCommandHandler>()
                     .AddScoped<IRequestHandler<LogoutCommand, Unit>, LogoutCommandHandler>()
                     .AddScoped<IRequestHandler<GetDonationsQuery, List<DonationViewModel>>, DonationQueryHandler>()
-                    .AddScoped<IRequestHandler<GetDonationQuery, DonationViewModel>, DonationQueryHandler>();
+                    .AddScoped<IRequestHandler<GetDonationQuery, DonationViewModel>, DonationQueryHandler>()
+                    .AddScoped<IRequestHandler<GetUserQuery, UserDetailViewModel>, GetUserQueryHandler>()
+                    .AddScoped<IRequestHandler<AcquireDonationCommand, Unit>, AcquireDonationCommandHandler>();
 
         }
     }

@@ -23,7 +23,7 @@ namespace DonationStore.Domain.Handlers.Commands.Users
         {
             var user = UserFactory.Adapt(request);
             await UserRepository.Login(user, request.Password);
-            var loggedUser = UserRepository.GetUserByEmail(user.Email);
+            var loggedUser = await UserRepository .GetUserByEmail(user.Email);
 
             return UserFactory.Adapt(loggedUser);
         }

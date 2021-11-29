@@ -1,5 +1,6 @@
 ﻿using DonationStore.Domain.Abstractions.Repositories;
 using DonationStore.Domain.Enities;
+using DonationStore.Enums.DomainEnums;
 using DonationStore.Repository.Context;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -15,6 +16,13 @@ namespace DonationStore.Repository.Repositories
         public DonationRepository(DonationStoreContext donationStoreContext)
         {
             DonationStoreContext = donationStoreContext;
+        }
+
+        public async Task ChangeStatus(DonationEnum donationEnum, Guid donationId)
+        {
+            var donation = await DonationStoreContext.Donations.FindAsync(donationId);
+            donation.Status = donationEnum;
+            await DonationStoreContext.SaveChangesAsync();
         }
 
         public async Task<Donation> GetDonation(Guid id)

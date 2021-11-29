@@ -56,5 +56,10 @@ namespace DonationStore.Application.Services.Abstractions
                 }
             });
         }
+
+        public async Task AcquireDonation(AcquireDonationCommand command)
+        {
+            await Mediator.Send(command);
+        }
     }
 }

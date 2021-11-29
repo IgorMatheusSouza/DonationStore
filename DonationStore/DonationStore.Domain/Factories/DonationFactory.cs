@@ -3,11 +3,11 @@ using DonationStore.Application.ViewModels;
 using DonationStore.Domain.Abstractions.Factories;
 using DonationStore.Domain.Enities;
 using DonationStore.Domain.Entities;
+using DonationStore.Enums.DomainEnums;
 using DonationStore.Infrastructure.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace DonationStore.Domain.Factories
 {
@@ -24,6 +24,9 @@ namespace DonationStore.Domain.Factories
                 ZipCode = data.ZipCode,
                 Address = data.Address,
                 District = data.District,
+                ShowEmail = data.ShowEmail,
+                Status = DonationEnum.Active,
+                ShowPhoneNumber = data.ShowPhoneNumber,
                 Images = data.Images.Where(x => !x.FileName.IsEmpty()).Select(x => new DonationImage { 
                     FileName = x.FileName, 
                     CreationDate = DateTime.Now 
@@ -65,10 +68,14 @@ namespace DonationStore.Domain.Factories
                 Address = data.Address,
                 District = data.District,
                 CreationDate = data.CreationDate,
+                ShowEmail = data.ShowEmail,
+                ShowPhoneNumber = data.ShowPhoneNumber,
                 Images = data.Images?.Select(x => new DonationImageModel
                 {
                     FileName = x.FileName
-                }).ToList() ?? default
+                }).ToList() ?? default,
+                User = new UserDetailViewModel() { Name = data.User.Name, Phone = data.User.PhoneNumber }
+
             };
         }
     }

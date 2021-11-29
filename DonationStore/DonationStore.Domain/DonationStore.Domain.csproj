@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DonationStore.Application\DonationStore.Application.csproj" />
+    <ProjectReference Include="..\DonationStore.Enums\DonationStore.Enums.csproj" />
   </ItemGroup>
 
 </Project>

@@ -15,6 +15,9 @@ import { RegisterDonationComponent } from './views/registerDonation/registerDona
 import { MatSelectModule } from '@angular/material/select';
 import { LoaderComponent } from './components/loader/loader.component';
 import { DonationDetailsComponent } from './views/donationDetails/donationDetails.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MyDonationsComponent } from './views/myDonations/myDonations.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,8 @@ import { DonationDetailsComponent } from './views/donationDetails/donationDetail
     DonationsComponent,
     RegisterDonationComponent,
     LoaderComponent,
-    DonationDetailsComponent
+    DonationDetailsComponent,
+    MyDonationsComponent
   ],
   imports: [
     CommonModule,
@@ -36,7 +40,9 @@ import { DonationDetailsComponent } from './views/donationDetails/donationDetail
     MatFormFieldModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatSelectModule
+    MatSelectModule,
+    MatCheckboxModule,
+    FontAwesomeModule
 
   ],
   providers: [],

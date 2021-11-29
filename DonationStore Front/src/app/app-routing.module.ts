@@ -5,6 +5,7 @@ import { DonationsComponent } from './views/donations/donations.component';
 import { HomeComponent } from './views/home/home.component';
 import { LoginComponent } from './views/login/login.component';
 import { LogoutComponent } from './views/logout/logout.component';
+import { MyDonationsComponent } from './views/myDonations/myDonations.component';
 import { RegisterDonationComponent } from './views/registerDonation/registerDonation.component';
 import { SignupComponent } from './views/signup/signup.component';
 
@@ -40,8 +41,11 @@ const routes: Routes = [
   {
     path: 'donation/:id',
     component: DonationDetailsComponent
+  },
+  {
+    path: 'mydonations',
+    component: MyDonationsComponent
   }
-
 ];
 
 @NgModule({

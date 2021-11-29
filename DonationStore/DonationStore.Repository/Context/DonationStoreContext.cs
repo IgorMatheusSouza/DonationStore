@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DonationStore.Repository.Context
 {
-    public class DonationStoreContext : IdentityDbContext<AspNetUsers, AspNetRoles, string>
+    public class DonationStoreContext : IdentityDbContext<User, AspNetRoles, string>
     {
         public DonationStoreContext(DbContextOptions<DonationStoreContext> options) : base(options)
         {
@@ -15,6 +15,7 @@ namespace DonationStore.Repository.Context
         public DbSet<Donation> Donations { get; set; }
 
         public DbSet<DonationImage> DonationImages { get; set; }
+
+        public DbSet<DonationAcquisition> DonationAcquisition { get; set; }
     }
 }
-

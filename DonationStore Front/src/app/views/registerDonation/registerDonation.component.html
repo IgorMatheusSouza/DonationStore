@@ -9,9 +9,9 @@
         <div class="col-lg-7">
           <div class="p-5">
             <div class="text-center">
-              <h1 *ngIf="wizardState == 1" class="h4 text-gray-900 mb-4">Preencha o titulo e os detalhes da sua doação!
-              </h1>
+              <h1 *ngIf="wizardState == 1" class="h4 text-gray-900 mb-4">Preencha o titulo e os detalhes da sua doação! </h1>
               <h1 *ngIf="wizardState == 2" class="h4 text-gray-900 mb-4">Preencha o endereço da sua doação!</h1>
+              <h1 *ngIf="wizardState == 3" class="h4 text-gray-900 mb-4">Deseja exibir seus contatos para quem requisitar a doação?</h1>
             </div>
             <form class="user" [formGroup]="registerDonationForm" (ngSubmit)="registerDonation()">
               <div class="wirzard1" *ngIf="wizardState == 1">
@@ -68,10 +68,19 @@
                   </div>
                 </div>
               </div>
-
               <div class="wirzard1" *ngIf="wizardState == 3">
-
-
+                <div class="col-sm-12 mb-12 mb-sm-12 form-group">
+                  <input [readonly]="true" matInput type="text" class="form-control form-control-user"
+                    id="exampleInputEmail" placeholder="" formControlName="email">
+                  <mat-checkbox formControlName="showEmail"  [color]="'primary'" class="example-margin">Deixar o meu e-mail visivel</mat-checkbox>
+                </div>
+                <div class="col-sm-12 mb-12 mb-sm-12 form-group">
+                  <input [readonly]="true" matInput type="text" class="form-control form-control-user"
+                    id="exampleInputEmail" placeholder="Cidade" formControlName="phone">
+                    <mat-checkbox formControlName="showPhoneNumber"  [color]="'primary'" class="example-margin">Deixar o meu telefone visivel</mat-checkbox>
+                </div>
+              </div>
+              <div class="wirzard1" *ngIf="wizardState == 4">
                 <div class="container">
                   <div class="card-upload">
                     <div class="card-body">
@@ -153,10 +162,10 @@
                 <br>
               </div>
               <br>
-              <button *ngIf="wizardState < 3" class="btn btn-primary btn-user btn-block" (click)="next()">
+              <button *ngIf="wizardState < 4" class="btn btn-primary btn-user btn-block" (click)="next()">
                 Próximo
               </button>
-              <button *ngIf="wizardState == 3" class="btn btn-primary btn-user btn-block" type="submit">
+              <button *ngIf="wizardState == 4" class="btn btn-primary btn-user btn-block" type="submit">
                 Cadastrar
               </button>
               <button *ngIf="wizardState > 1" class="btn btn-light btn-user btn-block" (click)="back()">

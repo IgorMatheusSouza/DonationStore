@@ -16,6 +16,8 @@ namespace DonationStore.Application.ViewModels
         public string Address { get; set; }
         public string ZipCode { get; set; }
         public string District { get; set; }
+        public bool ShowPhoneNumber { get; set; }
+        public bool ShowEmail { get; set; }
         public DateTime CreationDate { get; set; }
         public virtual UserViewModel User { get; set; }
         public virtual ICollection<DonationImageModel> Images { get; set; }
