@@ -16,8 +16,8 @@ namespace DonationStore.Domain.Handlers.Commands.Users
 
         public LoginCommandHandler(IUserRepository userRepository, IUserFactory userFactory)
         {
-            this.UserRepository = userRepository;
-            this.UserFactory = userFactory;
+            UserRepository = userRepository;
+            UserFactory = userFactory;
         }
         public async Task<UserViewModel> Handle(LoginCommand request, CancellationToken cancellationToken)
         {

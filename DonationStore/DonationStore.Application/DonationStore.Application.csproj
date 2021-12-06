@@ -9,6 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DonationStore.Enums\DonationStore.Enums.csproj" />
     <ProjectReference Include="..\DonationStore.Infrastructure\DonationStore.Infrastructure.csproj" />
   </ItemGroup>
 

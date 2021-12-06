@@ -53,7 +53,7 @@ namespace DonationStore.Repository.Repositories
 
         public async Task<User> GetUser(Guid id)
         {
-            return await DonationStoreContext.Users.FindAsync(id);
+            return await DonationStoreContext.Users.FindAsync(id.ToString());
         }
 
         public async Task<User> GetUserByEmail(string email)
@@ -64,6 +64,13 @@ namespace DonationStore.Repository.Repositories
         public async Task Logout(string email)
         {
             await SignInManager.SignOutAsync();
+        }
+
+        public async Task RegisterPhone(Guid id, string phone)
+        {
+            var user = await GetUser(id);
+            user.PhoneNumber = phone;
+            await DonationStoreContext.SaveChangesAsync();
         }
     }
 }

@@ -47,6 +47,7 @@ namespace DonationStore.Domain.Factories
                 Address = data.Address,
                 District = data.District,
                 CreationDate = data.CreationDate,
+                Status = data.Status,
                 Images = data.Images?.Select(x => new DonationImageModel
                 {
                     FileName = x.FileName
@@ -69,6 +70,7 @@ namespace DonationStore.Domain.Factories
                 District = data.District,
                 CreationDate = data.CreationDate,
                 ShowEmail = data.ShowEmail,
+                Status = data.Status,
                 ShowPhoneNumber = data.ShowPhoneNumber,
                 Images = data.Images?.Select(x => new DonationImageModel
                 {
@@ -77,6 +79,20 @@ namespace DonationStore.Domain.Factories
                 User = new UserDetailViewModel() { Name = data.User.Name, Phone = data.User.PhoneNumber }
 
             };
+        }
+
+        public List<DonationViewModel> Adapt(List<DonationAcquisition> acquisitions)
+        {
+            List<DonationViewModel> result = new();
+
+            foreach (var item in acquisitions)
+            {
+                var donation = Adapt(item.Donation);
+                donation.DonationAcquisitions.Add(new() { CreationDate = item.CreationDate, Status = item.Status });
+                result.Add(donation);
+            }
+
+            return result;
         }
     }
 }

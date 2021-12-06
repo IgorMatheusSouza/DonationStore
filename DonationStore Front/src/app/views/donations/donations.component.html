@@ -24,31 +24,14 @@
       </div>
       <div class="col-md-6 main-box" id="style-7">
         <!-- Card Start -->
-        <div class="card card-donation" *ngFor="let item of mainDonations">
+        <div class="card card-donation border-bottom-primary" *ngFor="let item of mainDonations">
           <div class="row">
-
-
             <div class="col-md-5">
               <div id="CarouselTest" class="carousel slide box" data-ride="carousel">
-                <ol class="carousel-indicators">
-                  <li data-target="#CarouselTest" data-slide-to="0" class="active"></li>
-                  <li data-target="#CarouselTest" data-slide-to="1"></li>
-                  <li data-target="#CarouselTest" data-slide-to="2"></li>
-
-                </ol>
                 <div class="carousel-inner">
                   <div *ngFor="let image of item.images; index as i" class="carousel-item {{ i == 0 ? 'active' : ''}} ">
                     <img class="d-block img-donation" src="data:image/jpeg;base64,{{image.file}}" alt="">
                   </div>
-
-                  <a class="carousel-control-prev" href="#CarouselTest" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                  </a>
-                  <a class="carousel-control-next" href="#CarouselTest" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                  </a>
                 </div>
               </div>
             </div>
@@ -58,7 +41,7 @@
                 <a [routerLink]="['/donation',item.id]">
                   <h5 class="card-title">{{item.title}}</h5>
                   <h6 class="card-text">{{item.description}}</h6>
-                  <div href="#" class="small">{{item.city}} - {{item.state}}, {{item.district}} - {{ item.creationDate | date:'dd/MM/yyyy HH:mm' }}</div>
+                  <div href="#" class="small">{{item.district}},{{item.city}} - {{item.state}}- {{ item.creationDate | date:'dd/MM/yyyy HH:mm' }}</div>
                 </a>
               </div>
             </div>

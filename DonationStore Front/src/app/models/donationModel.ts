@@ -1,3 +1,6 @@
+import { DonationAcquisitionModel } from "./DonationAcquisitionModel";
+import { UserViewModel } from "./userViewModel";
+
 export class DonationModel {
     id: string = '';
     title: string = '';
@@ -9,6 +12,8 @@ export class DonationModel {
     zipCode: string = '';
     creationDate: Date = new Date();
     images: ImageModel[] = [];
+    donationAcquisitions : DonationAcquisitionModel[] = [];
+    user: UserViewModel = new UserViewModel();
 }
 
 export class ImageModel {

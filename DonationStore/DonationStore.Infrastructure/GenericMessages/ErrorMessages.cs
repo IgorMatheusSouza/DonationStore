@@ -10,5 +10,6 @@ namespace DonationStore.Infrastructure.GenericMessages
         public static readonly string LoginError = $@"Não foi possível fazer login, verifique o email e senha";
         public static readonly string AuthError = $@"Você não tem permissão para realizar essa ação, faça login novamente";
         public static readonly string InvalidFile = $@"Arquivo inválido";
+        public static readonly string AcquireDonationError = $@"Essa doação não está disponível para resgate no momento";
     }
 }

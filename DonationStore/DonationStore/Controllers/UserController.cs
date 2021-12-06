@@ -1,4 +1,5 @@
-﻿using DonationStore.Application.Queries.User;
+﻿using DonationStore.Application.Commands.User;
+using DonationStore.Application.Queries.User;
 using DonationStore.Application.Services.Abstractions;
 using DonationStore.Domain.Abstractions.Repositories;
 using DonationStore.Infrastructure.Security;
@@ -26,6 +27,17 @@ namespace DonationStore.Controllers
         {
             var userSession = await GetUserSession();
             return Ok(await UserService.GetUser(new GetUserQuery(userSession.Email)));
+        }
+
+        [HttpPost]
+        [Route("phone")]
+        [AuthorizationFilter]
+        public async Task<IActionResult> GetLoggedUser([FromBody] RegisterPhoneNumberCommand command)
+        {
+            var userSession = await GetUserSession();
+            command.UserId = userSession.Id;
+            await UserService.RegisterPhone(command);
+            return OkCreated();
         }
     }
 }

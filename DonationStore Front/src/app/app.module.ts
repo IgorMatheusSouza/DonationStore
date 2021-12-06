@@ -18,6 +18,7 @@ import { DonationDetailsComponent } from './views/donationDetails/donationDetail
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MyDonationsComponent } from './views/myDonations/myDonations.component';
+import { DonationAcquisitionComponent } from './views/donationAcquisition/donationAcquisition.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { MyDonationsComponent } from './views/myDonations/myDonations.component'
     RegisterDonationComponent,
     LoaderComponent,
     DonationDetailsComponent,
-    MyDonationsComponent
+    MyDonationsComponent,
+    DonationAcquisitionComponent
   ],
   imports: [
     CommonModule,

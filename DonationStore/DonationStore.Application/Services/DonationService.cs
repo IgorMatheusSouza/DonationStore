@@ -1,7 +1,10 @@
 ﻿using DonationStore.Application.Commands.Donation;
 using DonationStore.Application.Queries.Donation;
 using DonationStore.Application.ViewModels;
+using DonationStore.Enums.DomainEnums;
+using DonationStore.Infrastructure.Exceptions;
 using DonationStore.Infrastructure.Extensions;
+using DonationStore.Infrastructure.GenericMessages;
 using DonationStore.Infrastructure.Services.Interfaces;
 using DonationStore.Infrastructure.Transaction;
 using MediatR;
@@ -44,6 +47,27 @@ namespace DonationStore.Application.Services.Abstractions
             return donation;
         }
 
+        public async Task AcquireDonation(AcquireDonationCommand command)
+        {
+            var donation = await Mediator.Send(new GetDonationQuery(command.DonationId));
+            if (donation.Status != DonationEnum.Active || donation.User.Id == command.UserId)
+                throw new BusinessException(ErrorMessages.AcquireDonationError);
+
+            await Mediator.Send(command);
+        }
+
+        public async Task<List<DonationViewModel>> GetDonationAcquisitions(GetDonationAcquisitionsQuery query)
+        {
+            var donations = await Mediator.Send(query);
+
+            foreach (var donation in donations)
+            {
+                donation.Images[0].File = await InfrastructureService.LoadImage(donation.Images[0].FileName);
+            }
+            
+            return donations;
+        }
+
         private async Task LoadDonationImage(DonationViewModel donation)
         {
             await Task.Run(async () =>
@@ -55,11 +79,6 @@ namespace DonationStore.Application.Services.Abstractions
                     image.File = await InfrastructureService.LoadImage(image.FileName);
                 }
             });
-        }
-
-        public async Task AcquireDonation(AcquireDonationCommand command)
-        {
-            await Mediator.Send(command);
         }
     }
 }

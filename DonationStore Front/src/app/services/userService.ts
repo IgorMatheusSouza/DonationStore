@@ -16,9 +16,14 @@ export class UserService extends BaseService {
 
   private urls = {
     get: this.urlAuthetication,
+    registerPhone: this.urlAuthetication + 'phone/',
   }
 
   getUser() {
     return this.http.get<UserViewModel>(this.urls.get, this.header).pipe();
+  }
+
+  registerPhone(phone: string) {
+    return this.http.post(this.urls.registerPhone,{phoneNumber: phone},this.header).pipe();
   }
 }

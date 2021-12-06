@@ -75,9 +75,10 @@
                   <mat-checkbox formControlName="showEmail"  [color]="'primary'" class="example-margin">Deixar o meu e-mail visivel</mat-checkbox>
                 </div>
                 <div class="col-sm-12 mb-12 mb-sm-12 form-group">
-                  <input [readonly]="true" matInput type="text" class="form-control form-control-user"
-                    id="exampleInputEmail" placeholder="Cidade" formControlName="phone">
-                    <mat-checkbox formControlName="showPhoneNumber"  [color]="'primary'" class="example-margin">Deixar o meu telefone visivel</mat-checkbox>
+                  <input [readonly]="!phoneRegistration" matInput type="text" class="form-control form-control-user"
+                    id="exampleInputEmail" placeholder="Telefone" formControlName="phone">
+                    <mat-checkbox *ngIf="!phoneRegistration" formControlName="showPhoneNumber"  [color]="'primary'" class="example-margin">Deixar o meu telefone visivel</mat-checkbox>
+                    <a *ngIf="phoneRegistration" href="javascript:void(0)" (click)="registerPhone()">Cadastrar Telefone</a>
                 </div>
               </div>
               <div class="wirzard1" *ngIf="wizardState == 4">
@@ -174,10 +175,7 @@
             </form>
             <hr>
             <div class="text-center">
-              <a class="small" href="forgot-password.html">Forgot Password?</a>
-            </div>
-            <div class="text-center">
-              <a class="small" href="login.html">Already have an account? Login!</a>
+              <a class="small" href="donations">Voltar para doações</a>
             </div>
           </div>
         </div>

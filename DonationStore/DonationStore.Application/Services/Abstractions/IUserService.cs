@@ -1,4 +1,5 @@
-﻿using DonationStore.Application.Queries.User;
+﻿using DonationStore.Application.Commands.User;
+using DonationStore.Application.Queries.User;
 using DonationStore.Application.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -11,5 +12,6 @@ namespace DonationStore.Application.Services.Abstractions
     public interface IUserService
     {
         Task<UserViewModel> GetUser(GetUserQuery getUserQuery);
+        Task RegisterPhone(RegisterPhoneNumberCommand command);
     }
 }

@@ -1,37 +1,37 @@
+using DonationStore.Application.Commands.Authentication;
+using DonationStore.Application.Commands.Donation;
+using DonationStore.Application.Commands.User;
+using DonationStore.Application.Queries.Donation;
+using DonationStore.Application.Queries.User;
+using DonationStore.Application.Services;
+using DonationStore.Application.Services.Abstractions;
+using DonationStore.Application.ViewModels;
+using DonationStore.Domain.Abstractions.Factories;
+using DonationStore.Domain.Abstractions.Repositories;
+using DonationStore.Domain.Entities;
+using DonationStore.Domain.Factories;
+using DonationStore.Domain.Handlers.Commands.Donation;
+using DonationStore.Domain.Handlers.Commands.User;
+using DonationStore.Domain.Handlers.Commands.Users;
+using DonationStore.Domain.Handlers.Queries.Donation;
+using DonationStore.Domain.Handlers.Queries.User;
+using DonationStore.Infrastructure.Exceptions;
+using DonationStore.Infrastructure.Services.File;
+using DonationStore.Infrastructure.Services.Interfaces;
+using DonationStore.Infrastructure.Transaction;
+using DonationStore.Repository.Context;
+using DonationStore.Repository.Repositories;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
-using MediatR;
-using DonationStore.Domain.Entities;
-using DonationStore.Application.Services.Abstractions;
-using DonationStore.Application.Commands.Authentication;
-using DonationStore.Domain.Handlers.Commands.Users;
-using DonationStore.Domain.Abstractions.Repositories;
-using DonationStore.Repository.Repositories;
-using DonationStore.Domain.Abstractions.Factories;
-using DonationStore.Domain.Factories;
-using DonationStore.Infrastructure.Exceptions;
-using Microsoft.AspNetCore.Mvc;
-using DonationStore.Application.ViewModels;
-using DonationStore.Repository.Context;
-using DonationStore.Infrastructure.Transaction;
-using DonationStore.Application.Commands.Donation;
-using DonationStore.Domain.Handlers.Commands.Donation;
 using System;
-using DonationStore.Domain.Handlers.Commands.User;
-using DonationStore.Application.Queries.Donation;
 using System.Collections.Generic;
-using DonationStore.Domain.Handlers.Queries.Donation;
-using DonationStore.Infrastructure.Services;
-using DonationStore.Infrastructure.Services.Interfaces;
-using DonationStore.Infrastructure.Services.File;
-using DonationStore.Application.Services;
-using DonationStore.Application.Queries.User;
-using DonationStore.Domain.Handlers.Queries.User;
 
 namespace DonationStore
 {
@@ -141,7 +141,9 @@ namespace DonationStore
                     .AddScoped<IRequestHandler<GetDonationsQuery, List<DonationViewModel>>, DonationQueryHandler>()
                     .AddScoped<IRequestHandler<GetDonationQuery, DonationViewModel>, DonationQueryHandler>()
                     .AddScoped<IRequestHandler<GetUserQuery, UserDetailViewModel>, GetUserQueryHandler>()
-                    .AddScoped<IRequestHandler<AcquireDonationCommand, Unit>, AcquireDonationCommandHandler>();
+                    .AddScoped<IRequestHandler<AcquireDonationCommand, Unit>, AcquireDonationCommandHandler>()
+                    .AddScoped<IRequestHandler<GetDonationAcquisitionsQuery, List<DonationViewModel>>, DonationAcquisitionQueryHandler>()
+                    .AddScoped<IRequestHandler<RegisterPhoneNumberCommand, Unit>, RegisterPhoneNumberCommandHandler>();
 
         }
     }

@@ -1,4 +1,5 @@
-﻿using DonationStore.Application.Queries.User;
+﻿using DonationStore.Application.Commands.User;
+using DonationStore.Application.Queries.User;
 using DonationStore.Application.Services.Abstractions;
 using DonationStore.Application.ViewModels;
 using DonationStore.Infrastructure.Transaction;
@@ -21,6 +22,11 @@ namespace DonationStore.Application.Services
         public async Task<UserViewModel> GetUser(GetUserQuery Query)
         {
             return await this.Mediator.Send(Query);
+        }
+
+        public async Task RegisterPhone(RegisterPhoneNumberCommand command)
+        {
+            await this.Mediator.Send(command);
         }
     }
 }

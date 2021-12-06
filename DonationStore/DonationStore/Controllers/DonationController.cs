@@ -1,6 +1,7 @@
 ﻿using DonationStore.Application.Commands.Donation;
 using DonationStore.Application.Queries.Donation;
 using DonationStore.Application.Services.Abstractions;
+using DonationStore.Application.ViewModels;
 using DonationStore.Infrastructure.Security;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -63,6 +64,16 @@ namespace DonationStore.Controllers
 
             await DonationService.AcquireDonation(command);
             return OkCreated();
+        }
+
+        [HttpGet]
+        [AuthorizationFilter]
+        [Route("acquire")]
+        public async Task<IActionResult> GetDonationAcquisition()
+        {
+            var user = await GetUserSession();
+            var result = await DonationService.GetDonationAcquisitions(new GetDonationAcquisitionsQuery(user.Id));
+            return Ok(result);
         }
     }
 }

@@ -15,5 +15,7 @@ namespace DonationStore.Domain.Abstractions.Repositories
         Task<User> GetUserByEmail(string email);
 
         Task Logout(string email);
+
+        Task RegisterPhone(Guid id, string phone);
     }
 }

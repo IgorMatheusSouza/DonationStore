@@ -20,9 +20,9 @@ namespace DonationStore.Domain.Handlers.Commands.Donation
 
         public RegisterDonationCommandHandler(IDonationRepository donationRepository, IDonationFactory donationFactory, IUserRepository userRepository)
         {
-            this.DonationRepository = donationRepository;
-            this.DonationFactory = donationFactory;
-            this.UserRepository = userRepository;
+            DonationRepository = donationRepository;
+            DonationFactory = donationFactory;
+            UserRepository = userRepository;
         }
 
         public async Task<Unit> Handle(RegisterDonationCommand request, CancellationToken cancellationToken)

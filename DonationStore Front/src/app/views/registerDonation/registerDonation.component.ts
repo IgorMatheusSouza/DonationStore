@@ -49,6 +49,7 @@ export class RegisterDonationComponent implements OnInit {
   public imagePath: string = '';
   public imagesModel: ImageModel[] = [];
   public user: UserViewModel = new UserViewModel();
+  public phoneRegistration: boolean = false;
 
   fileToUpload: File | null = null;
 
@@ -69,6 +70,9 @@ export class RegisterDonationComponent implements OnInit {
     this.userService.getUser().subscribe((response: UserViewModel) => {
       this.registerDonationForm.controls.phone.setValue(response.phone);
       this.registerDonationForm.controls.email.setValue(response.email);
+      if(!response.phone){
+        this.phoneRegistration = true;
+      }
     });
   }
 
@@ -122,5 +126,18 @@ export class RegisterDonationComponent implements OnInit {
         this.imagesModel.push(response);
       });
     }
+  }
+
+  registerPhone(){
+    if (this.loader)
+      return;
+
+    this.loader = true;
+
+    let phone: string = this.registerDonationForm.controls.phone.value;
+    this.userService.registerPhone(phone).subscribe(() => {
+      this.phoneRegistration = false;
+      this.loader = false;
+    });
   }
 }

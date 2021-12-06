@@ -42,7 +42,7 @@ export class DonationDetailsComponent implements OnInit {
     var request = { donationId : this.donation.id };
 
     this.donationService.acquireDonation(request).subscribe((response: any) => {
-      this.router.navigate(['/donations']);
+      this.router.navigate(['/myAcquisition']);
     }, err => { console.log(err.error) }).add(() => { this.loader = false; });;
   }
 }

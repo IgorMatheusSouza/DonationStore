@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DonationStore.Enums.DomainEnums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,8 +19,10 @@ namespace DonationStore.Application.ViewModels
         public string District { get; set; }
         public bool ShowPhoneNumber { get; set; }
         public bool ShowEmail { get; set; }
+        public DonationEnum Status { get; set; }
         public DateTime CreationDate { get; set; }
-        public virtual UserViewModel User { get; set; }
-        public virtual ICollection<DonationImageModel> Images { get; set; }
+        public UserViewModel User { get; set; }
+        public List<DonationImageModel> Images { get; set; } = new();
+        public List<DonationAcquisitionViewModel> DonationAcquisitions { get; set; } = new();
     }
 }

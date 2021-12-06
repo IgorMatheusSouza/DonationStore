@@ -39,4 +39,8 @@ export class DonationService extends BaseService {
   acquireDonation(request : any){
     return this.http.post<DonationModel>(this.urls.acquireDonation, request, this.header).pipe();
   }
+
+  getMyDonationAcquisitions(){
+    return this.http.get<DonationModel[]>(this.urls.acquireDonation, this.header).pipe();
+  }
 }
