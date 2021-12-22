@@ -13,5 +13,6 @@ namespace DonationStore.Domain.Abstractions.Repositories
         Task<List<Donation>> GetDonations(int page, int quantity);
         Task<Donation> GetDonation(Guid id);
         Task ChangeStatus(DonationEnum donationEnum, Guid donationId);
+        Task<List<Donation>> GetUserDonations(Guid id);
     }
 }

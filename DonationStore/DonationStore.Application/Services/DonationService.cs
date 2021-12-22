@@ -34,7 +34,8 @@ namespace DonationStore.Application.Services.Abstractions
 
             foreach (var donation in donations)
             {
-                await LoadDonationImage(donation);
+                if (donation.Images.Count > 0)
+                    await LoadFirstImage(donation);
             }
 
             return donations;
@@ -62,10 +63,34 @@ namespace DonationStore.Application.Services.Abstractions
 
             foreach (var donation in donations)
             {
-                donation.Images[0].File = await InfrastructureService.LoadImage(donation.Images[0].FileName);
+                if (donation.Images.Count > 0)
+                    await LoadFirstImage(donation);
             }
-            
+
             return donations;
+        }
+
+        public async Task<List<DonationViewModel>> GetUserDonations(GetUserDonationsQuery query) 
+        {
+            var donations = await Mediator.Send(query);
+
+            foreach (var donation in donations)
+            {
+                if(donation.Images.Count > 0)
+                    await LoadFirstImage(donation);
+            }
+
+            return donations;
+        }
+
+        public async Task ChangeDonationAcquisitionStatus(ChangeAcquisitionStatusCommand command)
+        {
+            await Mediator.Send(command);
+        }
+
+        private async Task LoadFirstImage(DonationViewModel donation) 
+        {
+           donation.Images[0].File = await InfrastructureService.LoadImage(donation.Images[0].FileName);
         }
 
         private async Task LoadDonationImage(DonationViewModel donation)

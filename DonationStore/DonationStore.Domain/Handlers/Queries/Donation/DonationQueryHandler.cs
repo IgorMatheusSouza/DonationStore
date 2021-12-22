@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace DonationStore.Domain.Handlers.Queries.Donation
 {
-    public sealed class DonationQueryHandler : IRequestHandler<GetDonationsQuery, List<DonationViewModel>>, IRequestHandler<GetDonationQuery, DonationViewModel>
+    public sealed class DonationQueryHandler : IRequestHandler<GetDonationsQuery, List<DonationViewModel>>, IRequestHandler<GetDonationQuery, DonationViewModel>, IRequestHandler<GetUserDonationsQuery, List<DonationViewModel>>
     {
         private readonly IDonationRepository DonationRepository;
         private readonly IDonationFactory DonationFactory;
@@ -32,6 +32,12 @@ namespace DonationStore.Domain.Handlers.Queries.Donation
         public async Task<DonationViewModel> Handle(GetDonationQuery request, CancellationToken cancellationToken)
         {
             var result = await DonationRepository.GetDonation(request.Id);
+            return DonationFactory.Adapt(result);
+        }
+
+        public async Task<List<DonationViewModel>> Handle(GetUserDonationsQuery request, CancellationToken cancellationToken)
+        {
+            var result = await DonationRepository.GetUserDonations(request.Id);
             return DonationFactory.Adapt(result);
         }
     }

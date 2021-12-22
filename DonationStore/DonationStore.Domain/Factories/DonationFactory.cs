@@ -51,7 +51,13 @@ namespace DonationStore.Domain.Factories
                 Images = data.Images?.Select(x => new DonationImageModel
                 {
                     FileName = x.FileName
-                }).ToList() ?? default
+                }).ToList() ?? default,
+                DonationAcquisitions = data.Acquisitions?.Select(x =>
+                                                new DonationAcquisitionViewModel() {
+                                                    CreationDate = x.CreationDate,
+                                                    Status = x.Status,
+                                                    User = new UserDetailViewModel() { Name = x.User?.Name, Phone = x.User?.PhoneNumber }
+                                                }).ToList()
 
             }).ToList();
         }
@@ -77,7 +83,6 @@ namespace DonationStore.Domain.Factories
                     FileName = x.FileName
                 }).ToList() ?? default,
                 User = new UserDetailViewModel() { Name = data.User.Name, Phone = data.User.PhoneNumber }
-
             };
         }
 

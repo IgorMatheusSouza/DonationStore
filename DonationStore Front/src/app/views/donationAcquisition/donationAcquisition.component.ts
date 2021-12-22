@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DonationAcquisitionStatusEnum } from 'src/app/enums/donationAcquisitionStatus.enum';
+import { DonationStatusEnum } from 'src/app/enums/donationStatus.enum';
 import { DonationModel } from 'src/app/models/donationModel';
 import { DonationService } from 'src/app/services/donationService';
 
@@ -16,6 +18,21 @@ export class DonationAcquisitionComponent implements OnInit {
   ngOnInit() {
     this.donationService.getMyDonationAcquisitions().subscribe((response: DonationModel[]) => {
         this.donations = response;
+    });
+  }
+
+  public get DonationAcquisitionEnum(): typeof DonationAcquisitionStatusEnum {
+    return DonationAcquisitionStatusEnum;
+  }
+
+  public get DonationEnum(): typeof DonationStatusEnum {
+    return DonationStatusEnum;
+  }
+
+  cancelDonationAcquisition(donation : DonationModel){
+    this.donationService.changeDonationAcquisitionStatus(donation.id, DonationAcquisitionStatusEnum.Cancelled).subscribe(() => {
+      donation.status = DonationStatusEnum.Active;
+      donation.donationAcquisitions[0].status = DonationAcquisitionStatusEnum.Cancelled;
     });
   }
 }

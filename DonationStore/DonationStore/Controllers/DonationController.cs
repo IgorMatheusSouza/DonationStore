@@ -1,12 +1,9 @@
 ﻿using DonationStore.Application.Commands.Donation;
 using DonationStore.Application.Queries.Donation;
 using DonationStore.Application.Services.Abstractions;
-using DonationStore.Application.ViewModels;
 using DonationStore.Infrastructure.Security;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace DonationStore.Controllers
@@ -39,7 +36,6 @@ namespace DonationStore.Controllers
         {
             var query = new GetDonationsQuery(page, quantity);
             var donations = await DonationService.GetDonations(query);
-
             return Ok(donations);
         }
 
@@ -74,6 +70,27 @@ namespace DonationStore.Controllers
             var user = await GetUserSession();
             var result = await DonationService.GetDonationAcquisitions(new GetDonationAcquisitionsQuery(user.Id));
             return Ok(result);
+        }
+
+        [HttpGet]
+        [AuthorizationFilter]
+        [Route("user")]
+        public async Task<IActionResult> GetUserDonations()
+        {
+            var user = await GetUserSession();
+            var donations = await DonationService.GetUserDonations(new GetUserDonationsQuery(user.Id));
+            return Ok(donations);
+        }
+
+        [HttpPut]
+        [AuthorizationFilter]
+        [Route("acquire/status")]
+        public async Task<IActionResult> ChangeDonationAcquisitionStatus([FromBody] ChangeAcquisitionStatusCommand command)
+        {
+            var user = await GetUserSession();
+            command.UserId = user.Id;
+            await DonationService.ChangeDonationAcquisitionStatus(command);
+            return Accepted();
         }
     }
 }

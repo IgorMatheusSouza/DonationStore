@@ -15,25 +15,46 @@
       <div class="column-xs-12 column-md-7">
         <div class="product-gallery">
           <div class="product-image">
-            <img *ngIf="donation.images" class="active"
-              src="data:image/jpeg;base64,{{donation.images[mainImageIndex].file}}">
+            <img *ngIf="donation.images" class="active" src="data:image/jpeg;base64,{{donation.images[mainImageIndex].file}}">
           </div>
           <ul class="image-list">
             <div *ngFor="let image of donation.images; index as i">
-              <li class="image-item" (click)="selectMainImage(i)" *ngIf="mainImageIndex != i"><img src="data:image/jpeg;base64,{{image.file}}"></li>
+              <li class="image-item" (click)="selectMainImage(i)" *ngIf="mainImageIndex != i"><img
+                  src="data:image/jpeg;base64,{{image.file}}"></li>
             </div>
           </ul>
         </div>
       </div>
       <div class="column-xs-12 column-md-5">
         <h1>{{donation.title}} </h1>
-        <h5>{{ donation.creationDate | date:'dd/MM/yyyy HH:mm' }}</h5>
+        <h5>{{ donation.creationDate | date:'dd/MM/yyyy HH:mm' }} <span class="card-text"><span class="btn btn-info btn-icon-split">Status: Ativo</span></span></h5>
         <div class="description">
           <p>{{donation.description}}</p>
         </div>
         <!-- <button class="btn btn-primary btn-user">
           Resgatar doação
         </button> -->
+        <div class="card-block border-left-primary">
+          <div>
+            <span class="mr-2  d-lg-inline text-gray-600 small">{{donation.user.name}}</span>
+            <img class="img-profile rounded-circle" src="assets/imgs/undraw_profile.svg">
+          </div>
+
+          <a href="tel:{{donation.user.phone}}" class="mr-2 d-lg-inline text-gray-600 small">
+            <i class="fa fa-phone" aria-hidden="true"></i>
+            {{donation.user.phone.substr(0, donation.user.phone.length - 4) + '****'}}
+          </a>
+          <span class="mr-2 d-lg-inline text-gray-600 small">
+            <i class="fa fa-envelope" aria-hidden="true"></i> {{donation.user.email ?? 'Não visivel'}}
+          </span>
+          <a href="tel:{{donation.user.phone}}" class="btn btn-primary btn-icon-split btn-sm">
+            <span class="icon text-white-50">
+              <i class="fa fa-paper-plane" aria-hidden="true"></i>
+            </span>
+          </a>
+        </div>
+        <br>
+        <br>
         <div class="btn btn-primary btn-icon-split btn-lg">
           <span class="icon text-white-50">
             <i class="fa fa-hand-paper-o" aria-hidden="true"></i>
@@ -47,8 +68,7 @@
 <footer>
   <div class="grid">
     <div class="column-xs-12">
-      <p class="copyright">&copy; Copyright 2021 <a href="#" title="Katherine Kato"
-          target="_blank">Igor Matheus</a></p>
+      <p class="copyright">&copy; Copyright 2021 <a href="#" title="Katherine Kato" target="_blank">Igor Matheus</a></p>
     </div>
   </div>
 </footer>

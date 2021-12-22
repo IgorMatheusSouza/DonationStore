@@ -21,7 +21,9 @@ export class DonationService extends BaseService {
     register: this.urlAuthetication,
     getAll: this.urlAuthetication,
     get: this.urlAuthetication,
-    acquireDonation: this.urlAuthetication + 'acquire/'
+    acquireDonation: this.urlAuthetication + 'acquire/',
+    userdonations: this.urlAuthetication + 'user/',
+    changeDonationAcquisitionStatus: this.urlAuthetication + 'acquire/status'
   }
 
   register(data : AuthenticationUserModel) {
@@ -42,5 +44,13 @@ export class DonationService extends BaseService {
 
   getMyDonationAcquisitions(){
     return this.http.get<DonationModel[]>(this.urls.acquireDonation, this.header).pipe();
+  }
+
+  getMyDonations(){
+    return this.http.get<DonationModel[]>(this.urls.userdonations, this.header).pipe();
+  }
+
+  changeDonationAcquisitionStatus(id : string, status : number){
+    return this.http.put(this.urls.changeDonationAcquisitionStatus, { donationId : id, status }, this.header).pipe();
   }
 }

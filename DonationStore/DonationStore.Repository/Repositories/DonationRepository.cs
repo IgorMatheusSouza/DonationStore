@@ -1,6 +1,7 @@
 ﻿using DonationStore.Domain.Abstractions.Repositories;
 using DonationStore.Domain.Enities;
 using DonationStore.Enums.DomainEnums;
+using DonationStore.Enums.EnumServices;
 using DonationStore.Repository.Context;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -32,7 +33,17 @@ namespace DonationStore.Repository.Repositories
 
         public async Task<List<Donation>> GetDonations(int page, int quantity)
         {
-            return await DonationStoreContext.Donations.Skip(page * quantity).Take(quantity).Include(x => x.Images).ToListAsync();
+            IList<DonationEnum> openStatus = DonationEnumService.GetOpenDonationStatus();
+            return await DonationStoreContext.Donations.Where(x => openStatus.Contains(x.Status)).Skip(page * quantity).Take(quantity).Include(x => x.Images).ToListAsync();
+        }
+
+        public async Task<List<Donation>> GetUserDonations(Guid id)
+        {
+            return await DonationStoreContext.Donations.Include(x => x.Images)
+                                                       .Include(x => x.Acquisitions.Where(y => y.Status == DonationAcquisitionEnum.Active))
+                                                       .ThenInclude(x => x.User)
+                                                       .Where(x => x.User.Id == id.ToString())
+                                                       .ToListAsync();
         }
 
         public async Task RegisterDonation(Donation donation)

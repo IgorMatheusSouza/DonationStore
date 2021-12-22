@@ -10,6 +10,7 @@ export class DonationModel {
     address: string = '';
     district: string = '';
     zipCode: string = '';
+    status: number = 1;
     creationDate: Date = new Date();
     images: ImageModel[] = [];
     donationAcquisitions : DonationAcquisitionModel[] = [];

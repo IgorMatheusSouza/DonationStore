@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace DonationStore.Infrastructure.GenericMessages
+﻿namespace DonationStore.Infrastructure.GenericMessages
 {
     public static class ErrorMessages
     {
@@ -11,5 +7,6 @@ namespace DonationStore.Infrastructure.GenericMessages
         public static readonly string AuthError = $@"Você não tem permissão para realizar essa ação, faça login novamente";
         public static readonly string InvalidFile = $@"Arquivo inválido";
         public static readonly string AcquireDonationError = $@"Essa doação não está disponível para resgate no momento";
+        public static readonly string InvalidData = $@"Não foi possível completar a operação por inconsistência nos dados enviados";
     }
 }

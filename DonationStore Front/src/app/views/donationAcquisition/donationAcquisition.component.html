@@ -5,7 +5,7 @@
       <h2 class="blog-post-title">Aqui estão seus resgates de doaçãoes</h2>
       <p>Doações em andamento.</p>
       <div *ngFor="let item of donations">
-        <div *ngIf="item.donationAcquisitions[0].status == 1" class="card card-donation border-bottom-primary">
+        <div *ngIf="item.donationAcquisitions[0].status == DonationAcquisitionEnum.Active" class="card card-donation border-bottom-primary">
           <div class="row" >
             <div class="col-md-4">
               <div id="CarouselTest" class="carousel slide box" data-ride="carousel">
@@ -20,10 +20,11 @@
             <div class="col-md-4 px-3">
               <div class="card-block">
                 <a [routerLink]="['/donation',item.id]">
-                  <h5 class="card-title">{{item.title}}</h5>
-                  <h6 class="card-text">{{item.description}}</h6>
-                  <div href="#" class="small"> {{item.district}},{{item.city}} - {{item.state}}</div>
+                  <h5 class="card-title font-16"><b>{{item.title}}</b></h5>
+                  <h6 class="card-text font-12">{{item.description.substr(0, 100) + '...'}}</h6>
+                  <div href="#" class="small font-12"> {{item.district}},{{item.city}} - {{item.state}}</div>
                 </a>
+                <span class="text btn btn-danger btn-sm font-12 float-right" (click)="cancelDonationAcquisition(item)">Cancelar resgate</span>
               </div>
             </div>
             <div class="col-md-4 px-3">
@@ -44,10 +45,9 @@
                   <span class="icon text-white-50">
                     <i class="fa fa-paper-plane" aria-hidden="true"></i>
                   </span>
-                  <span class="text">Enviar mensagem</span>
                 </a>
                 <hr>
-                <h5 class="card-text"><span class="btn btn-info btn-icon-split">Status: Ativo</span></h5>
+                <h5 class="card-text"><span class="btn btn-info btn-icon-split">Status:{{item.status == DonationEnum.InProgress ? 'Em progresso' : 'Reservado'}} </span></h5>
                 <h6 class="card-text">
                   Data aquisição: {{item.donationAcquisitions[0].creationDate | date:'dd/MM/yyyy HH:mm' }}
                 </h6>
@@ -59,7 +59,7 @@
       <hr>
       <p>Doações anteriores</p>
       <div *ngFor="let item of donations">
-        <div class="card card-donation border-bottom-primary" *ngIf="item.donationAcquisitions[0].status > 1">
+        <div class="card card-donation border-bottom-primary" *ngIf="item.donationAcquisitions[0].status > DonationAcquisitionEnum.Active">
           <div class="row">
             <div class="col-md-4">
               <div id="CarouselTest" class="carousel slide box" data-ride="carousel">
@@ -74,9 +74,9 @@
             <div class="col-md-4 px-3">
               <div class="card-block">
                 <a [routerLink]="['/donation',item.id]">
-                  <h5 class="card-title">{{item.title}}</h5>
-                  <h6 class="card-text">{{item.description}}</h6>
-                  <div href="#" class="small"> {{item.district}},{{item.city}} - {{item.state}}</div>
+                  <h5 class="card-title font-16"><b>{{item.title}}</b></h5>
+                  <h6 class="card-text font-12">{{item.description}}</h6>
+                  <div href="#" class="small font-12"> {{item.district}},{{item.city}} - {{item.state}}</div>
                 </a>
               </div>
             </div>
@@ -98,7 +98,7 @@
                 <hr>
                 <h5 class="card-text">
                   <span class="btn btn-success btn-icon-split">
-                    Status: {{item.donationAcquisitions[0].status < 3 ? 'Finalizada' : 'Cancelada'}}
+                    Status: {{item.donationAcquisitions[0].status == DonationAcquisitionEnum.Completed  ? 'Finalizada' : 'Cancelada'}}
                   </span>
                 </h5>
                     <h6 class="card-text">

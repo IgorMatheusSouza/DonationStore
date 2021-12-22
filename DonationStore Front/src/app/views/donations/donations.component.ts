@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DonationService } from 'src/app/services/donationService';
 import { DonationModel } from 'src/app/models/donationModel';
+import { DonationStatusEnum } from 'src/app/enums/donationStatus.enum';
 
 @Component({
   selector: 'app-donations',
@@ -13,6 +14,10 @@ export class DonationsComponent implements OnInit {
   constructor(private donationService: DonationService) { }
 
   public mainDonations: DonationModel[] = [];
+
+  public get DonationEnum(): typeof DonationStatusEnum {
+    return DonationStatusEnum;
+  }
 
   ngOnInit() {
     if(this.reloadPage())

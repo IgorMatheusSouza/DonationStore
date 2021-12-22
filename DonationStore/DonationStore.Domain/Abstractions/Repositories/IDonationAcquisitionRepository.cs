@@ -1,8 +1,8 @@
-﻿using DonationStore.Domain.Entities;
+﻿using DonationStore.Domain.Enities;
+using DonationStore.Domain.Entities;
+using DonationStore.Enums.DomainEnums;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DonationStore.Domain.Abstractions.Repositories
@@ -12,5 +12,9 @@ namespace DonationStore.Domain.Abstractions.Repositories
         Task CreateDonationAcquisition(Guid donationId, Guid UserId);
 
         Task<List<DonationAcquisition>> GetDonationAcquisitions(Guid userId);
+
+        Task<Donation> GetDonationAcquisition(Guid donationId);
+
+        Task ChangeAcquisitionStatus(Guid donationAcquisitionId, DonationAcquisitionEnum status);
     }
 }
