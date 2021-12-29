@@ -47,6 +47,18 @@ namespace DonationStore.Controllers
             return Ok(donations);
         }
 
+        [HttpPut]
+        [AuthorizationFilter]
+        [Route("status")]
+        public async Task<IActionResult> ChangeDonaitonStatus([FromBody] ChangeDonationStatusCommand command)
+        {
+            if (!command.Validate())
+                return ReturnError(command.StatusCode, command.Message);
+
+            await DonationService.ChangeDonaitonStatus(command);
+            return Accepted();
+        }
+
         [HttpPost]
         [AuthorizationFilter]
         [Route("acquire")]
@@ -89,6 +101,10 @@ namespace DonationStore.Controllers
         {
             var user = await GetUserSession();
             command.UserId = user.Id;
+
+            if (!command.Validate())
+                return ReturnError(command.StatusCode, command.Message);
+
             await DonationService.ChangeDonationAcquisitionStatus(command);
             return Accepted();
         }

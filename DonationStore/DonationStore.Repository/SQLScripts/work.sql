@@ -25,6 +25,7 @@ join aspnetusers a on a.Id = ad.userId
 join Donations d on d.Id = ad.DonationId
 join aspnetusers a2 on a2.Id = d.UserId
 
+select * from aspnetusers where id = '6a5b0aad-b59e-4130-bfb8-5b614a728610'
 
 --update DonationAcquisition set Status = 2 where id = '354D1BF6-20B7-4C11-35A3-08D9B2B688B1'
 

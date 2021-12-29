@@ -8,14 +8,13 @@ using IRequest = MediatR.IRequest;
 
 namespace DonationStore.Application.Commands.Donation
 {
-    public class ChangeAcquisitionStatusCommand : Command, ICommand, IRequest
+    public class ChangeDonationStatusCommand : Command, ICommand, IRequest
     {
         public Guid DonationId { get; set; }
 
-        public DonationAcquisitionEnum Status { get; set; }
+        public DonationEnum Status { get; set; }
 
         public Guid UserId { get; set; }
-
 
         public bool Validate()
         {

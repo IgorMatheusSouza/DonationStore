@@ -9,6 +9,7 @@ import { LogoutComponent } from './views/logout/logout.component';
 import { MyDonationsComponent } from './views/myDonations/myDonations.component';
 import { RegisterDonationComponent } from './views/registerDonation/registerDonation.component';
 import { SignupComponent } from './views/signup/signup.component';
+import { UnderConstructionComponent } from './views/underConstruction/underConstruction.component';
 
 const routes: Routes = [
   {
@@ -50,6 +51,10 @@ const routes: Routes = [
   {
     path: 'myAcquisition',
     component: DonationAcquisitionComponent
+  },
+  {
+    path: 'underConstruction',
+    component: UnderConstructionComponent
   }
 ];
 

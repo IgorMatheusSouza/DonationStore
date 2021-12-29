@@ -116,8 +116,6 @@ namespace DonationStore
         {
             services.AddDbContext<DonationStoreContext>(options => options.UseSqlServer(defaultConection));
 
-            services.AddDbContext<DonationStoreContext>(options => options.UseSqlServer(defaultConection));
-
             services.AddIdentity<User, AspNetRoles>(options =>
             {
                 options.User.RequireUniqueEmail = true;
@@ -154,7 +152,8 @@ namespace DonationStore
                     .AddScoped<IRequestHandler<GetDonationAcquisitionsQuery, List<DonationViewModel>>, DonationAcquisitionQueryHandler>()
                     .AddScoped<IRequestHandler<RegisterPhoneNumberCommand, Unit>, RegisterPhoneNumberCommandHandler>()
                     .AddScoped<IRequestHandler<GetUserDonationsQuery, List<DonationViewModel>>, DonationQueryHandler>()
-                    .AddScoped<IRequestHandler<ChangeAcquisitionStatusCommand, Unit>, ChangeAcquisitionStatusCommandHandler>(); 
+                    .AddScoped<IRequestHandler<ChangeAcquisitionStatusCommand, Unit>, ChangeAcquisitionStatusCommandHandler>()
+                    .AddScoped<IRequestHandler<ChangeDonationStatusCommand, Unit>, ChangeDonationStatusCommandHandler>();
 
         }
     }

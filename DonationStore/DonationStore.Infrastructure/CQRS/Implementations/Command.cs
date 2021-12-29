@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Newtonsoft.Json;
 using System.Net;
 
 namespace DonationStore.Infrastructure.CQRS.Implementations
@@ -9,10 +10,14 @@ namespace DonationStore.Infrastructure.CQRS.Implementations
         {
             IsValid = true;
         }
+
+        [JsonIgnore]
         public string Message { get; private set; }
 
+        [JsonIgnore]
         public HttpStatusCode StatusCode { get; private set; }
 
+        [JsonIgnore]
         public bool IsValid { get; private set; }
 
         protected void SetBadRequest(string message) 

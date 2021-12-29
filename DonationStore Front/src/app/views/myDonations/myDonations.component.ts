@@ -50,4 +50,10 @@ export class MyDonationsComponent implements OnInit {
       donation.donationAcquisitions[0].status = DonationAcquisitionStatusEnum.Completed;
     });
   }
+
+  cancelDonation(donation : DonationModel){
+    this.donationService.changeDonationStatus(donation.id, DonationStatusEnum.Cancelled).subscribe(() => {
+      donation.status = DonationStatusEnum.Cancelled;
+    });
+  }
 }

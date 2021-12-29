@@ -87,6 +87,10 @@ namespace DonationStore.Application.Services.Abstractions
         {
             await Mediator.Send(command);
         }
+        public async Task ChangeDonaitonStatus(ChangeDonationStatusCommand command)
+        {
+            await Mediator.Send(command);
+        }
 
         private async Task LoadFirstImage(DonationViewModel donation) 
         {

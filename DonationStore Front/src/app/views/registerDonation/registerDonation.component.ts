@@ -36,7 +36,7 @@ export class RegisterDonationComponent implements OnInit {
         file: new FormControl(),
       }),
     ]),
-    phone: ['', []],
+    phone: ['', [Validators.required]],
     email: ['', []],
     showPhoneNumber: ['', [Validators.required]],
     showEmail: ['', [Validators.required]]

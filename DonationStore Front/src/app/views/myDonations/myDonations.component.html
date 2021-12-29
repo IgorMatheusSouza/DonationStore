@@ -28,7 +28,7 @@
                   <h6 class="card-text font-12">{{item.description.substr(0, 100) + '...'}}</h6>
                   <div href="#" class="small font-12"> {{item.district}} - {{item.city}} - {{item.state}}</div>
                 </a>
-                <span class="text btn btn-danger btn-sm font-12 float-right">Cancelar doação</span>
+                <span class="text btn btn-danger btn-sm font-12 float-right mb-1" (click)="cancelDonation(item)">Cancelar doação</span>
               </div>
             </div>
             <div class="col-md-4 px-3">

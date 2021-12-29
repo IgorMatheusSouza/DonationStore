@@ -21,5 +21,7 @@ namespace DonationStore.Application.Services.Abstractions
         Task<List<DonationViewModel>> GetUserDonations(GetUserDonationsQuery query);
 
         Task ChangeDonationAcquisitionStatus(ChangeAcquisitionStatusCommand command);
+
+        Task ChangeDonaitonStatus(ChangeDonationStatusCommand command);
     }
 }

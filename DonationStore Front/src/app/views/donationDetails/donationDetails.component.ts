@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DonationService } from 'src/app/services/donationService';
 import { Router } from '@angular/router';
 import { DonationModel } from 'src/app/models/donationModel';
+import { AuthenticationService } from 'src/app/services/authenticationService';
 
 @Component({
   selector: 'app-donationDetails',
@@ -12,11 +13,12 @@ import { DonationModel } from 'src/app/models/donationModel';
 
 export class DonationDetailsComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private donationService: DonationService, private router: Router) { }
+  constructor(private route: ActivatedRoute, private donationService: DonationService, private router: Router, private authenticationService: AuthenticationService) { }
 
   donation: DonationModel = new DonationModel();
   mainImageIndex: number = 0;
   loader = false;
+  isDonationOwner = false;
 
   ngOnInit() {
     var id = this.route.snapshot.paramMap.get('id');
@@ -27,6 +29,10 @@ export class DonationDetailsComponent implements OnInit {
     this.donationService.getDonation(id ?? '').subscribe((response: DonationModel) => {
       this.donation = response;
     });
+
+    if(this.authenticationService.currentUser?.email == this.donation.user.email){
+      this.isDonationOwner = true;
+    }
   }
 
   selectMainImage(index: number){
@@ -45,4 +51,9 @@ export class DonationDetailsComponent implements OnInit {
       this.router.navigate(['/myAcquisition']);
     }, err => { console.log(err.error) }).add(() => { this.loader = false; });;
   }
+
+  editDonation(){
+    this.router.navigate(['/underConstruction']);
+  }
+
 }
