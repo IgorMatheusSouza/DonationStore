@@ -1,6 +1,8 @@
-﻿using DonationStore.Infrastructure.Constants;
+﻿using Azure.Storage.Blobs;
+using DonationStore.Infrastructure.Constants;
 using DonationStore.Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.IO;
 using System.Threading.Tasks;
@@ -9,29 +11,28 @@ namespace DonationStore.Infrastructure.Services.File
 {
     public class FileInfrastructureService : IFileInfrastructureService
     {
-        private readonly string ImagesPath = Directory.GetCurrentDirectory() + SystemConstantValues.ImageFolder;
+        private readonly IConfiguration _configuration; 
 
-        public async Task<string> LoadImage(string name) 
+        public FileInfrastructureService(IConfiguration configuration)
         {
-            byte[] AsBytes = await System.IO.File.ReadAllBytesAsync(ImagesPath + name + SystemConstantValues.ImageExtension);
-            return Convert.ToBase64String(AsBytes);
+            _configuration = configuration;
         }
 
-        public async Task<string> FileToBase64(IFormFile filekey) 
-        {
-            using var ms = new MemoryStream();
-            await filekey.CopyToAsync(ms);
-            var fileBytes = ms.ToArray();
-            string file = Convert.ToBase64String(fileBytes);
-            return file;
-        }
-
-        public async Task CreateFileAsync(IFormFile filekey, string LocalPath)
+        public async Task CreateFileAsync(IFormFile file, string fileName)
         {
             await Task.Run(async () =>
             {
-                using var stream = System.IO.File.Create(LocalPath);
-                await filekey.CopyToAsync(stream);
+                fileName += SystemConstantValues.ImageExtension;
+                var connection = _configuration.GetSection(SystemConstantValues.BlobConnectionName).Value;
+
+                BlobServiceClient blobServiceClient = new BlobServiceClient(connection);
+                BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(SystemConstantValues.BlobStorageContainer);
+                BlobClient blobClient = containerClient.GetBlobClient(fileName);
+
+                using var memoryStream = new MemoryStream();
+                file.CopyTo(memoryStream);
+                memoryStream.Position = 0;
+                await blobClient.UploadAsync(memoryStream);
             });
         }
     }

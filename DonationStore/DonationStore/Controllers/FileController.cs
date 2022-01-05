@@ -23,17 +23,15 @@ namespace DonationStore.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UploadImage([FromForm] IFormFile filekey)
+        public IActionResult UploadImage([FromForm] IFormFile filekey)
         {
-            var fileName = Guid.NewGuid();
-            var LocalPath = Directory.GetCurrentDirectory() + SystemConstantValues.ImageFolder + fileName + SystemConstantValues.ImageExtension;
+            var fileName = Guid.NewGuid().ToString();
 
             if (filekey.Length > 0)
             {
-                string file = await InfrastructureService.FileToBase64(filekey);
-                _ = InfrastructureService.CreateFileAsync(filekey, LocalPath);
-
-                return OkCreated(new { fileName, file });
+                string fileUrl = SystemConstantValues.BlobUrl + fileName;
+                _ = InfrastructureService.CreateFileAsync(filekey, fileName);
+                return OkCreated(new { fileName, fileUrl });
             }
 
             return ReturnError(HttpStatusCode.BadRequest, ErrorMessages.InvalidFile);

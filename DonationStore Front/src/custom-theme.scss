@@ -36,3 +36,7 @@ $DonationStore-theme: mat.define-light-theme((
 .header-area{
   background: linear-gradient( 135deg , rgba(0, 136, 232, 1) 0%, rgba(0, 182, 198, 1) 0%, rgba(0, 136, 232, 1) 100% );
 }
+
+.header-area .logo {
+  margin-left: 5px!important;
+}

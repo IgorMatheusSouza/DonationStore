@@ -11,7 +11,7 @@
               <div id="CarouselTest" class="carousel slide box" data-ride="carousel">
                 <div class="carousel-inner">
                   <div *ngFor="let image of item.images; index as i" class="carousel-item {{ i == 0 ? 'active' : ''}} ">
-                    <img class="d-block img-donation" src="data:image/jpeg;base64,{{image.file}}" alt="">
+                    <img class="d-block img-donation" src="{{image.fileUrl}}" alt="">
                   </div>
                 </div>
               </div>
@@ -71,7 +71,7 @@
               <div id="CarouselTest" class="carousel slide box" data-ride="carousel">
                 <div class="carousel-inner">
                   <div *ngFor="let image of item.images; index as i" class="carousel-item {{ i == 0 ? 'active' : ''}} ">
-                    <img class="d-block img-donation" src="data:image/jpeg;base64,{{image.file}}" alt="">
+                    <img class="d-block img-donation" src="{{image.fileUrl}}" alt="">
                   </div>
                 </div>
               </div>

@@ -31,20 +31,12 @@ namespace DonationStore.Application.Services.Abstractions
         public async Task<List<DonationViewModel>> GetDonations(GetDonationsQuery query)
         {
             var donations = await Mediator.Send(query);
-
-            foreach (var donation in donations)
-            {
-                if (donation.Images.Count > 0)
-                    await LoadFirstImage(donation);
-            }
-
             return donations;
         }
 
         public async Task<DonationViewModel> GetDonation(GetDonationQuery query)
         {
             var donation = await Mediator.Send(query);
-            await LoadDonationImage(donation);
             return donation;
         }
 
@@ -60,26 +52,12 @@ namespace DonationStore.Application.Services.Abstractions
         public async Task<List<DonationViewModel>> GetDonationAcquisitions(GetDonationAcquisitionsQuery query)
         {
             var donations = await Mediator.Send(query);
-
-            foreach (var donation in donations)
-            {
-                if (donation.Images.Count > 0)
-                    await LoadFirstImage(donation);
-            }
-
             return donations;
         }
 
         public async Task<List<DonationViewModel>> GetUserDonations(GetUserDonationsQuery query) 
         {
             var donations = await Mediator.Send(query);
-
-            foreach (var donation in donations)
-            {
-                if(donation.Images.Count > 0)
-                    await LoadFirstImage(donation);
-            }
-
             return donations;
         }
 
@@ -90,24 +68,6 @@ namespace DonationStore.Application.Services.Abstractions
         public async Task ChangeDonaitonStatus(ChangeDonationStatusCommand command)
         {
             await Mediator.Send(command);
-        }
-
-        private async Task LoadFirstImage(DonationViewModel donation) 
-        {
-           donation.Images[0].File = await InfrastructureService.LoadImage(donation.Images[0].FileName);
-        }
-
-        private async Task LoadDonationImage(DonationViewModel donation)
-        {
-            await Task.Run(async () =>
-            {
-                var images = donation.Images.Where(x => !x.FileName.IsEmpty());
-
-                foreach (var image in images)
-                {
-                    image.File = await InfrastructureService.LoadImage(image.FileName);
-                }
-            });
         }
     }
 }

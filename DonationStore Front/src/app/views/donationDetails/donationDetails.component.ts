@@ -13,7 +13,7 @@ import { AuthenticationService } from 'src/app/services/authenticationService';
 
 export class DonationDetailsComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute, private donationService: DonationService, private router: Router, private authenticationService: AuthenticationService) { }
+  constructor(private route: ActivatedRoute, public authenticationService: AuthenticationService, private donationService: DonationService, private router: Router) { }
 
   donation: DonationModel = new DonationModel();
   mainImageIndex: number = 0;
@@ -28,15 +28,13 @@ export class DonationDetailsComponent implements OnInit {
 
     this.donationService.getDonation(id ?? '').subscribe((response: DonationModel) => {
       this.donation = response;
+      if(this.authenticationService.currentUser?.email == this.donation.user.email){
+        this.isDonationOwner = true;
+      }
     });
-
-    if(this.authenticationService.currentUser?.email == this.donation.user.email){
-      this.isDonationOwner = true;
-    }
   }
 
   selectMainImage(index: number){
-    console.log(index);
     this.mainImageIndex = index;
   }
 
@@ -55,5 +53,4 @@ export class DonationDetailsComponent implements OnInit {
   editDonation(){
     this.router.navigate(['/underConstruction']);
   }
-
 }

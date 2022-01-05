@@ -21,6 +21,7 @@ namespace DonationStore.Application.ViewModels
         public bool ShowEmail { get; set; }
         public DonationEnum Status { get; set; }
         public DateTime CreationDate { get; set; }
+        public GeocodingModel Geocoding { get; set; }
         public UserViewModel User { get; set; }
         public List<DonationImageModel> Images { get; set; } = new();
         public List<DonationAcquisitionViewModel> DonationAcquisitions { get; set; } = new();

@@ -22,6 +22,7 @@ namespace DonationStore.Application.Commands.Donation
         public List<DonationImageModel> Images { get; set; }
         public bool ShowPhoneNumber { get; set; }
         public bool ShowEmail { get; set; }
+        public GeocodingModel Geocoding { get; set; }
 
         public bool Validate()
         {

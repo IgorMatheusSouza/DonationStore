@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DonationStore.Infrastructure.Constants;
 
 namespace DonationStore.Application.ViewModels
 {
@@ -10,6 +6,6 @@ namespace DonationStore.Application.ViewModels
     {
         public string FileName { get; set; }
 
-        public string File { get; set; }
+        public string FileUrl { get => SystemConstantValues.BlobUrl + FileName + SystemConstantValues.ImageExtension; }
     }
 }

@@ -30,7 +30,9 @@ namespace DonationStore.Domain.Factories
                 Images = data.Images.Where(x => !x.FileName.IsEmpty()).Select(x => new DonationImage { 
                     FileName = x.FileName, 
                     CreationDate = DateTime.Now 
-                }).ToList()
+                }).ToList(),
+                Latitude = data.Geocoding.Lat,
+                Longitude = data.Geocoding.Lng
             };
         }
 
@@ -52,6 +54,7 @@ namespace DonationStore.Domain.Factories
                 {
                     FileName = x.FileName
                 }).ToList() ?? default,
+                Geocoding = new() { Lat = data.Latitude, Lng = data.Longitude  },
                 DonationAcquisitions = data.Acquisitions?.Select(x =>
                                                 new DonationAcquisitionViewModel() {
                                                     CreationDate = x.CreationDate,
@@ -82,7 +85,7 @@ namespace DonationStore.Domain.Factories
                 {
                     FileName = x.FileName
                 }).ToList() ?? default,
-                User = new UserDetailViewModel() { Name = data.User.Name, Phone = data.User.PhoneNumber }
+                User = new UserDetailViewModel() { Name = data.User.Name, Phone = data.User.PhoneNumber, Email = data.User.Email }
             };
         }
 

@@ -1,4 +1,5 @@
 import { DonationAcquisitionModel } from "./DonationAcquisitionModel";
+import { GeoLocationModel } from "./geoLocationModel";
 import { UserViewModel } from "./userViewModel";
 
 export class DonationModel {
@@ -15,9 +16,10 @@ export class DonationModel {
     images: ImageModel[] = [];
     donationAcquisitions : DonationAcquisitionModel[] = [];
     user: UserViewModel = new UserViewModel();
+    geocoding: GeoLocationModel = new GeoLocationModel();
 }
 
 export class ImageModel {
   fileName : string = '';
-  file : string = '';
+  fileUrl : string = '';
 }

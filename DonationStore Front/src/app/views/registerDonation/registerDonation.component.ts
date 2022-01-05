@@ -10,7 +10,9 @@ import { DonationService } from 'src/app/services/donationService';
 import { ExternalService } from 'src/app/services/externalService';
 import { FileUploadService } from 'src/app/services/fileUploadService';
 import { UserService } from 'src/app/services/userService';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { Loader } from "@googlemaps/js-api-loader"
+import { GeolocationService } from 'src/app/services/geolocationService';
 
 
 @Component({
@@ -38,8 +40,12 @@ export class RegisterDonationComponent implements OnInit {
     ]),
     phone: ['', [Validators.required]],
     email: ['', []],
-    showPhoneNumber: ['', [Validators.required]],
-    showEmail: ['', [Validators.required]]
+    showPhoneNumber: [true, [Validators.required]],
+    showEmail: [true, [Validators.required]],
+    geocoding: new FormGroup({
+        lat: new FormControl(),
+        lng: new FormControl(),
+      })
   });
 
 
@@ -61,16 +67,18 @@ export class RegisterDonationComponent implements OnInit {
     private externalService: ExternalService,
     private authenticationService: AuthenticationService,
     private fileUploadService: FileUploadService,
-    private userService: UserService) { }
+    private userService: UserService,
+    private geolocationService: GeolocationService) { }
 
   ngOnInit() {
+    console.log(5)
     if (this.authenticationService.currentUser == null)
       this.Router.navigate(['/login']);
 
     this.userService.getUser().subscribe((response: UserViewModel) => {
       this.registerDonationForm.controls.phone.setValue(response.phone);
       this.registerDonationForm.controls.email.setValue(response.email);
-      if(!response.phone){
+      if (!response.phone) {
         this.phoneRegistration = true;
       }
     });
@@ -83,7 +91,7 @@ export class RegisterDonationComponent implements OnInit {
 
     this.loader = true;
     this.donationService.register(this.registerDonationForm.value).subscribe((response: any) => {
-      this.Router.navigate(['/donations']);
+      this.Router.navigate(['/mydonations']);
     }, err => { this.requestError = err.error; }).add(() => { this.loader = false; });;
   }
 
@@ -95,6 +103,7 @@ export class RegisterDonationComponent implements OnInit {
       this.registerDonationForm.controls.city.setValue(response.localidade);
       this.registerDonationForm.controls.district.setValue(response.bairro);
       this.registerDonationForm.controls.address.setValue(response.logradouro);
+      this.getGeocoding(response.logradouro);
     })
   }
 
@@ -117,10 +126,8 @@ export class RegisterDonationComponent implements OnInit {
       var file = this.fileToUpload as File;
 
       this.fileUploadService.postFile(file).subscribe((response: any) => {
-        response.file = 'data:image/jpeg;base64,' + response.file;
-
         var imagesForm = this.registerDonationForm.get('images') as FormArray;
-        var model: ImageModel = { fileName: response.fileName, file: '' };
+        var model: ImageModel = { fileName: response.fileName, fileUrl:  response.fileUrl };
         imagesForm.push(this.formBuilder.group(model));
 
         this.imagesModel.push(response);
@@ -128,7 +135,7 @@ export class RegisterDonationComponent implements OnInit {
     }
   }
 
-  registerPhone(){
+  registerPhone() {
     if (this.loader)
       return;
 
@@ -138,6 +145,28 @@ export class RegisterDonationComponent implements OnInit {
     this.userService.registerPhone(phone).subscribe(() => {
       this.phoneRegistration = false;
       this.loader = false;
+    });
+  }
+
+  getGeocoding(address: string) {
+    var request = { address: address };
+
+    const loader = new Loader({
+      apiKey: this.geolocationService.getGoogleApiKey(),
+      version: "weekly"
+    });
+
+    loader.load().then(() => {
+      var geocoder = new google.maps.Geocoder();
+      geocoder.geocode(request)
+        .then((result) => {
+          var geo = { lat : result.results[0].geometry.location.lat(), lng : result.results[0].geometry.location.lng() };
+          var geocodingForm = this.registerDonationForm.get('geocoding') as FormGroup;
+          geocodingForm.setValue(geo);
+        })
+        .catch((e) => {
+          console.log("Geocode was not successful for the following reason: " + e);
+        });
     });
   }
 }

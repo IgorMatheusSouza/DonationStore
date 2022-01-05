@@ -18,6 +18,8 @@ namespace DonationStore.Domain.Enities
         public DateTime CreationDate { get; set; }
         public bool ShowPhoneNumber { get; set; }
         public bool ShowEmail { get; set; }
+        public double Longitude { get; set; }
+        public double Latitude { get; set; }
         public DonationEnum Status { get; set; }
         public virtual User User { get; set; }
         public virtual ICollection<DonationImage> Images { get; set; }
