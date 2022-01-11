@@ -25,13 +25,14 @@ export class RegisterDonationComponent implements OnInit {
   requestError = '';
 
   registerDonationForm = this.formBuilder.group({
-    title: ['', [Validators.required, Validators.maxLength(50)]],
-    description: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(3000)]],
+    title: ['', [Validators.required,Validators.minLength(5), Validators.maxLength(50)]],
+    description: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(500)]],
     state: ['', [Validators.required]],
     city: ['', [Validators.required]],
     district: ['', [Validators.required]],
     address: ['', [Validators.required, Validators.maxLength(50)]],
     zipCode: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(10)]],
+    addressNumber: ['',[Validators.required]],
     images: this.formBuilder.array([
       new FormGroup({
         fileName: new FormControl(),
@@ -71,7 +72,6 @@ export class RegisterDonationComponent implements OnInit {
     private geolocationService: GeolocationService) { }
 
   ngOnInit() {
-    console.log(5)
     if (this.authenticationService.currentUser == null)
       this.Router.navigate(['/login']);
 
@@ -90,6 +90,7 @@ export class RegisterDonationComponent implements OnInit {
       return;
 
     this.loader = true;
+
     this.donationService.register(this.registerDonationForm.value).subscribe((response: any) => {
       this.Router.navigate(['/mydonations']);
     }, err => { this.requestError = err.error; }).add(() => { this.loader = false; });;
@@ -103,8 +104,12 @@ export class RegisterDonationComponent implements OnInit {
       this.registerDonationForm.controls.city.setValue(response.localidade);
       this.registerDonationForm.controls.district.setValue(response.bairro);
       this.registerDonationForm.controls.address.setValue(response.logradouro);
-      this.getGeocoding(response.logradouro);
+
     })
+  }
+
+  getUserGeoCoding(){
+    this.getGeocoding( this.registerDonationForm.controls.address.value + ' ' + this.registerDonationForm.controls.addressNumber);
   }
 
   next() {
@@ -126,11 +131,13 @@ export class RegisterDonationComponent implements OnInit {
       var file = this.fileToUpload as File;
 
       this.fileUploadService.postFile(file).subscribe((response: any) => {
-        var imagesForm = this.registerDonationForm.get('images') as FormArray;
-        var model: ImageModel = { fileName: response.fileName, fileUrl:  response.fileUrl };
-        imagesForm.push(this.formBuilder.group(model));
+        setTimeout(() => {
+            var imagesForm = this.registerDonationForm.get('images') as FormArray;
+            var model: ImageModel = { fileName: response.fileName, fileUrl:  response.fileUrl };
+            imagesForm.push(this.formBuilder.group(model));
 
-        this.imagesModel.push(response);
+            this.imagesModel.push(response);
+        }, 250);
       });
     }
   }

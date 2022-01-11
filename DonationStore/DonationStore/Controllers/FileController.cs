@@ -5,9 +5,7 @@ using DonationStore.Infrastructure.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.IO;
 using System.Net;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace DonationStore.Controllers
@@ -23,14 +21,14 @@ namespace DonationStore.Controllers
         }
 
         [HttpPost]
-        public IActionResult UploadImage([FromForm] IFormFile filekey)
+        public async Task<IActionResult> UploadImage([FromForm] IFormFile filekey)
         {
             var fileName = Guid.NewGuid().ToString();
 
             if (filekey.Length > 0)
             {
-                string fileUrl = SystemConstantValues.BlobUrl + fileName;
-                _ = InfrastructureService.CreateFileAsync(filekey, fileName);
+                string fileUrl = SystemConstantValues.BlobUrl + fileName + SystemConstantValues.ImageExtension;
+                await InfrastructureService.CreateFileAsync(filekey, fileName); 
                 return OkCreated(new { fileName, fileUrl });
             }
 

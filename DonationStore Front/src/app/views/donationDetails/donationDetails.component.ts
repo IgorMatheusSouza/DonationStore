@@ -41,6 +41,9 @@ export class DonationDetailsComponent implements OnInit {
   acquireDonation(){
     if(this.loader) return;
 
+    if (this.authenticationService.currentUser == null)
+        this.router.navigate(['/login']);
+
     this.loader = true;
 
     var request = { donationId : this.donation.id };

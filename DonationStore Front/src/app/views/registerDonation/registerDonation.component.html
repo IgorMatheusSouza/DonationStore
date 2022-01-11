@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container mar-bottom">
   <br>
   <br>
   <br>
@@ -13,12 +13,17 @@
               <h1 *ngIf="wizardState == 2" class="h4 text-gray-900 mb-4">Preencha o endereço da sua doação!</h1>
               <h1 *ngIf="wizardState == 3" class="h4 text-gray-900 mb-4">Deseja exibir seus contatos para quem requisitar a doação?</h1>
             </div>
-            <form class="user" [formGroup]="registerDonationForm" (ngSubmit)="registerDonation()">
+            <form class="user" [formGroup]="registerDonationForm">
               <div class="wirzard1" *ngIf="wizardState == 1">
                 <div class="form-group row">
                   <div class="col-sm-12 mb-3 mb-sm-0">
                     <input matInput class="form-control form-control-user" placeholder="digite o titulo do anúncio"
                       formControlName="title">
+                      <div *ngIf="registerDonationForm.controls['title'].invalid && (registerDonationForm.controls['title'].dirty || registerDonationForm.controls['title'].touched)" class="text-danger text-center error-msg">
+                        <div *ngIf="registerDonationForm.controls['title'].errors">
+                          Preencha o titulo com um texto de 5 a 50 characteres.
+                        </div>
+                      </div>
                   </div>
                 </div>
                 <div class="form-group">
@@ -26,6 +31,11 @@
                     <textarea matInput class="form-control form-control-user textarea"
                       placeholder="digite o detalhes do anúncio" formControlName="description" rows="7"
                       cols="80"></textarea>
+                      <div *ngIf="registerDonationForm.controls['description'].invalid && (registerDonationForm.controls['description'].dirty || registerDonationForm.controls['description'].touched)" class="text-danger text-center error-msg">
+                        <div *ngIf="registerDonationForm.controls['description'].errors">
+                          Preencha a descrição com um texto de 5 a 500 characteres.
+                        </div>
+                      </div>
                   </div>
                 </div>
               </div>
@@ -38,7 +48,7 @@
 
                     <div
                       *ngIf="registerDonationForm.controls['zipCode'].invalid && (registerDonationForm.controls['zipCode'].dirty || registerDonationForm.controls['zipCode'].touched)"
-                      class="text-danger text-center">
+                      class="text-danger text-center error-msg">
                       <div *ngIf="registerDonationForm.controls['zipCode'].errors">
                         O Cep deve ser preenchido :)
                       </div>
@@ -63,8 +73,13 @@
                       id="exampleInputEmail" placeholder="Rua" formControlName="address">
                   </div>
                   <div class="form-group col-sm-6 mb-3 mb-sm-0">
-                    <input matInput type="text" class="form-control form-control-user" id="exampleInputEmail"
-                      placeholder="número">
+                    <input matInput type="text" class="form-control form-control-user" id="addressNumber"
+                      placeholder="número" formControlName="addressNumber" (change)="getUserGeoCoding()">
+                      <div *ngIf="registerDonationForm.controls['addressNumber'].invalid && (registerDonationForm.controls['addressNumber'].dirty || registerDonationForm.controls['addressNumber'].touched)" class="text-danger text-center error-msg">
+                        <div *ngIf="registerDonationForm.controls['addressNumber'].errors">
+                          Preencha o número. Obs: não será exibido na sua doação.
+                        </div>
+                      </div>
                   </div>
                 </div>
               </div>
@@ -79,10 +94,16 @@
                     id="exampleInputEmail" placeholder="Telefone" formControlName="phone">
                     <mat-checkbox *ngIf="!phoneRegistration" formControlName="showPhoneNumber"  [color]="'primary'" class="example-margin">Deixar o meu telefone visivel</mat-checkbox>
                     <a *ngIf="phoneRegistration" href="javascript:void(0)" (click)="registerPhone()">Cadastrar Telefone</a>
+                    <div *ngIf="phoneRegistration || (registerDonationForm.controls['phone'].invalid && (registerDonationForm.controls['phone'].dirty || registerDonationForm.controls['phone'].touched))" class="text-danger text-center error-msg">
+                      <div *ngIf="registerDonationForm.controls['phone'].errors">
+                        Preencha e cadastre seu telefone. Obs: caso não queira deixar visivel, basta desmarcar a opção de visibilidade.
+                      </div>
+                    </div>
+
                 </div>
               </div>
               <div class="wirzard1" *ngIf="wizardState == 4">
-                <div class="container">
+                <div>
                   <div class="card-upload">
                     <div class="card-body">
                       <div class="card-title">Envie imagens da sua doação</div>
@@ -152,12 +173,12 @@
                       </div>
                     </div>
                   </div>
+                  <div *ngIf="this.registerDonationForm.invalid" class="text-danger text-center error-msg">
+                    Preencha todos os campos obrigatórios.
+                   </div>
                 </div>
                 <!-- Icons made by Smashicons https://www.flaticon.com/authors/smashicons -->
-
-
               </div>
-
               <div *ngIf="requestError" class="text-danger text-center">
                 {{requestError}}
                 <br>
@@ -166,10 +187,10 @@
               <button *ngIf="wizardState < 4" class="btn btn-primary btn-user btn-block" (click)="next()">
                 Próximo
               </button>
-              <button *ngIf="wizardState == 4" class="btn btn-primary btn-user btn-block" type="submit">
+              <button *ngIf="wizardState == 4" class="btn btn-primary btn-user btn-block" (click)="registerDonation()">
                 Cadastrar
               </button>
-              <button *ngIf="wizardState > 1" class="btn btn-light btn-user btn-block" (click)="back()">
+              <button *ngIf="wizardState > 1" class="btn btn-secondary btn-user btn-block" (click)="back()">
                 Voltar
               </button>
             </form>

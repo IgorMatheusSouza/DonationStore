@@ -38,7 +38,7 @@ export class SignupComponent implements OnInit {
     this.loader = true;
     this.authenticationService.register(this.registerForm.value).subscribe((response: UserLoginViewModel) => {
       this.authenticationService.saveLoginCredentials(response);
-      this.Router.navigate(['/donations']);
+      this.Router.navigate(['/home']);
     }, err => { this.requestError = err.error;}).add(() => { this.loader = false; });
   }
 

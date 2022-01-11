@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     if(this.authenticationService.currentUser != null)
-          this.Router.navigate(['/donations']);
+          this.Router.navigate(['/home']);
   }
 
   loginUser(){
@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
 
     this.authenticationService.login(this.loginForm.value).subscribe((response: UserLoginViewModel) => {
           this.authenticationService.saveLoginCredentials(response);
-          this.Router.navigate(['/donations']);
+          this.Router.navigate(['/home']);
       },
         err => { this.requestError = err.error;}
       );

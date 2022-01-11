@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AboutComponent } from './views/about/about.component';
 import { DonationAcquisitionComponent } from './views/donationAcquisition/donationAcquisition.component';
 import { DonationDetailsComponent } from './views/donationDetails/donationDetails.component';
 import { DonationsComponent } from './views/donations/donations.component';
@@ -55,6 +56,10 @@ const routes: Routes = [
   {
     path: 'underConstruction',
     component: UnderConstructionComponent
+  },
+  {
+    path: 'about',
+    component: AboutComponent
   }
 ];
 

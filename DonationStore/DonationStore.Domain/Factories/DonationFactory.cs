@@ -26,6 +26,7 @@ namespace DonationStore.Domain.Factories
                 District = data.District,
                 ShowEmail = data.ShowEmail,
                 Status = DonationEnum.Active,
+                AddressNumber = data.AddressNumber,
                 ShowPhoneNumber = data.ShowPhoneNumber,
                 Images = data.Images.Where(x => !x.FileName.IsEmpty()).Select(x => new DonationImage { 
                     FileName = x.FileName, 
@@ -50,6 +51,7 @@ namespace DonationStore.Domain.Factories
                 District = data.District,
                 CreationDate = data.CreationDate,
                 Status = data.Status,
+                AddressNumber = data.AddressNumber,
                 Images = data.Images?.Select(x => new DonationImageModel
                 {
                     FileName = x.FileName

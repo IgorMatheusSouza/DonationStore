@@ -35,13 +35,14 @@
         <div class="row">
             <div class="col-12">
                 <nav class="main-nav">
-                    <a href="home" class="logo">Donation Store</a>
+                    <a href="home" class="logo">Donation Store<img src="https://donationstorestorage.blob.core.windows.net/donation-store-blob/logo-branca.png" width="50px"></a>
                     <ul class="nav">
                         <li class="scroll-to-section"><a href="home" class="active">Home</a></li>
                         <li class="scroll-to-section"><a href="donations">Doações</a></li>
                         <li class="scroll-to-section"><a href="registerDonation">Doar</a></li>
-                        <li class="scroll-to-section"><a href="underConstruction">Sobre</a></li>
+                        <li class="scroll-to-section"><a href="about">Sobre</a></li>
                         <li id="login"class="scroll-to-section"><a href="login">Login</a></li>
+                        <li id="signup"class="scroll-to-section"><a href="signup">Criar conta</a></li>
                         <li id="menu-logado"  class="submenu" style="display: none;">
                           <a href="javascript:;">
                             <span class="" id="name">Olá </span>
@@ -90,6 +91,7 @@
     {
       $("#name").text('Olá '+ user.name.split(' ')[0]);
       $("#login").hide();
+      $("#signup").hide();
       $("#menu-logado").show();
     }
 

@@ -12,7 +12,7 @@ AspNetUserRoles
 
 select * from Donations d join DonationImages on d.id = donationId join aspnetusers a on d.UserId = a.Id
 
-update aspnetusers set PhoneNumber =  '' where id = 'de50f0ed-e1fd-4b81-a9cb-c62cb684dbb4'
+--update aspnetusers set PhoneNumber =  '' where id = '1a2be988-574a-4508-bbd8-d31012b48efc'
 
 -- update donations set description ='O Discman foi o primeiro portátil leitor de CDs, mídias que durante algum tempo foram top de linha quando o assunto era qualidade digital de áudio.' where id = 'E9D0252B-209A-451F-581B-08D9AE968929'
 

@@ -3,7 +3,7 @@
     <div class="col-md-8 main-box offset-md-2" id="style-7">
       <!-- Card Start -->
       <h2 class="blog-post-title">Aqui estão seus resgates de doaçãoes</h2>
-      <p>Doações em andamento.</p>
+      <p>Doações em andamento</p>
       <div *ngFor="let item of donations">
         <div *ngIf="item.donationAcquisitions[0].status == DonationAcquisitionEnum.Active" class="card card-donation border-bottom-primary">
           <div class="row" >
@@ -11,7 +11,7 @@
               <div id="CarouselTest" class="carousel slide box" data-ride="carousel">
                 <div class="carousel-inner">
                   <div *ngFor="let image of item.images; index as i" class="carousel-item {{ i == 0 ? 'active' : ''}} ">
-                    <img class="d-block img-donation" src="data:image/jpeg;base64,{{image.fileUrl}}" alt="">
+                    <img class="d-block img-donation" src="{{image.fileUrl}}" alt="">
                   </div>
                 </div>
               </div>
@@ -28,7 +28,7 @@
               </div>
             </div>
             <div class="col-md-4 px-3">
-              <div class="card-block border-left-primary">
+              <div class="card-block card-block-align border-left-primary">
                 <div>
                   <span class="mr-2  d-lg-inline text-gray-600 small">{{item.user.name}}</span>
                   <img class="img-profile rounded-circle" src="assets/imgs/undraw_profile.svg">
@@ -65,14 +65,14 @@
               <div id="CarouselTest" class="carousel slide box" data-ride="carousel">
                 <div class="carousel-inner">
                   <div *ngFor="let image of item.images; index as i" class="carousel-item {{ i == 0 ? 'active' : ''}} ">
-                    <img class="d-block img-donation" src="data:image/jpeg;base64,{{image.fileUrl}}" alt="">
+                    <img class="d-block img-donation" src="{{image.fileUrl}}" alt="">
                   </div>
                 </div>
               </div>
             </div>
 
             <div class="col-md-4 px-3">
-              <div class="card-block">
+              <div class="card-block ">
                 <a [routerLink]="['/donation',item.id]">
                   <h5 class="card-title font-16"><b>{{item.title}}</b></h5>
                   <h6 class="card-text font-12">{{item.description}}</h6>
@@ -81,7 +81,7 @@
               </div>
             </div>
             <div class="col-md-4 px-3">
-              <div class="card-block border-left-primary">
+              <div class="card-block card-block-align border-left-primary">
                 <div>
                   <span class="mr-2  d-lg-inline text-gray-600 small">{{item.user.name}}</span>
                   <img class="img-profile rounded-circle" src="assets/imgs/undraw_profile.svg">
@@ -109,6 +109,9 @@
 
           </div>
         </div>
+      </div>
+      <div *ngIf="donations.length == 0">
+        <h6 class="text-nodonation">Nenhuma doação</h6>
       </div>
     </div>
   </div>

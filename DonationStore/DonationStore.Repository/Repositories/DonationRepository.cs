@@ -40,7 +40,7 @@ namespace DonationStore.Repository.Repositories
         public async Task<List<Donation>> GetUserDonations(Guid id)
         {
             return await DonationStoreContext.Donations.Include(x => x.Images)
-                                                       .Include(x => x.Acquisitions.Where(y => y.Status == DonationAcquisitionEnum.Active))
+                                                       .Include(x => x.Acquisitions.Where(y => y.Status != DonationAcquisitionEnum.Cancelled))
                                                        .ThenInclude(x => x.User)
                                                        .Where(x => x.User.Id == id.ToString())
                                                        .ToListAsync();

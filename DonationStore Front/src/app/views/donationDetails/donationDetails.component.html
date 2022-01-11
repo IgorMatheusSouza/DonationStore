@@ -6,7 +6,7 @@
           <ol class="breadcrumb-list">
             <li class="breadcrumb-item">Doações </li>
             <li class="breadcrumb-item">Detalhes</li>
-            <li class="breadcrumb-item">{{donation.title}}</li>
+            <li class="breadcrumb-item">{{donation.title.split(' ').slice(0, 2).join(' ')}}</li>
           </ol>
         </nav>
       </div>
@@ -15,18 +15,18 @@
       <div class="column-xs-12 column-md-7">
         <div class="product-gallery">
           <div class="product-image">
-            <img *ngIf="donation.images" class="active" src="{{donation.images[mainImageIndex].fileUrl}}">
+            <img *ngIf="donation.images" class="active img-don" src="{{donation.images[mainImageIndex].fileUrl}}">
           </div>
           <ul class="image-list">
             <div *ngFor="let image of donation.images; index as i">
-              <li class="image-item" (click)="selectMainImage(i)" *ngIf="mainImageIndex != i"><img
-                  src="{{image.fileUrl}}"></li>
+              <li class="image-item" (click)="selectMainImage(i)" *ngIf="mainImageIndex != i">
+                <img class="img-don" src="{{image.fileUrl}}"></li>
             </div>
           </ul>
         </div>
       </div>
       <div class="column-xs-12 column-md-5">
-        <h1>{{donation.title}} </h1>
+        <h1 class="title">{{donation.title}} </h1>
         <h5>{{ donation.creationDate | date:'dd/MM/yyyy HH:mm' }} <span class="card-text"><span class="btn btn-info btn-icon-split float-right">Status: Ativo</span></span></h5>
         <div class="description">
           <p>{{donation.description}}</p>
