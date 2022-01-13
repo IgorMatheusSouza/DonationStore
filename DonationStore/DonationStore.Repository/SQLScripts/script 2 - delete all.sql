@@ -1,0 +1,3 @@
+delete from DonationImages
+delete from DonationAcquisition
+delete from Donations

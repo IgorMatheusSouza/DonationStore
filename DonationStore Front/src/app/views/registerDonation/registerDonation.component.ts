@@ -109,7 +109,7 @@ export class RegisterDonationComponent implements OnInit {
   }
 
   getUserGeoCoding(){
-    this.getGeocoding( this.registerDonationForm.controls.address.value + ' ' + this.registerDonationForm.controls.addressNumber);
+    this.getGeocoding(this.registerDonationForm.controls.address.value + ' ' + this.registerDonationForm.controls.addressNumber.value + ' - ' + this.registerDonationForm.controls.district.value);
   }
 
   next() {
