@@ -31,7 +31,6 @@ export class DonationsComponent implements OnInit, AfterViewInit {
 
     this.donationService.getDonations().subscribe((response: DonationModel[]) => {
       this.mainDonations = response;
-      console.log(5);
       this.loadMap(response, location)
     });
   }
@@ -92,8 +91,8 @@ export class DonationsComponent implements OnInit, AfterViewInit {
       for(var i = 0; i < donations.length; i++){
         if(donations[i].geocoding && donations[i].geocoding.lat != 0)
         {
-          donations[i].geocoding.lat += Math.random() / 1000;
-          donations[i].geocoding.lng += Math.random() / 1000;
+          donations[i].geocoding.lat += Math.random() / 3000 - Math.random() / 3000;
+          donations[i].geocoding.lng += Math.random() / 3000 - Math.random() / 3000;
           var title = donations[i].title.length > 25 ?  donations[i].title.substring(0, 25) + '...' :  donations[i].title;
           tourStops.push([ donations[i].geocoding , "<a href='donation/"+donations[i].id+"'><img width='160px' height='80px' class='d-block img-donation' src='"+ donations[i].images[0].fileUrl +"'>" + title +"</a>"]);
         }

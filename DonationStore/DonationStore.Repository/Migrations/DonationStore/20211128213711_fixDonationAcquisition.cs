@@ -7,38 +7,38 @@ namespace DonationStore.Repository.Migrations.DonationStore
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_DonationAcquisition_AspNetUsers_UserId1",
-                table: "DonationAcquisition");
+            //migrationBuilder.DropForeignKey(
+            //    name: "FK_DonationAcquisition_AspNetUsers_UserId1",
+            //    table: "DonationAcquisition");
 
-            migrationBuilder.DropIndex(
-                name: "IX_DonationAcquisition_UserId1",
-                table: "DonationAcquisition");
+            //migrationBuilder.DropIndex(
+            //    name: "IX_DonationAcquisition_UserId1",
+            //    table: "DonationAcquisition");
 
-            migrationBuilder.DropColumn(
-                name: "UserId1",
-                table: "DonationAcquisition");
+            //migrationBuilder.DropColumn(
+            //    name: "UserId1",
+            //    table: "DonationAcquisition");
 
-            migrationBuilder.AlterColumn<string>(
-                name: "UserId",
-                table: "DonationAcquisition",
-                type: "nvarchar(450)",
-                nullable: true,
-                oldClrType: typeof(Guid),
-                oldType: "uniqueidentifier");
+            //migrationBuilder.AlterColumn<string>(
+            //    name: "UserId",
+            //    table: "DonationAcquisition",
+            //    type: "nvarchar(450)",
+            //    nullable: true,
+            //    oldClrType: typeof(Guid),
+            //    oldType: "uniqueidentifier");
 
-            migrationBuilder.CreateIndex(
-                name: "IX_DonationAcquisition_UserId",
-                table: "DonationAcquisition",
-                column: "UserId");
+            //migrationBuilder.CreateIndex(
+            //    name: "IX_DonationAcquisition_UserId",
+            //    table: "DonationAcquisition",
+            //    column: "UserId");
 
-            migrationBuilder.AddForeignKey(
-                name: "FK_DonationAcquisition_AspNetUsers_UserId",
-                table: "DonationAcquisition",
-                column: "UserId",
-                principalTable: "AspNetUsers",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Restrict);
+            //migrationBuilder.AddForeignKey(
+            //    name: "FK_DonationAcquisition_AspNetUsers_UserId",
+            //    table: "DonationAcquisition",
+            //    column: "UserId",
+            //    principalTable: "AspNetUsers",
+            //    principalColumn: "Id",
+            //    onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

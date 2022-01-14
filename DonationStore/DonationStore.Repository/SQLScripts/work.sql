@@ -1,7 +1,8 @@
 
 select * from sys.tables
 select * from aspnetusers
-select * from don
+select * from Donations
+select * from [AspNetRoles]
 
 select * from DonationImages
 AspNetUserClaims
@@ -30,3 +31,10 @@ select * from aspnetusers where id = '6a5b0aad-b59e-4130-bfb8-5b614a728610'
 --update DonationAcquisition set Status = 2 where id = '354D1BF6-20B7-4C11-35A3-08D9B2B688B1'
 
 --update Donations set status = 4 where id in ('E9D0252B-209A-451F-581B-08D9AE968929','12B47DC7-1698-4587-581C-08D9AE968929','1A37C013-20BE-445F-581D-08D9AE968929')
+
+Data Source=tcp:donationstoredb.database.windows.net,1433;Initial Catalog=DonationStore_db;User Id=AdminDonationStore@donationstoredb;Password=Pkm@t183.coreDonationStore
+
+
+
+Server=tcp:donationstoredb.database.windows.net,1433;Initial Catalog=DonationStore_db;Persist Security Info=False;
+User ID=IgorAdmin;Password=Pkm@t183.core;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
