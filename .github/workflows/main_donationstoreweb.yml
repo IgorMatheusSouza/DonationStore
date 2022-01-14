@@ -23,6 +23,7 @@ jobs:
 
       - name: npm install, build, and test
         run: |
+          cd DonationStore Front/
           npm install
           npm run build --if-present
           npm run test --if-present
@@ -53,4 +54,4 @@ jobs:
           app-name: 'donationstoreweb'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_CE230EF48F3A4954A1D03602C9950552 }}
-          package: DonationStore Front
+          package: .
