@@ -18,8 +18,9 @@ jobs:
       - uses: actions/checkout@v2
         with:
           submodules: true
-      - name: cd folder
+      - name: dir cd dir folder
         run: |
+          dir
           cd "DonationStore Front/"
           dir
       - name: Build And Deploy
