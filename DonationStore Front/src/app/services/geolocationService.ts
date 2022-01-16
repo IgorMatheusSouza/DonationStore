@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { GeoLocationModel } from '../models/geoLocationModel';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export class GeolocationService {
   constructor() { }
 
   getGoogleApiKey() {
-    return "";
+    return environment.googleApiKey;
   }
 
   getCurrentLocation(): GeoLocationModel{
