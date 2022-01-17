@@ -1,4 +1,5 @@
 export const environment = {
   production: false,
-  donationsStoreUrl: "https://donationstore.azurewebsites.net"
+  donationsStoreUrl: "https://donationstore.azurewebsites.net/api/",
+  googleApiKey: ""
 };

@@ -6,7 +6,12 @@
     "start": "node server",
     "build": "ng build --prod",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "deploy:ghdocs": "ng build --prod --output-path docs --base-href /donationstore/",
+    "heroku-postbuild": "ng build --prod"
+  },
+  "engines": {
+    "node": "12.x"
   },
   "private": true,
   "dependencies": {

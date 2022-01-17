@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  donationsStoreUrl: "https://localhost:44336/api/"
+  donationsStoreUrl: "https://localhost:44336/api/",
+  googleApiKey: ""
 };
 
 /*
