@@ -16,7 +16,7 @@ export class DonationsComponent implements OnInit, AfterViewInit {
 
   constructor(private donationService: DonationService, private geolocationService: GeolocationService) { }
 
-
+  public loader = false;
   public mainDonations: DonationModel[] = [];
 
   public get DonationEnum(): typeof DonationStatusEnum {
@@ -27,12 +27,14 @@ export class DonationsComponent implements OnInit, AfterViewInit {
     if (this.reloadPage())
       return;
 
+    this.loader = true;
     var location = this.geolocationService.getCurrentLocation();
 
     this.donationService.getDonations().subscribe((response: DonationModel[]) => {
       this.mainDonations = response;
       this.loadMap(response, location)
-    });
+      this.loader = false;
+    }).add(() => { this.loader = false; });;
   }
 
   ngAfterViewInit(): void {
