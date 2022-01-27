@@ -50,10 +50,10 @@
 
           <a href="tel:{{donation.user.phone}}" class="mr-2 d-lg-inline text-gray-600 small">
             <i class="fa fa-phone" aria-hidden="true"></i>
-            {{donation.user.phone.substr(0, donation.user.phone.length - 4) + '****'}}
+            {{ donation.showPhoneNumber ? donation.user.phone.substr(0, donation.user.phone.length - 4) + '****' : donation.user.phone}}
           </a>
           <span class="mr-2 d-lg-inline text-gray-600 small">
-            <i class="fa fa-envelope" aria-hidden="true"></i> {{donation.user.email ?? 'Não visivel'}}
+            <i class="fa fa-envelope" aria-hidden="true"></i> {{ donation.user.email }}
           </span>
           <a href="tel:{{donation.user.phone}}" class="btn btn-primary btn-icon-split btn-sm">
             <span class="icon text-white-50">

@@ -5,6 +5,7 @@ using DonationStore.Domain.Enities;
 using DonationStore.Domain.Entities;
 using DonationStore.Enums.DomainEnums;
 using DonationStore.Infrastructure.Extensions;
+using DonationStore.Infrastructure.GenericMessages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -61,7 +62,7 @@ namespace DonationStore.Domain.Factories
                                                 new DonationAcquisitionViewModel() {
                                                     CreationDate = x.CreationDate,
                                                     Status = x.Status,
-                                                    User = new UserDetailViewModel() { Name = x.User?.Name, Phone = x.User?.PhoneNumber }
+                                                    User = new UserDetailViewModel() { Name = x.User?.Name, Phone =  data.ShowPhoneNumber ? x.User?.PhoneNumber : DefautlTexts.PhoneNotVisible }
                                                 }).ToList()
 
             }).ToList();
@@ -87,7 +88,11 @@ namespace DonationStore.Domain.Factories
                 {
                     FileName = x.FileName
                 }).ToList() ?? default,
-                User = new UserDetailViewModel() { Name = data.User.Name, Phone = data.User.PhoneNumber, Email = data.User.Email }
+                User = new UserDetailViewModel() {
+                    Name = data.User.Name,
+                    Phone = data.ShowPhoneNumber ? data.User?.PhoneNumber : DefautlTexts.PhoneNotVisible, 
+                    Email = data.ShowEmail ? data.User?.Email : DefautlTexts.EmailNotVisible
+                }
             };
         }
 

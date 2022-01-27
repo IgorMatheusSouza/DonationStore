@@ -7,6 +7,7 @@ import { Loader } from "@googlemaps/js-api-loader"
 import { GeolocationService } from 'src/app/services/geolocationService';
 import { GeoLocationModel } from 'src/app/models/geoLocationModel';
 
+
 @Component({
   selector: 'app-donations',
   templateUrl: './donations.component.html',
@@ -18,6 +19,7 @@ export class DonationsComponent implements OnInit, AfterViewInit {
 
   public loader = false;
   public mainDonations: DonationModel[] = [];
+  public searchModel = { searchWord: "", searchLocal: ""};
 
   public get DonationEnum(): typeof DonationStatusEnum {
     return DonationStatusEnum;
@@ -32,7 +34,7 @@ export class DonationsComponent implements OnInit, AfterViewInit {
 
     this.donationService.getDonations().subscribe((response: DonationModel[]) => {
       this.mainDonations = response;
-      this.loadMap(response, location)
+      this.loadMap(response, location);
       this.loader = false;
     }).add(() => { this.loader = false; });;
   }
@@ -55,11 +57,49 @@ export class DonationsComponent implements OnInit, AfterViewInit {
     return false;
   }
 
+  public searchDonations(){
+    console.log(this.searchModel);
+
+    var location = this.geolocationService.getCurrentLocation();
+
+    this.donationService.getFilteredDonations(this.searchModel.searchWord, this.searchModel.searchLocal).subscribe((response: DonationModel[]) => {
+      this.mainDonations = response;
+      this.searchOnMap(response, location);
+      this.loader = false;
+    }).add(() => { this.loader = false; });;
+
+  }
 
   private loadMap(donations: DonationModel[], location: GeoLocationModel | null) {
-    if (!location || location.lat == 0)
-      location = { lat:  -23.000448, lng: -43.378379 };
+    var centerlocation = location;
 
+    if (!location || location.lat == 0)
+    {
+      location = null;
+      centerlocation = { lat:  -23.000448, lng: -43.378379 };
+    }
+
+    this.loadBaseMap(donations, location, 12, centerlocation);
+  }
+
+  private searchOnMap(donations: DonationModel[], location: GeoLocationModel | null) {
+    var centerlocation = location;
+
+    if (!location || location.lat == 0)
+    {
+      location = null;
+      centerlocation = { lat:  -23.000448, lng: -43.378379 };
+    }
+
+    if(donations.length > 0)
+    {
+      centerlocation =  donations[0].geocoding;
+    }
+
+    this.loadBaseMap(donations, location, 9, centerlocation);
+  }
+
+  private loadBaseMap(donations: DonationModel[], userLocation: GeoLocationModel | null, zoomLevel: number, centerLocation: GeoLocationModel | null) {
     const loader = new Loader({
       apiKey: this.geolocationService.getGoogleApiKey(),
       version: "weekly"
@@ -71,22 +111,26 @@ export class DonationsComponent implements OnInit, AfterViewInit {
         document.getElementById("map") as HTMLElement,
         {
           zoom: 12,
-          center: location,
+          center: centerLocation,
         }
       );
 
-      var userPosition = new google.maps.Marker({
-        position: location,
-        icon: "https://donationstorestorage.blob.core.windows.net/donation-store-blob/map-logo-user.png",
-        map: map,
-        title: "Você está por aqui! (Baixa precisão :/)"
-      });
+      if(userLocation)
+      {
+        var userPosition = new google.maps.Marker({
+          position: userLocation,
+          icon: "https://donationstorestorage.blob.core.windows.net/donation-store-blob/map-logo-user.png",
+          map: map,
+          title: "Você está por aqui! (Baixa precisão :/)"
+        });
 
-      userPosition.addListener("click", () => {
-        infoWindow.close();
-        infoWindow.setContent(userPosition.getTitle());
-        infoWindow.open(userPosition.getMap(), userPosition);
-      });
+        userPosition.addListener("click", () => {
+          infoWindow.close();
+          infoWindow.setContent(userPosition.getTitle());
+          infoWindow.open(userPosition.getMap(), userPosition);
+        });
+      }
+
 
       const tourStops: [google.maps.LatLngLiteral, string][] = [];
 
@@ -107,7 +151,6 @@ export class DonationsComponent implements OnInit, AfterViewInit {
           position,
           map,
           title: `${title}`,
-          label: `${i + 1}`,
           optimized: false,
         });
 

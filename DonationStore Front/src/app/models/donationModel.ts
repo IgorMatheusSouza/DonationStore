@@ -17,6 +17,8 @@ export class DonationModel {
     donationAcquisitions : DonationAcquisitionModel[] = [];
     user: UserViewModel = new UserViewModel();
     geocoding: GeoLocationModel = new GeoLocationModel();
+    showEmail: Boolean = false;
+    showPhoneNumber: Boolean = false;
 }
 
 export class ImageModel {

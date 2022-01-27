@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DonationStore.Infrastructure.Extensions;
 
 namespace DonationStore.Repository.Repositories
 {
@@ -31,10 +32,18 @@ namespace DonationStore.Repository.Repositories
             return await DonationStoreContext.Donations.Include(x => x.Images).Include(x => x.User).FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public async Task<List<Donation>> GetDonations(int page, int quantity)
+        public async Task<List<Donation>> GetDonations(int page, int quantity, string searchWord, string searchPlace)
         {
             IList<DonationEnum> openStatus = DonationEnumService.GetOpenDonationStatus();
-            return await DonationStoreContext.Donations.Where(x => openStatus.Contains(x.Status)).Skip(page * quantity).Take(quantity).Include(x => x.Images).ToListAsync();
+            var result = DonationStoreContext.Donations.Where(x => openStatus.Contains(x.Status)).Include(x => x.Images).AsQueryable();
+
+            if (!searchWord.IsEmpty())
+                result = result.Where(x => x.Title.ToLower().Contains(searchWord)).AsQueryable();
+
+            if (!searchPlace.IsEmpty())
+                result = result.Where(x => x.City.ToLower().Contains(searchPlace) || x.District.ToLower().Contains(searchPlace)).AsQueryable();
+
+            return await result.Skip(page * quantity).Take(quantity).ToListAsync();
         }
 
         public async Task<List<Donation>> GetUserDonations(Guid id)

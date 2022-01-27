@@ -32,9 +32,9 @@ namespace DonationStore.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetDonations([FromQuery] int? page, [FromQuery] int? quantity)
+        public async Task<IActionResult> GetDonations([FromQuery] int? page, [FromQuery] int? quantity, [FromQuery] string search, [FromQuery] string place)
         {
-            var query = new GetDonationsQuery(page, quantity);
+            var query = new GetDonationsQuery(page, quantity, search, place);
             var donations = await DonationService.GetDonations(query);
             return Ok(donations);
         }

@@ -14,6 +14,22 @@
       </div>
     </div>
     <div class="row">
+      <div class="form-group col-lg-12 col-sm-12 row">
+          <div class="col-lg-2 col-md-2 col-sm-0 mb-2">
+
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-5 mb-3">
+            <input [(ngModel)]="searchModel.searchWord" type="text" class="form-control form-control-user margin-left" placeholder="Pesquise algo como livro, camisa, mesa..." name="busca-objeto">
+          </div>
+          <div class="col-lg-4 col-md-4 col-sm-5 mb-3">
+            <input [(ngModel)]="searchModel.searchLocal" type="text" class="form-control form-control-user margin-left" placeholder="Busque em um bairro ou cidade" name="cidade">
+          </div>
+          <div class="col-lg-2 col-md-2 col-sm-2 mb-2">
+            <button class="btn btn-primary btn-user btn-block margin-left" (click)="searchDonations()">
+              Buscar
+            </button>
+          </div>
+      </div>
 
       <div class="col-lg-6 col-md-6 col-sm-12">
         <div id="map">
@@ -22,6 +38,11 @@
       </div>
       <div class="col-md-6 main-box" id="style-7">
         <!-- Card Start -->
+        <div *ngIf="mainDonations.length == 0 && !loader" class="text-center">
+          <span class="mr-2 d-lg-inline text-gray-600 small">
+            Nenhuma doação encontrada
+          </span>
+        </div>
         <div class="card card-donation border-bottom-primary" *ngFor="let item of mainDonations">
           <div class="row">
             <div class="col-md-5 col-5">

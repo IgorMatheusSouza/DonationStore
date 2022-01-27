@@ -25,7 +25,7 @@ namespace DonationStore.Domain.Handlers.Queries.Donation
 
         public async Task<List<DonationViewModel>> Handle(GetDonationsQuery request, CancellationToken cancellationToken)
         {
-            var result = await DonationRepository.GetDonations(request.IncialPage, request.Quantity);
+            var result = await DonationRepository.GetDonations(request.IncialPage, request.Quantity, request.SearchWord, request.SearchPlace);
             return DonationFactory.Adapt(result);
         }
 

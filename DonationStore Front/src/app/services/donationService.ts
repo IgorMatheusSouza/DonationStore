@@ -35,6 +35,10 @@ export class DonationService extends BaseService {
     return this.http.get<DonationModel[]>(this.urls.getAll).pipe();
   }
 
+  getFilteredDonations(searchWord: string, searchLocal :string ) {
+    return this.http.get<DonationModel[]>(this.urls.getAll.slice(0, this.urls.getAll.length-1) + `?search=${searchWord}&place=${searchLocal}`).pipe();
+  }
+
   getDonation(id : string) {
     return this.http.get<DonationModel>(this.urls.get + id).pipe();
   }

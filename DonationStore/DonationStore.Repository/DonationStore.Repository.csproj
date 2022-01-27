@@ -18,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DonationStore.Domain\DonationStore.Domain.csproj" />
     <ProjectReference Include="..\DonationStore.Enums\DonationStore.Enums.csproj" />
+    <ProjectReference Include="..\DonationStore.Infrastructure\DonationStore.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
