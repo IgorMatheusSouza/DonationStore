@@ -58,7 +58,7 @@ export class DonationsComponent implements OnInit, AfterViewInit {
 
   private loadMap(donations: DonationModel[], location: GeoLocationModel | null) {
     if (!location || location.lat == 0)
-      location = { lat: -23.57972, lng: -46.6590906 };
+      location = { lat:  -23.000448, lng: -43.378379 };
 
     const loader = new Loader({
       apiKey: this.geolocationService.getGoogleApiKey(),

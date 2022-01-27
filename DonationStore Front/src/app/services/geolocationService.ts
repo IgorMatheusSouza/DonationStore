@@ -25,7 +25,10 @@ export class GeolocationService {
         console.log(result)
         return result;
       },
-        (error: any) => console.log(error));
+        (error: any) => console.log(error)
+      ,
+        {enableHighAccuracy: true, maximumAge: 10000}
+      );
     } else {
       alert("Geolocation is not supported by this browser.");
     }

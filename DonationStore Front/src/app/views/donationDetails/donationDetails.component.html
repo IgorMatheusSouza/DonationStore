@@ -27,7 +27,15 @@
       </div>
       <div class="column-xs-12 column-md-5">
         <h1 class="title">{{donation.title}} </h1>
-        <h5>{{ donation.creationDate | date:'dd/MM/yyyy HH:mm' }} <span class="card-text"><span class="btn btn-info btn-icon-split float-right">Status: Ativo</span></span></h5>
+        <h5>{{ donation.creationDate | date:'dd/MM/yyyy HH:mm' }}
+          <span class="card-text">
+            <span *ngIf="donation.status == 1" class="btn btn-info btn-icon-split float-right">Status: Ativo</span>
+            <span *ngIf="donation.status == 2" class="btn btn-success btn-icon-split float-right">Status: Em Progresso</span>
+            <span *ngIf="donation.status == 3" class="btn btn-primary btn-icon-split float-right">Status: Reservada</span>
+            <span *ngIf="donation.status == 4" class="btn btn-success btn-icon-split float-right">Status: Completa</span>
+            <span *ngIf="donation.status == 5" class="btn btn-danger btn-icon-split float-right">Status: Cancelada</span>
+          </span>
+      </h5>
         <div class="description">
           <p>{{donation.description}}</p>
         </div>
@@ -55,7 +63,7 @@
         </div>
         <br>
         <br>
-        <div *ngIf="!isDonationOwner" class="btn btn-primary btn-icon-split btn-lg">
+        <div *ngIf="!isDonationOwner && donation.status == 1" class="btn btn-primary btn-icon-split btn-lg">
           <span class="icon text-white-50">
             <i class="fa fa-hand-paper-o" aria-hidden="true"></i>
           </span>

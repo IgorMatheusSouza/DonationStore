@@ -9,7 +9,7 @@
         <div class="col-lg-7">
           <div class="p-5">
             <div class="text-center">
-              <h1 *ngIf="wizardState == 1" class="h4 text-gray-900 mb-4">Preencha o titulo e os detalhes da sua doação! </h1>
+              <h1 *ngIf="wizardState == 1" class="h4 text-gray-900 mb-4">Preencha o título e os detalhes da sua doação! </h1>
               <h1 *ngIf="wizardState == 2" class="h4 text-gray-900 mb-4">Preencha o endereço da sua doação!</h1>
               <h1 *ngIf="wizardState == 3" class="h4 text-gray-900 mb-4">Deseja exibir seus contatos para quem requisitar a doação?</h1>
             </div>
@@ -21,7 +21,7 @@
                       formControlName="title">
                       <div *ngIf="registerDonationForm.controls['title'].invalid && (registerDonationForm.controls['title'].dirty || registerDonationForm.controls['title'].touched)" class="text-danger text-center error-msg">
                         <div *ngIf="registerDonationForm.controls['title'].errors">
-                          Preencha o titulo com um texto de 5 a 50 characteres.
+                          Preencha o título com um texto de 5 a 50 caracteres.
                         </div>
                       </div>
                   </div>
@@ -29,11 +29,11 @@
                 <div class="form-group">
                   <div class="col-sm-12 col-md-12">
                     <textarea matInput class="form-control form-control-user textarea"
-                      placeholder="digite o detalhes do anúncio" formControlName="description" rows="7"
+                      placeholder="Preencha a descrição do anúncio" formControlName="description" rows="7"
                       cols="80"></textarea>
                       <div *ngIf="registerDonationForm.controls['description'].invalid && (registerDonationForm.controls['description'].dirty || registerDonationForm.controls['description'].touched)" class="text-danger text-center error-msg">
                         <div *ngIf="registerDonationForm.controls['description'].errors">
-                          Preencha a descrição com um texto de 5 a 500 characteres.
+                          Preencha a descrição com um texto de 5 a 500 caracteres.
                         </div>
                       </div>
                   </div>
@@ -87,16 +87,16 @@
                 <div class="col-sm-12 mb-12 mb-sm-12 form-group">
                   <input [readonly]="true" matInput type="text" class="form-control form-control-user"
                     id="exampleInputEmail" placeholder="" formControlName="email">
-                  <mat-checkbox formControlName="showEmail"  [color]="'primary'" class="example-margin">Deixar o meu e-mail visivel</mat-checkbox>
+                  <mat-checkbox formControlName="showEmail"  [color]="'primary'" class="example-margin">Deixar o meu e-mail visível</mat-checkbox>
                 </div>
                 <div class="col-sm-12 mb-12 mb-sm-12 form-group">
                   <input [readonly]="!phoneRegistration" matInput type="text" class="form-control form-control-user"
                     id="exampleInputEmail" placeholder="Telefone" formControlName="phone">
-                    <mat-checkbox *ngIf="!phoneRegistration" formControlName="showPhoneNumber"  [color]="'primary'" class="example-margin">Deixar o meu telefone visivel</mat-checkbox>
+                    <mat-checkbox *ngIf="!phoneRegistration" formControlName="showPhoneNumber"  [color]="'primary'" class="example-margin">Deixar o meu telefone visível</mat-checkbox>
                     <a *ngIf="phoneRegistration" href="javascript:void(0)" (click)="registerPhone()">Cadastrar Telefone</a>
                     <div *ngIf="phoneRegistration || (registerDonationForm.controls['phone'].invalid && (registerDonationForm.controls['phone'].dirty || registerDonationForm.controls['phone'].touched))" class="text-danger text-center error-msg">
                       <div *ngIf="registerDonationForm.controls['phone'].errors">
-                        Preencha e cadastre seu telefone. Obs: caso não queira deixar visivel, basta desmarcar a opção de visibilidade.
+                        Preencha e cadastre seu telefone. Obs: caso não queira deixar visível, basta desmarcar a opção de visibilidade.
                       </div>
                     </div>
 

@@ -120,7 +120,6 @@ body {
       min-height: 200px;
     }
     .img-donation{
-        max-width: 220px;
         max-height: 200px;
         display: block; /* remove extra space below image */
     }
@@ -128,8 +127,10 @@ body {
 
 
 .img-donation{
-    min-width: 100%;
-    max-width: 100%;
+   width: 100%;
+   display: inline-block;
+   box-sizing: border-box;
+   object-fit: contain;
 }
 
 .breadcrumb-list {
