@@ -58,8 +58,6 @@ export class DonationsComponent implements OnInit, AfterViewInit {
   }
 
   public searchDonations(){
-    console.log(this.searchModel);
-
     var location = this.geolocationService.getCurrentLocation();
 
     this.donationService.getFilteredDonations(this.searchModel.searchWord, this.searchModel.searchLocal).subscribe((response: DonationModel[]) => {
@@ -96,7 +94,7 @@ export class DonationsComponent implements OnInit, AfterViewInit {
       centerlocation =  donations[0].geocoding;
     }
 
-    this.loadBaseMap(donations, location, 9, centerlocation);
+    this.loadBaseMap(donations, location, 11, centerlocation);
   }
 
   private loadBaseMap(donations: DonationModel[], userLocation: GeoLocationModel | null, zoomLevel: number, centerLocation: GeoLocationModel | null) {
@@ -110,7 +108,7 @@ export class DonationsComponent implements OnInit, AfterViewInit {
       const map = new google.maps.Map(
         document.getElementById("map") as HTMLElement,
         {
-          zoom: 12,
+          zoom: zoomLevel,
           center: centerLocation,
         }
       );
@@ -140,7 +138,7 @@ export class DonationsComponent implements OnInit, AfterViewInit {
           donations[i].geocoding.lat += Math.random() / 3000 - Math.random() / 3000;
           donations[i].geocoding.lng += Math.random() / 3000 - Math.random() / 3000;
           var title = donations[i].title.length > 25 ?  donations[i].title.substring(0, 25) + '...' :  donations[i].title;
-          tourStops.push([ donations[i].geocoding , "<a href='donation/"+donations[i].id+"'><img width='160px' height='80px' class='d-block img-donation' src='"+ donations[i].images[0].fileUrl +"'>" + title +"</a>"]);
+          tourStops.push([ donations[i].geocoding , "<a href='donation/"+donations[i].id+"'><img width='160px' height='80px' class='d-block img-donation' src='"+ donations[i].images[0]?.fileUrl +"'>" + title +"</a>"]);
         }
       }
 
