@@ -1,6 +1,6 @@
 
 select * from sys.tables
-select * from aspnetusers
+select * from aspnetusers where id = '1a2be988-574a-4508-bbd8-d31012b48efc'
 select * from Donations
 select * from [AspNetRoles]
 
@@ -13,7 +13,7 @@ AspNetUserRoles
 
 select * from Donations d join DonationImages on d.id = donationId join aspnetusers a on d.UserId = a.Id
 
---update aspnetusers set PhoneNumber =  '' where id = '1a2be988-574a-4508-bbd8-d31012b48efc'
+--update aspnetusers set PhoneNumber =  '' where id = 'de50f0ed-e1fd-4b81-a9cb-c62cb684dbb4'
 
 -- update donations set description ='O Discman foi o primeiro portátil leitor de CDs, mídias que durante algum tempo foram top de linha quando o assunto era qualidade digital de áudio.' where id = 'E9D0252B-209A-451F-581B-08D9AE968929'
 
@@ -32,9 +32,12 @@ select * from aspnetusers where id = '6a5b0aad-b59e-4130-bfb8-5b614a728610'
 
 --update Donations set status = 4 where id in ('E9D0252B-209A-451F-581B-08D9AE968929','12B47DC7-1698-4587-581C-08D9AE968929','1A37C013-20BE-445F-581D-08D9AE968929')
 
-Data Source=tcp:donationstoredb.database.windows.net,1433;Initial Catalog=DonationStore_db;User Id=AdminDonationStore@donationstoredb;Password=Pkm@t183.coreDonationStore
+delete from aspnetusers
+delete from DonationImages
+delete from DonationAcquisition
+delete from donations
+delete from aspnetusers
 
+select * from aspnetusers
 
-
-Server=tcp:donationstoredb.database.windows.net,1433;Initial Catalog=DonationStore_db;Persist Security Info=False;
-User ID=IgorAdmin;Password=Pkm@t183.core;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
+--update donations set showemail = 1 where id = 'B351B6C5-0C5B-497A-8193-08D9ECDCEAFE'
