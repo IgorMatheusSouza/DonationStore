@@ -28,7 +28,7 @@ export class DonationDetailsComponent implements OnInit {
 
     this.donationService.getDonation(id ?? '').subscribe((response: DonationModel) => {
       this.donation = response;
-      if(this.authenticationService.currentUser?.email == this.donation.user.email){
+      if(this.authenticationService.currentUser?.email == this.donation.user.email || this.authenticationService.currentUser?.name == this.donation.user.name){
         this.isDonationOwner = true;
       }
     });

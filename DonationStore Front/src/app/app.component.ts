@@ -14,7 +14,7 @@ export class AppComponent {
   userName = '';
   loader = false;
 
-  constructor(private authenticationService: AuthenticationService,private nameFormater: NameFormater){
+  constructor(private authenticationService: AuthenticationService, private nameFormater: NameFormater){
     let user = this.authenticationService.currentUser;
 
     if(user)

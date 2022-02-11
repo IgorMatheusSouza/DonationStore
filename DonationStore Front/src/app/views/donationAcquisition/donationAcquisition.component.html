@@ -97,9 +97,12 @@
 
                 <hr>
                 <h5 class="card-text">
-                  <span class="btn btn-success btn-icon-split">
-                    Status: {{item.donationAcquisitions[0].status == DonationAcquisitionEnum.Completed  ? 'Finalizada' : 'Cancelada'}}
+                  <span *ngIf="item.donationAcquisitions[0].status == DonationAcquisitionEnum.Completed" class="btn btn-success btn-icon-split">
+                   Finalizada
                   </span>
+                  <span *ngIf="item.donationAcquisitions[0].status == DonationAcquisitionEnum.Cancelled" class="btn btn-success btn-icon-split">
+                   Cancelada
+                   </span>
                 </h5>
                     <h6 class="card-text">
                       Data aquisição: {{item.donationAcquisitions[0].creationDate | date:'dd/MM/yyyy HH:mm' }}

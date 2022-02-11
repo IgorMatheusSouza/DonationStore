@@ -74,10 +74,10 @@ export class DonationsComponent implements OnInit, AfterViewInit {
     if (!location || location.lat == 0)
     {
       location = null;
-      centerlocation = { lat:  -23.000448, lng: -43.378379 };
+      centerlocation = { lat: -22.817706, lng: -43.328848 };
     }
 
-    this.loadBaseMap(donations, location, 12, centerlocation);
+    this.loadBaseMap(donations, location, 10, centerlocation);
   }
 
   private searchOnMap(donations: DonationModel[], location: GeoLocationModel | null) {
@@ -86,7 +86,7 @@ export class DonationsComponent implements OnInit, AfterViewInit {
     if (!location || location.lat == 0)
     {
       location = null;
-      centerlocation = { lat:  -23.000448, lng: -43.378379 };
+      centerlocation = { lat:  -22.817706, lng: -43.328848 };
     }
 
     if(donations.length > 0)
@@ -119,7 +119,7 @@ export class DonationsComponent implements OnInit, AfterViewInit {
           position: userLocation,
           icon: "https://donationstorestorage.blob.core.windows.net/donation-store-blob/map-logo-user.png",
           map: map,
-          title: "Você está por aqui! (Baixa precisão :/)"
+          title: "Você está aqui!"
         });
 
         userPosition.addListener("click", () => {
